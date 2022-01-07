@@ -91,8 +91,8 @@ public class AgeGroup implements Auditable{
 	}
 
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", nombre:" + getName() + ", edad máxima: " + getAgeMax() + 
+	public String generateLog(String method) {
+		return method + " ->" +" {id:" + getId() + ", nombre:" + getName() + ", edad máxima: " + getAgeMax() + 
 				", edad mínima: "+ getAgeMin() +", activo: " + activeToString() + "}";
 	}
 

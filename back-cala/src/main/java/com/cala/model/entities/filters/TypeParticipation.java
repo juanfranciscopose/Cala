@@ -27,8 +27,8 @@ public class TypeParticipation extends GenericFilter implements Auditable{
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", tipo de participación:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", tipo de participación:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static List<TypeParticipation> createList(List<TypeParticipationVo> list) {

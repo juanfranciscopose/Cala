@@ -20,7 +20,7 @@ public abstract class FilterDao
 	public abstract K createVo(T filter);
 	public abstract T create(K filterVo);
 	public abstract List<K> createListVo(List<T> list);
-	public abstract void generateLog(T filter);
+	public abstract void generateLog(T filter, String method);
 	
 	@Autowired
 	private GenericFilterRepository<T> repository;
@@ -49,7 +49,7 @@ public abstract class FilterDao
 	public K store(K filterVo) {
 		T filter = create(filterVo);
 		getRepository().save(filter);
-		generateLog(filter);
+		generateLog(filter, "Store");
 		return createVo(filter);
 	}
 
@@ -59,6 +59,7 @@ public abstract class FilterDao
 		if (findFilter.isPresent()) {
 			T filter = findFilter.get();
 			filter.setName(filterVo.getName());
+			generateLog(filter, "Rename");
 			return createVo(getRepository().save(filter));
 		}
 		return null;
@@ -82,6 +83,7 @@ public abstract class FilterDao
 		if (findFilter.isPresent()) {
 			T filter = findFilter.get(); 
 			filter.setActive(active);
+			generateLog(filter, "ActiveAction");
 			return createVo(getRepository().save(filter));			
 		}
 		return null;

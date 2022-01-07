@@ -24,8 +24,8 @@ public class Gender extends GenericFilter implements Auditable{
 	}
 
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", género:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", género:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static Gender create(GenderVo gender) {

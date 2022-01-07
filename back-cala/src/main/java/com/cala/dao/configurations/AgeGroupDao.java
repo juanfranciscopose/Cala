@@ -37,6 +37,7 @@ public class AgeGroupDao implements I_AgeGroupDao{
 			configuration.setAgeMin(c.getAgeMin());
 			configuration.setName(c.getName());
 			configuration = getRepository().save(configuration);
+			logger.info(configuration.generateLog("setAgeGroup"));
 			return AgeGroupVo.createVo(configuration);
 		}
 		return null;
@@ -65,7 +66,7 @@ public class AgeGroupDao implements I_AgeGroupDao{
 	public AgeGroupVo store(AgeGroupVo config) {
 		AgeGroup configuration = new AgeGroup(config);
 		configuration = getRepository().save(configuration);
-		logger.info(configuration.generateLog());
+		logger.info(configuration.generateLog("Store"));
 		return AgeGroupVo.createVo(configuration);
 	}
 
@@ -85,6 +86,7 @@ public class AgeGroupDao implements I_AgeGroupDao{
 			AgeGroup config = configuration.get();
 			config.setActive(active);
 			config = getRepository().save(config);
+			logger.info(config.generateLog("ActiveAction"));
 			return AgeGroupVo.createVo(config);
 		}
 		return null;

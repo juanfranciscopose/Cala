@@ -27,8 +27,8 @@ public class Topic extends GenericFilter implements Auditable{
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", temática:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", temática:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static List<Topic> createList(List<TopicVo> list) {

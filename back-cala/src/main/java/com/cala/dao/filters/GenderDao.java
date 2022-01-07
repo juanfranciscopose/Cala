@@ -31,8 +31,8 @@ public class GenderDao extends FilterDao<Gender, GenderVo> {
 	}
 
 	@Override
-	public void generateLog(Gender filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(Gender filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 	
 }

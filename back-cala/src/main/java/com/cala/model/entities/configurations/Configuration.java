@@ -61,8 +61,8 @@ public class Configuration implements Auditable{
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", nombre:" + getName() + ", valor: " + getValue() + "}";
+	public String generateLog(String method) {
+		return method + " ->" +" {id:" + getId() + ", nombre:" + getName() + ", valor: " + getValue() + "}";
 	}
 	
 	

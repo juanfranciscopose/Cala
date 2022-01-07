@@ -24,8 +24,8 @@ public class TypeJob extends GenericFilter implements Auditable {
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", tipo de empleo:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", tipo de empleo:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static TypeJob create(TypeJobVo typeJobVo) {

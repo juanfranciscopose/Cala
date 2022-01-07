@@ -27,8 +27,8 @@ public class Ideology extends GenericFilter implements Auditable{
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", ideología:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", ideología:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static List<Ideology> createList(List<IdeologyVo> list) {

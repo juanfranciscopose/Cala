@@ -31,8 +31,8 @@ public class InterestDao extends FilterDao<Interest, InterestVo>{
 	}
 
 	@Override
-	public void generateLog(Interest filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(Interest filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 
 }

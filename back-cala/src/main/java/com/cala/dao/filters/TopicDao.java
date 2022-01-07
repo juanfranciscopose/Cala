@@ -31,8 +31,8 @@ public class TopicDao extends FilterDao<Topic, TopicVo>{
 	}
 
 	@Override
-	public void generateLog(Topic filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(Topic filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 
 }

@@ -31,8 +31,8 @@ public class IdeologyDao extends FilterDao<Ideology, IdeologyVo> {
 	}
 
 	@Override
-	public void generateLog(Ideology filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(Ideology filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 
 	

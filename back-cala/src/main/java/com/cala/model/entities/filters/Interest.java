@@ -27,8 +27,8 @@ public class Interest extends GenericFilter implements Auditable{
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", interés:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", interés:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static List<Interest> createList(List<InterestVo> list) {

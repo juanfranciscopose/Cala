@@ -31,8 +31,8 @@ public class TypeInstitutionDao extends FilterDao<TypeInstitution, TypeInstituti
 	}
 
 	@Override
-	public void generateLog(TypeInstitution filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(TypeInstitution filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 
 }

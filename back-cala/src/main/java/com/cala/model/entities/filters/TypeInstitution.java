@@ -27,8 +27,8 @@ public class TypeInstitution extends GenericFilter implements Auditable{
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", tipo de institución:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", tipo de institución:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static List<TypeInstitution> createList(List<TypeInstitutionVo> list) {

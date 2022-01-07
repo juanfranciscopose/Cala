@@ -31,8 +31,8 @@ public class NexusManagementDao extends FilterDao<NexusManagement, NexusManageme
 	}
 
 	@Override
-	public void generateLog(NexusManagement filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(NexusManagement filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 
 }

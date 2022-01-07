@@ -31,8 +31,8 @@ public class TypeParticipationDao extends FilterDao<TypeParticipation, TypeParti
 	}
 
 	@Override
-	public void generateLog(TypeParticipation filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(TypeParticipation filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 
 }

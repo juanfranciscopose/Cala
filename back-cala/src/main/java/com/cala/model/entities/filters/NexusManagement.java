@@ -27,8 +27,8 @@ public class NexusManagement extends GenericFilter  implements Auditable{
 	}
 	
 	@Override
-	public String generateLog() {
-		return "{id:" + getId() + ", nexo de gestión:" + getName() + ", activo: " + activeToString() + "}";
+	public String generateLog(String method) {
+		return method + " ->" + " {id:" + getId() + ", nexo de gestión:" + getName() + ", activo: " + activeToString() + "}";
 	}
 	
 	public static List<NexusManagement> createList(List<NexusManagementVo> list) {

@@ -31,8 +31,8 @@ public class TypeJobDao extends FilterDao<TypeJob, TypeJobVo>{
 	}
 
 	@Override
-	public void generateLog(TypeJob filter) {
-		logger.info(filter.generateLog());
+	public void generateLog(TypeJob filter, String method) {
+		logger.info(filter.generateLog(method));
 	}
 
 }
