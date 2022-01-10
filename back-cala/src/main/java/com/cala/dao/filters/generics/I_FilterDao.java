@@ -8,7 +8,7 @@ import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.pagination.PaginationVo;
 
 @Repository
-public interface I_GenericFilterVoDao<T extends GenericFilterVo> {
+public interface I_FilterDao<T extends GenericFilterVo> {
 	public T enable(Long id);
 	public T disable(Long id);
 	public T store(T filterVo);

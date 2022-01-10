@@ -17,6 +17,11 @@ public class TypeParticipationVo extends GenericFilterVo{
 		setActive(filter.isActive());
 	}
 	
+	public TypeParticipationVo(String name, boolean active) {
+		setName(name);
+		setActive(active);
+	}
+
 	public static TypeParticipationVo createVo(GenericFilter filter) {
 		if (filter != null) {
 			return new TypeParticipationVo(filter);
@@ -27,6 +32,13 @@ public class TypeParticipationVo extends GenericFilterVo{
 	public static List<TypeParticipationVo> createListVo(List<TypeParticipation> types){
 		if (types!= null) {
 			return types.stream().map(TypeParticipationVo::new).collect(Collectors.toList());
+		}
+		return null;
+	}
+
+	public static TypeParticipationVo createVo(String name, boolean active) {
+		if (name != null) {
+			return new TypeParticipationVo(name, active);
 		}
 		return null;
 	}

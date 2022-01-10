@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.TypeJobVo;
 @Repository
 public class TypeJobDao extends FilterDao<TypeJob, TypeJobVo>{
 
-	Logger logger = LoggerFactory.getLogger(TypeJobDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(TypeJobDao.class);
 	
 	@Override
 	public TypeJobVo createVo(TypeJob filter) {

@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.TopicVo;
 @Repository
 public class TopicDao extends FilterDao<Topic, TopicVo>{
 
-	Logger logger = LoggerFactory.getLogger(TopicDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(TopicDao.class);
 	
 	@Override
 	public TopicVo createVo(Topic filter) {

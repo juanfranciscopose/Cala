@@ -17,6 +17,11 @@ public class TopicVo  extends GenericFilterVo{
 		setActive(filter.isActive());
 	}
 
+	public TopicVo(String name, boolean active) {
+		setName(name);
+		setActive(active);
+	}
+
 	public static TopicVo createVo(GenericFilter topic) {
 		if (topic != null) {
 			return new TopicVo(topic);
@@ -27,6 +32,13 @@ public class TopicVo  extends GenericFilterVo{
 	public static List<TopicVo> createListVo(List<Topic> topics){
 		if (topics!= null) {
 			return topics.stream().map(TopicVo::new).collect(Collectors.toList());	
+		}
+		return null;
+	}
+
+	public static TopicVo createVo(String name, boolean active) {
+		if (name != null) {
+			return new TopicVo(name, active);
 		}
 		return null;
 	}

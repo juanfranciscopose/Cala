@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.TypeInstitutionVo;
 @Repository
 public class TypeInstitutionDao extends FilterDao<TypeInstitution, TypeInstitutionVo>{
 	
-	Logger logger = LoggerFactory.getLogger(TypeInstitutionDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(TypeInstitutionDao.class);
 	
 	@Override
 	public TypeInstitutionVo createVo(TypeInstitution filter) {

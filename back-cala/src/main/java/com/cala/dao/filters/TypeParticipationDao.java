@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.TypeParticipationVo;
 @Repository
 public class TypeParticipationDao extends FilterDao<TypeParticipation, TypeParticipationVo>{
 	
-	Logger logger = LoggerFactory.getLogger(TypeParticipationDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(TypeParticipationDao.class);
 	
 	@Override
 	public TypeParticipationVo createVo(TypeParticipation filter) {

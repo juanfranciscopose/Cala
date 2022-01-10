@@ -17,6 +17,11 @@ public class TypeInstitutionVo extends GenericFilterVo {
 		setActive(filter.isActive());
 	}
 
+	public TypeInstitutionVo(String name, boolean active) {
+		setName(name);
+		setActive(active);
+	}
+
 	public static TypeInstitutionVo createVo(GenericFilter filter) {
 		if (filter != null) {
 			return new TypeInstitutionVo(filter);
@@ -26,6 +31,13 @@ public class TypeInstitutionVo extends GenericFilterVo {
 	
 	public static List<TypeInstitutionVo> createListVo(List<TypeInstitution> types){
 		return types.stream().map(filter -> new TypeInstitutionVo(filter)).collect(Collectors.toList());
+	}
+
+	public static TypeInstitutionVo createVo(String name, boolean active) {
+		if (name != null) {
+			return new TypeInstitutionVo(name, active);
+		}
+		return null;
 	}
 	
 }

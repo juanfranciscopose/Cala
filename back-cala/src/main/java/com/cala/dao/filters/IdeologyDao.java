@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.IdeologyVo;
 @Repository
 public class IdeologyDao extends FilterDao<Ideology, IdeologyVo> {
 
-	Logger logger = LoggerFactory.getLogger(IdeologyDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(IdeologyDao.class);
 	
 	@Override
 	public IdeologyVo createVo(Ideology filter) {

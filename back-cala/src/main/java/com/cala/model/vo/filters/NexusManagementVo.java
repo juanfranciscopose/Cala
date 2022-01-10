@@ -17,6 +17,11 @@ public class NexusManagementVo extends GenericFilterVo{
 		setActive(filter.isActive());
 	}
 
+	public NexusManagementVo(String name, boolean active) {
+		setName(name);
+		setActive(active);
+	}
+
 	public static NexusManagementVo createVo(GenericFilter filter) {
 		if (filter != null) {
 			return new NexusManagementVo(filter);
@@ -27,6 +32,13 @@ public class NexusManagementVo extends GenericFilterVo{
 	public static List<NexusManagementVo> createListVo(List<NexusManagement> list){
 		if (list!= null) {
 			return list.stream().map(filter -> new NexusManagementVo(filter)).collect(Collectors.toList());
+		}
+		return null;
+	}
+
+	public static NexusManagementVo createVo(String name, boolean active) {
+		if (name != null) {
+			return new NexusManagementVo(name, active);
 		}
 		return null;
 	}

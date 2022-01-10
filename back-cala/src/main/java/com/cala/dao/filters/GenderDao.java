@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.GenderVo;
 @Repository
 public class GenderDao extends FilterDao<Gender, GenderVo> {
 
-	Logger logger = LoggerFactory.getLogger(GenderDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(GenderDao.class);
 	
 	@Override
 	public GenderVo createVo(Gender filter) {

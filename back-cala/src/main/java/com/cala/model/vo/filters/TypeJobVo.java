@@ -17,6 +17,11 @@ public class TypeJobVo extends GenericFilterVo {
 		setActive(filter.isActive());
 	}
 	
+	public TypeJobVo(String name, boolean active) {
+		setName(name);
+		setActive(active);
+	}
+
 	public static TypeJobVo createVo(GenericFilter filter) {
 		if (filter != null) {
 			return new TypeJobVo(filter);
@@ -26,6 +31,13 @@ public class TypeJobVo extends GenericFilterVo {
 	
 	public static List<TypeJobVo> createListVo(List<TypeJob> types){
 		return types.stream().map(TypeJobVo::new).collect(Collectors.toList());
+	}
+
+	public static TypeJobVo createVo(String name, boolean active) {
+		if (name != null) {
+			return new TypeJobVo(name, active);
+		}
+		return null;
 	}
 
 }

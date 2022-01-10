@@ -13,9 +13,9 @@ import com.cala.model.vo.pagination.PaginationVo;
 import com.cala.repository.filters.GenericFilterRepository;
 
 public abstract class FilterDao
-	<T extends GenericFilter,
-	K extends GenericFilterVo>
-	implements I_GenericFilterVoDao<K>{
+				<T extends GenericFilter,
+				K extends GenericFilterVo>
+				implements I_FilterDao<K>{
 	
 	public abstract K createVo(T filter);
 	public abstract T create(K filterVo);
@@ -48,7 +48,7 @@ public abstract class FilterDao
 	@Override
 	public K store(K filterVo) {
 		T filter = create(filterVo);
-		getRepository().save(filter);
+		filter = getRepository().save(filter);
 		generateLog(filter, "Store");
 		return createVo(filter);
 	}

@@ -36,4 +36,11 @@ public class GenderVo extends GenericFilterVo{
 		return null;
 	}
 	
+	public static GenderVo createVo(String name, boolean active) {
+		if (name != null) {
+			return new GenderVo(name, active);
+		}
+		return null;
+	}
+	
 }

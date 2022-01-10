@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.InterestVo;
 @Repository
 public class InterestDao extends FilterDao<Interest, InterestVo>{
 
-	Logger logger = LoggerFactory.getLogger(InterestDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(InterestDao.class);
 	
 	@Override
 	public InterestVo createVo(Interest filter) {

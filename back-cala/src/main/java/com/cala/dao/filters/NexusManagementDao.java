@@ -13,7 +13,7 @@ import com.cala.model.vo.filters.NexusManagementVo;
 @Repository
 public class NexusManagementDao extends FilterDao<NexusManagement, NexusManagementVo> {
 
-	Logger logger = LoggerFactory.getLogger(NexusManagementDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(NexusManagementDao.class);
 	
 	@Override
 	public NexusManagementVo createVo(NexusManagement filter) {

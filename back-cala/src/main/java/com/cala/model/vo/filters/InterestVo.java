@@ -17,6 +17,11 @@ public class InterestVo extends GenericFilterVo{
 		setActive(filter.isActive());
 	}
 	
+	public InterestVo(String name, boolean active) {
+		setName(name);
+		setActive(active);
+	}
+
 	public static InterestVo createVo(GenericFilter filter) {
 		if (filter != null) {
 			return new InterestVo(filter);
@@ -27,6 +32,13 @@ public class InterestVo extends GenericFilterVo{
 	public static List<InterestVo> createListVo(List<Interest> interests){
 		if (interests!= null) {
 			return interests.stream().map(InterestVo::new).collect(Collectors.toList());
+		}
+		return null;
+	}
+
+	public static InterestVo createVo(String name, boolean active) {
+		if (name != null) {
+			return new InterestVo(name, active);
 		}
 		return null;
 	}
