@@ -70,8 +70,19 @@ public class TypeInstitutionDao implements I_FilterDao<TypeInstitutionVo>{
 
 	@Override
 	public TypeInstitutionVo rename(TypeInstitutionVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<TypeInstitution> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				TypeInstitution filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return TypeInstitutionVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Tipo Institucion");
+			return null;
+		}
 	}
 
 	@Override

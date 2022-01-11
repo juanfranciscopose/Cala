@@ -69,8 +69,19 @@ public class TypeJobDao implements I_FilterDao<TypeJobVo>{
 
 	@Override
 	public TypeJobVo rename(TypeJobVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<TypeJob> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				TypeJob filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return TypeJobVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Tipo Trabajo");
+			return null;
+		}
 	}
 
 	@Override

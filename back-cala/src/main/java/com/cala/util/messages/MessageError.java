@@ -120,4 +120,8 @@ public class MessageError {
 		return String.format("El filtro %s no se pudo eliminar en el sistema.", key);
 	}
 	
+	public static String msgErrorUpdateGenericFilter(String key){
+		return String.format("El filtro %s no se pudo actualizar en el sistema.", key);
+	}
+	
 }

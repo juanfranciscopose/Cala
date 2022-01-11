@@ -71,8 +71,19 @@ public class GenderDao implements I_FilterDao<GenderVo>{
 
 	@Override
 	public GenderVo rename(GenderVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Gender> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				Gender filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return GenderVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Genero");
+			return null;
+		}
 	}
 
 	@Override

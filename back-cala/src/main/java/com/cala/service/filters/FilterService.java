@@ -31,9 +31,15 @@ public class FilterService implements I_FilterService {
 	}
 
 	@Override
-	public FilterDto edit(String type, FilterDto filter) {
-		// TODO Auto-generated method stub
-		return null;
+	public FilterDto edit(String type, FilterDto filter) throws AppDataTypeValidationException, AppBussinessValidationException {
+		// data types validations
+		getHelperFilterService().validateDataTypeForEdition(filter);
+				
+		// identify type, business validations and generate filter on DB
+		GenericFilterVo filterVo = getHelperFilterService().updateFilter(type, filter);
+				
+		// create dto for response
+		return new FilterDto(filterVo.getId(), filterVo.getName(), filterVo.isActive());
 	}
 
 	@Override

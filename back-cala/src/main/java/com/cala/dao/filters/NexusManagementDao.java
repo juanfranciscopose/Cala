@@ -70,8 +70,19 @@ public class NexusManagementDao implements I_FilterDao<NexusManagementVo>{
 
 	@Override
 	public NexusManagementVo rename(NexusManagementVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<NexusManagement> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				NexusManagement filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return NexusManagementVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Nexo de Gestion");
+			return null;
+		}
 	}
 
 	@Override

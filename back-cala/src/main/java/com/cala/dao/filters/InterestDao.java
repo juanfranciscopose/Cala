@@ -70,8 +70,19 @@ public class InterestDao implements I_FilterDao<InterestVo>{
 
 	@Override
 	public InterestVo rename(InterestVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Interest> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				Interest filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return InterestVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Interes");
+			return null;
+		}
 	}
 
 	@Override

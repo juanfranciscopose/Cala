@@ -11,7 +11,7 @@ public interface I_FilterService {
 
 	public FilterDto store(String type, FilterDto filter) throws AppDataTypeValidationException, AppBussinessValidationException;
 
-	public FilterDto edit(String type, FilterDto filter);
+	public FilterDto edit(String type, FilterDto filter) throws AppDataTypeValidationException, AppBussinessValidationException;
 
 	public List<FilterDto> findAll(String type, int size, int page) throws AppDataTypeValidationException, AppBussinessValidationException;
 

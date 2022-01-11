@@ -60,6 +60,143 @@ public class HelperFilterService implements I_HelperFilterService{
 
 	private PaginationVo pagination;
 	
+	public void validateDataTypeForEdition(FilterDto filter) throws AppDataTypeValidationException {
+		DataTypeValidationService.checkString(filter.getName(), MessageError.ERR_ENTER_NAME);
+		DataTypeValidationService.checkNull(filter.isActive(), MessageError.ERR_ENTER_STATE);
+		
+		DataTypeValidationService.exceptionIf(filter.getName().length() >= 255, MessageError.ERR_ENTER_NAME_MAX);
+		DataTypeValidationService.exceptionIf(filter.getName().length() < 2, MessageError.ERR_ENTER_NAME_MIN);		
+		
+		DataTypeValidationService.checkLong(filter.getId(), MessageError.ERR_ID);
+	}
+
+	public GenericFilterVo updateFilter(String type, FilterDto filter) throws AppBussinessValidationException {
+		switch (type) {
+		
+		// -- 1 --
+		case GENDER :
+			//// business validations
+			GenderVo genderVo = getGenderDao().findById(filter.getId());
+			if (genderVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			genderVo = getGenderDao().findByName(filter.getName());
+			if (genderVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			genderVo = GenderVo.createVo(filter.getName(), filter.isActive());
+			return getGenderDao().rename(genderVo);
+		
+		// -- 2 --
+		case IDEOLOGY :
+			//// business validations
+			IdeologyVo ideologyVo = getIdeologyDao().findById(filter.getId());
+			if (ideologyVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			ideologyVo = getIdeologyDao().findByName(filter.getName());
+			if (ideologyVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			ideologyVo = IdeologyVo.createVo(filter.getName(), filter.isActive());
+			return getIdeologyDao().rename(ideologyVo);
+		
+		// -- 3 --
+		case INTEREST :
+			//// business validations
+			InterestVo interestVo = getInterestDao().findById(filter.getId());
+			if (interestVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			interestVo = getInterestDao().findByName(filter.getName());
+			if (interestVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			interestVo = InterestVo.createVo(filter.getName(), filter.isActive());
+			return getInterestDao().rename(interestVo);
+		
+		// -- 4 --
+		case NEXUS_MANAGEMENT :
+			//// business validations
+			NexusManagementVo nmVo = getNexusManagementDao().findById(filter.getId());
+			if (nmVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			nmVo = getNexusManagementDao().findByName(filter.getName());
+			if (nmVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			nmVo = NexusManagementVo.createVo(filter.getName(), filter.isActive());
+			return getNexusManagementDao().rename(nmVo);
+		
+		// -- 5 --
+		case TOPIC :
+			//// business validations
+			TopicVo topicVo = getTopicDao().findById(filter.getId());
+			if (topicVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			topicVo = getTopicDao().findByName(filter.getName());
+			if (topicVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			topicVo = TopicVo.createVo(filter.getName(), filter.isActive());
+			return getTopicDao().rename(topicVo);
+		
+		// -- 6 --
+		case TYPE_INSTITUTION :
+			//// business validations
+			TypeInstitutionVo typeInstitutionVo = getTypeInstitutionDao().findById(filter.getId());
+			if (typeInstitutionVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			typeInstitutionVo = getTypeInstitutionDao().findByName(filter.getName());
+			if (typeInstitutionVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			typeInstitutionVo = TypeInstitutionVo.createVo(filter.getName(), filter.isActive());
+			return getTypeInstitutionDao().rename(typeInstitutionVo);
+		
+		// -- 7 --
+		case TYPE_JOB :
+			//// business validations
+			TypeJobVo typeJobVo = getTypeJobDao().findById(filter.getId());
+			if (typeJobVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			typeJobVo = getTypeJobDao().findByName(filter.getName());
+			if (typeJobVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			typeJobVo = TypeJobVo.createVo(filter.getName(), filter.isActive());
+			return getTypeJobDao().rename(typeJobVo);
+		
+		// -- 8 --
+		case TYPE_PARTICIPATION :
+			//// business validations
+			TypeParticipationVo typeParticipationVo = getTypeParticipationDao().findById(filter.getId());
+			if (typeParticipationVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			typeParticipationVo = getTypeParticipationDao().findByName(filter.getName());
+			if (typeParticipationVo != null) {
+				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
+			}
+			// update
+			typeParticipationVo = TypeParticipationVo.createVo(filter.getName(), filter.isActive());
+			return getTypeParticipationDao().rename(typeParticipationVo);
+		
+		}// end switch
+		throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+	}
+	
 	public void validateDataTypeForFindAll(int size, int page) throws AppDataTypeValidationException {
 		DataTypeValidationService.checkInteger(size, MessageError.ERR_PAGINATION);	
 		DataTypeValidationService.checkInteger(page, MessageError.ERR_PAGINATION);	

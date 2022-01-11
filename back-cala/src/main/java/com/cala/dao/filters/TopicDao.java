@@ -70,8 +70,19 @@ public class TopicDao implements I_FilterDao<TopicVo>{
 
 	@Override
 	public TopicVo rename(TopicVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Topic> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				Topic filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return TopicVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Tematica");
+			return null;
+		}
 	}
 
 	@Override

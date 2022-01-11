@@ -55,9 +55,18 @@ public class FilterController {
 
 	@PutMapping("/{type}/update")
 	public ResponseEntity<?> update(@PathVariable("type") String type, @RequestBody FilterDto filter) {
-		logger.info("Servicio: /filter/"+type+"/update -> FilterDto: " + filter.generateLog(type));
-		FilterDto filterDto = getFilterService().edit(type, filter);
-		return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.OK);
+		try {
+			logger.info("Servicio: /filter/"+type+"/update -> FilterDto: " + filter.generateLog(type));
+			FilterDto filterDto = getFilterService().edit(type, filter);
+			return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.OK);
+		} catch (AppDataTypeValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch (AppBussinessValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(ResponseDto.error(MessageError.msgErrorUpdateGenericFilter(type)), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("/{type}/list") 

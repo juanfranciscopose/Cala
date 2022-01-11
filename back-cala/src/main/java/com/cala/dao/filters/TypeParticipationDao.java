@@ -70,8 +70,19 @@ public class TypeParticipationDao implements I_FilterDao<TypeParticipationVo>{
 
 	@Override
 	public TypeParticipationVo rename(TypeParticipationVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<TypeParticipation> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				TypeParticipation filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return TypeParticipationVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Tipo Participacion");
+			return null;
+		}
 	}
 
 	@Override

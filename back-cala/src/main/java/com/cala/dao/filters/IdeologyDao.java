@@ -70,8 +70,19 @@ public class IdeologyDao implements I_FilterDao<IdeologyVo>{
 
 	@Override
 	public IdeologyVo rename(IdeologyVo filterVo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Ideology> findFilter = getRepository().findById(filterVo.getId());
+			if (findFilter.isPresent()) {
+				Ideology filter = findFilter.get();
+				filter.setName(filterVo.getName());
+				logger.info(filter.generateLog("rename"));
+				return IdeologyVo.createVo(getRepository().save(filter));
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Ideologia");
+			return null;
+		}
 	}
 
 	@Override
