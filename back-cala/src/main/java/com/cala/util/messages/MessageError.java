@@ -9,7 +9,7 @@ public class MessageError {
 	public static final String ERR_PAGINACION_REQUERIDA = "Es necesario paginar los resultados";
 	
 	/**
-	 * ABM
+	 * generic filter
 	 */
 	public static final String ERR_ENTER_NAME = "El campo nombre es requerido para ejecutar esta acción";//-> usado en generico de filtro
 	public static final String ERR_ENTER_STATE = "El estado es requerido para ejecutar esta acción";//-> usado en generico de filtro
@@ -17,6 +17,9 @@ public class MessageError {
 	public static final String ERR_ENTER_NAME_MIN = "El campo nombre no alcanzó el tamaño mínimo";//-> usado en generico de filtro
 	public static final String ERR_NAME_NOT_UNIQUE = "El campo nombre está siendo utilizado en otro filtro";//-> usado en generico de filtro
 	
+	/**
+	 * ABM
+	 */
 	public static final String ERR_INGRESAR_USUARIO = "El campo nombre de usuario es requerido para ejecutar esta acción";
 	public static final String ERR_INGRESAR_PASSWORD = "El campo contraseña es requerido para ejecutar esta acción";
 	public static final String ERR_INGRESAR_DESCRIPCION = "El campo descripción es requerido para ejecutar esta acción";
@@ -103,8 +106,15 @@ public class MessageError {
 		return String.format("El campo %s no se pudo encontrar en el sistema.", key);
 	}
 	
-	public static String msgErrorGenericFilter(String key){
+	/*
+	 *       GENERIC FILTER
+	 */
+	public static String msgErrorCreateGenericFilter(String key){
 		return String.format("El filtro %s no se pudo crear en el sistema.", key);
-	}	
+	}
+	
+	public static String msgErrorDeleteGenericFilter(String key){
+		return String.format("El filtro %s no se pudo eliminar en el sistema.", key);
+	}
 	
 }

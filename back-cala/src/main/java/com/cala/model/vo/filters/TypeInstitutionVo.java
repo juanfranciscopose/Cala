@@ -3,15 +3,14 @@ package com.cala.model.vo.filters;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.cala.model.entities.filters.TypeInstitution;
-import com.cala.model.entities.filters.generics.GenericFilter;
+import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 
 public class TypeInstitutionVo extends GenericFilterVo {
 
 	public TypeInstitutionVo() {}
 	
-	public TypeInstitutionVo(GenericFilter filter) {
+	public TypeInstitutionVo(Filterable filter) {
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
@@ -22,14 +21,14 @@ public class TypeInstitutionVo extends GenericFilterVo {
 		setActive(active);
 	}
 
-	public static TypeInstitutionVo createVo(GenericFilter filter) {
+	public static TypeInstitutionVo createVo(Filterable filter) {
 		if (filter != null) {
 			return new TypeInstitutionVo(filter);
 		}
 		return null;
 	}
 	
-	public static List<TypeInstitutionVo> createListVo(List<TypeInstitution> types){
+	public static List<TypeInstitutionVo> createListVo(List<Filterable> types){
 		return types.stream().map(filter -> new TypeInstitutionVo(filter)).collect(Collectors.toList());
 	}
 

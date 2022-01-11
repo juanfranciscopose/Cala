@@ -24,6 +24,7 @@ import com.cala.exceptions.AppDataTypeValidationException;
 import com.cala.model.dto.filters.FilterDto;
 import com.cala.model.dto.global.ResponseDto;
 import com.cala.service.filters.I_FilterService;
+import com.cala.util.messages.MessageError;
 
 @RestController
 @CrossOrigin
@@ -46,7 +47,8 @@ public class FilterController {
 		}catch (AppBussinessValidationException e) {
 			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch (Exception e) {
-			return new ResponseEntity<>(ResponseDto.error(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+			return new ResponseEntity<>(ResponseDto.error(MessageError.msgErrorCreateGenericFilter(type)), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	}

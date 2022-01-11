@@ -1,39 +1,83 @@
 package com.cala.dao.filters;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cala.dao.filters.generics.FilterDao;
+import com.cala.dao.filters.generics.I_FilterDao;
 import com.cala.model.entities.filters.Ideology;
 import com.cala.model.vo.filters.IdeologyVo;
+import com.cala.model.vo.pagination.PaginationVo;
+import com.cala.repository.filters.IdeologyFilterRepository;
 
 @Repository
-public class IdeologyDao extends FilterDao<Ideology, IdeologyVo> {
+public class IdeologyDao implements I_FilterDao<IdeologyVo>{
 
 	private static final Logger logger = LoggerFactory.getLogger(IdeologyDao.class);
+
+	@Autowired
+	private IdeologyFilterRepository repository;
+	
+	public IdeologyFilterRepository getRepository() {
+		return repository;
+	}
 	
 	@Override
-	public IdeologyVo createVo(Ideology filter) {
-		return IdeologyVo.createVo(filter);
+	public IdeologyVo enable(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public Ideology create(IdeologyVo filterVo) {
-		return new Ideology(filterVo);
+	public IdeologyVo disable(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<IdeologyVo> createListVo(List<Ideology> list) {
-		return IdeologyVo.createListVo(list);
+	public IdeologyVo store(IdeologyVo filterVo) {
+		try {
+			Ideology filter = new Ideology(filterVo);
+			filter = getRepository().save(filter);
+			logger.info(filter.generateLog("store"));
+			return IdeologyVo.createVo(filter);
+		} catch (Exception e) {
+			logger.error("Error en metodo store del filtro: Ideologia");
+			return null;
+		}	
 	}
 
 	@Override
-	public void generateLog(Ideology filter, String method) {
-		logger.info(filter.generateLog(method));
+	public IdeologyVo rename(IdeologyVo filterVo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public IdeologyVo findByName(String name) {
+		try {
+			Optional<Ideology> findFilter = getRepository().findByName(name);
+			return (findFilter.isPresent() ? IdeologyVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Ideologia");
+			return null;
+		}
+	}
+
+	@Override
+	public IdeologyVo findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<IdeologyVo> getAll(PaginationVo pagination) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

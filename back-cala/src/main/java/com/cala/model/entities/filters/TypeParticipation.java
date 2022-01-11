@@ -3,16 +3,39 @@ package com.cala.model.entities.filters;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.DiscriminatorValue;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.cala.model.entities.audit.Auditable;
-import com.cala.model.entities.filters.generics.GenericFilter;
+import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.filters.TypeParticipationVo;
 
 @Entity
-@DiscriminatorValue(value = "TYPE_PARTICIPATION")
-public class TypeParticipation extends GenericFilter implements Auditable{
+@Table(name="filters_type_participation")
+public class TypeParticipation implements Auditable, Filterable{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private Long id;
+	
+	@Column(name = "active", nullable = false)
+	private boolean active;
+	
+	@Column(name="name", nullable = false, unique = true)
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public TypeParticipation () {}
 	
@@ -37,5 +60,25 @@ public class TypeParticipation extends GenericFilter implements Auditable{
 		}
 		return null;
 	}
-		
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	protected String activeToString() {
+		return isActive() ? "Si" : "No";
+	}
+
 }

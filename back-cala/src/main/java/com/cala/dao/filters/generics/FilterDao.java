@@ -7,16 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import com.cala.model.entities.filters.generics.GenericFilter;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.pagination.PaginationVo;
-import com.cala.repository.filters.GenericFilterRepository;
+
 
 public abstract class FilterDao
-				<T extends GenericFilter,
-				K extends GenericFilterVo>
+				<K extends GenericFilterVo>
 				implements I_FilterDao<K>{
-	
+	/*
 	public abstract K createVo(T filter);
 	public abstract T create(K filterVo);
 	public abstract List<K> createListVo(List<T> list);
@@ -88,5 +86,5 @@ public abstract class FilterDao
 		}
 		return null;
 	}
-	
+	*/
 }

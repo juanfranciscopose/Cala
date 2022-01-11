@@ -3,15 +3,14 @@ package com.cala.model.vo.filters;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.cala.model.entities.filters.Gender;
-import com.cala.model.entities.filters.generics.GenericFilter;
+import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 
 public class GenderVo extends GenericFilterVo{
 	
 	public GenderVo() {}
 	
-	public GenderVo(GenericFilter filter) {
+	public GenderVo(Filterable filter) {
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
@@ -22,16 +21,16 @@ public class GenderVo extends GenericFilterVo{
 		setActive(active);
 	}
 	
-	public static List<GenderVo> createListVo(List<Gender> list) {
+	public static List<GenderVo> createListVo(List<Filterable> list) {
 		if (list!= null) {
 			return list.stream().map(filter -> new GenderVo(filter)).collect(Collectors.toList());
 		}
 		return null;
 	}
 
-	public static GenderVo createVo(GenericFilter filter) {
+	public static GenderVo createVo(Filterable filter) {
 		if (filter != null) {
-			return new GenderVo((Gender) filter);
+			return new GenderVo(filter);
 		}
 		return null;
 	}

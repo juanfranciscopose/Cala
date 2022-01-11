@@ -7,10 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cala.model.entities.filters.generics.GenericFilter;
+import com.cala.model.entities.filters.Interest;
 
 @Repository
-public interface GenericFilterRepository<T extends GenericFilter> extends JpaRepository<T, Long>{
-	public Optional<T> findByName(String name);
-	public Page<T> findAll(Pageable pageable);
+public interface InterestFilterRepository extends JpaRepository<Interest, Long>{
+	public Optional<Interest> findByName(String name);
+	public Page<Interest> findAll(Pageable pageable);
 }

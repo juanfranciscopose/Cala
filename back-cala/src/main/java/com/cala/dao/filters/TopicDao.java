@@ -1,38 +1,83 @@
 package com.cala.dao.filters;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cala.dao.filters.generics.FilterDao;
+import com.cala.dao.filters.generics.I_FilterDao;
 import com.cala.model.entities.filters.Topic;
 import com.cala.model.vo.filters.TopicVo;
+import com.cala.model.vo.pagination.PaginationVo;
+import com.cala.repository.filters.TopicFilterRepository;
 
 @Repository
-public class TopicDao extends FilterDao<Topic, TopicVo>{
+public class TopicDao implements I_FilterDao<TopicVo>{
 
 	private static final Logger logger = LoggerFactory.getLogger(TopicDao.class);
+
+	@Autowired
+	private TopicFilterRepository repository;
+	
+	public TopicFilterRepository getRepository() {
+		return repository;
+	}
 	
 	@Override
-	public TopicVo createVo(Topic filter) {
-		return TopicVo.createVo(filter);
+	public TopicVo enable(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public Topic create(TopicVo filterVo) {
-		return new Topic(filterVo);
+	public TopicVo disable(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<TopicVo> createListVo(List<Topic> list) {
-		return TopicVo.createListVo(list);
+	public TopicVo store(TopicVo filterVo) {
+		try {
+			Topic filter = new Topic(filterVo);
+			filter = getRepository().save(filter);
+			logger.info(filter.generateLog("store"));
+			return TopicVo.createVo(filter);
+		} catch (Exception e) {
+			logger.error("Error en metodo store del filtro: Tematica");
+			return null;
+		}	
 	}
 
 	@Override
-	public void generateLog(Topic filter, String method) {
-		logger.info(filter.generateLog(method));
+	public TopicVo rename(TopicVo filterVo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public TopicVo findByName(String name) {
+		try {
+			Optional<Topic> findFilter = getRepository().findByName(name);
+			return (findFilter.isPresent() ? TopicVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByName del filtro: Tematica");
+			return null;
+		}
+	}
+
+	@Override
+	public TopicVo findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TopicVo> getAll(PaginationVo pagination) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
