@@ -55,7 +55,98 @@ public class HelperFilterService implements I_HelperFilterService{
 	@Autowired
 	private I_FilterDao<TypeParticipationVo> typeParticipationDao;
 	
-	public void validateDataType(FilterDto filter) throws AppDataTypeValidationException {
+	public void validateDataTypeForRemove(Long id) throws AppDataTypeValidationException {
+		DataTypeValidationService.checkId(id, MessageError.ERR_ID);		
+	}
+
+	public GenericFilterVo deleteFilter(String type, Long id) throws AppBussinessValidationException {
+		switch (type) {
+		
+		// -- 1 --
+		case GENDER :
+			//// business validations
+			GenderVo genderVo = getGenderDao().findById(id);
+			if (genderVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getGenderDao().disable(id);
+		
+		// -- 2 --
+		case IDEOLOGY :
+			//// business validations
+			IdeologyVo ideologyVo = getIdeologyDao().findById(id);
+			if (ideologyVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getIdeologyDao().disable(id);
+		
+		// -- 3 --
+		case INTEREST :
+			//// business validations
+			InterestVo interestVo = getInterestDao().findById(id);
+			if (interestVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getInterestDao().disable(id);
+		
+		// -- 4 --
+		case NEXUS_MANAGEMENT :
+			//// business validations
+			NexusManagementVo nmVo = getNexusManagementDao().findById(id);
+			if (nmVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getNexusManagementDao().disable(id);
+		
+		// -- 5 --
+		case TOPIC :
+			//// business validations
+			TopicVo topicVo = getTopicDao().findById(id);
+			if (topicVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getTopicDao().disable(id);
+		
+		// -- 6 --
+		case TYPE_INSTITUTION :
+			//// business validations
+			TypeInstitutionVo typeInstitutionVo = getTypeInstitutionDao().findById(id);
+			if (typeInstitutionVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getTypeInstitutionDao().disable(id);	
+		
+		// -- 7 --
+		case TYPE_JOB :
+			//// business validations
+			TypeJobVo typeJobVo = getTypeJobDao().findById(id);
+			if (typeJobVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getTypeJobDao().disable(id);
+			
+		// -- 8 --
+		case TYPE_PARTICIPATION :
+			//// business validations
+			TypeParticipationVo typeParticipationVo = getTypeParticipationDao().findById(id);
+			if (typeParticipationVo == null) {
+				throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+			}
+			// delete
+			return getTypeParticipationDao().disable(id);
+				
+	}// end switch
+	return null;
+	}
+
+	public void validateDataTypeForCreation(FilterDto filter) throws AppDataTypeValidationException {
 		DataTypeValidationService.checkString(filter.getName(), MessageError.ERR_ENTER_NAME);
 		DataTypeValidationService.checkNull(filter.isActive(), MessageError.ERR_ENTER_STATE);
 		

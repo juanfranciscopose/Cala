@@ -30,5 +30,12 @@ public class DataTypeValidationService {
 	public static void exceptionIf(Boolean exp, String message) throws AppDataTypeValidationException {
 		if (exp) throw new AppDataTypeValidationException(message);
 	}
+
+	public static Boolean checkId(Long id, String message) throws AppDataTypeValidationException {
+		if(id == null || id <= 0){
+			throw new AppDataTypeValidationException(message);
+		}
+		return true;
+	}
 	
 }

@@ -27,16 +27,30 @@ public class TypeJobDao implements I_FilterDao<TypeJobVo>{
 	
 	@Override
 	public TypeJobVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public TypeJobVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
 
+	private TypeJobVo activeAction(Long id, boolean active) {
+		try {
+			Optional<TypeJob> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				TypeJob filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return TypeJobVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Tipo Trabajo");
+			return null;
+		}
+	}
+	
 	@Override
 	public TypeJobVo store(TypeJobVo filterVo) {
 		try {
@@ -69,8 +83,13 @@ public class TypeJobDao implements I_FilterDao<TypeJobVo>{
 
 	@Override
 	public TypeJobVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<TypeJob> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? TypeJobVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Tipo Trabajo");
+			return null;
+		}
 	}
 
 	@Override

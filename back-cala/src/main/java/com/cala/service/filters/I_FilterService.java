@@ -15,7 +15,7 @@ public interface I_FilterService {
 
 	public Optional<List<FilterDto>> findAll(String type, int size, int page);
 
-	public FilterDto delete(String type, Long id);
+	public FilterDto delete(String type, Long id) throws AppDataTypeValidationException, AppBussinessValidationException;
 
 	public Optional<FilterDto> findById(String type, Long id);
 

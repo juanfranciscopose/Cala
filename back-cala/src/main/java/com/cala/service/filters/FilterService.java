@@ -20,7 +20,7 @@ public class FilterService implements I_FilterService {
 	@Override
 	public FilterDto store(String type, FilterDto filterDto) throws AppDataTypeValidationException, AppBussinessValidationException {		
 		// data types validations
-		getHelperFilterService().validateDataType(filterDto);
+		getHelperFilterService().validateDataTypeForCreation(filterDto);
 		
 		// identify type, business validations and generate filter on DB
 		GenericFilterVo filter = getHelperFilterService().generateFilter(type, filterDto);
@@ -42,9 +42,15 @@ public class FilterService implements I_FilterService {
 	}
 
 	@Override
-	public FilterDto delete(String type, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public FilterDto delete(String type, Long id) throws AppBussinessValidationException, AppDataTypeValidationException {
+		// data types validations
+		getHelperFilterService().validateDataTypeForRemove(id);
+		
+		// identify type, business validations and generate filter on DB
+		GenericFilterVo filter = getHelperFilterService().deleteFilter(type, id);
+				
+		// create dto for response
+		return new FilterDto(filter.getId(), filter.getName(), filter.isActive());
 	}
 
 	@Override

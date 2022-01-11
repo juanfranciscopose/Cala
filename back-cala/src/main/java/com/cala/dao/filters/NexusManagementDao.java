@@ -28,16 +28,30 @@ public class NexusManagementDao implements I_FilterDao<NexusManagementVo>{
 	
 	@Override
 	public NexusManagementVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public NexusManagementVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
 
+	private NexusManagementVo activeAction(Long id, boolean active) {
+		try {
+			Optional<NexusManagement> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				NexusManagement filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return NexusManagementVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Nexo de Gestion");
+			return null;
+		}
+	}
+	
 	@Override
 	public NexusManagementVo store(NexusManagementVo filterVo) {
 		try {
@@ -70,8 +84,13 @@ public class NexusManagementDao implements I_FilterDao<NexusManagementVo>{
 
 	@Override
 	public NexusManagementVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<NexusManagement> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? NexusManagementVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Nexo de Gestion");
+			return null;
+		}
 	}
 
 	@Override

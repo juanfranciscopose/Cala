@@ -28,16 +28,30 @@ public class InterestDao implements I_FilterDao<InterestVo>{
 	
 	@Override
 	public InterestVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public InterestVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
 
+	private InterestVo activeAction(Long id, boolean active) {
+		try {
+			Optional<Interest> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				Interest filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return InterestVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Interes");
+			return null;
+		}
+	}
+	
 	@Override
 	public InterestVo store(InterestVo filterVo) {
 		try {
@@ -70,8 +84,13 @@ public class InterestDao implements I_FilterDao<InterestVo>{
 
 	@Override
 	public InterestVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Interest> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? InterestVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Interes");
+			return null;
+		}
 	}
 
 	@Override

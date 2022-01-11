@@ -28,16 +28,30 @@ public class TopicDao implements I_FilterDao<TopicVo>{
 	
 	@Override
 	public TopicVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public TopicVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
 
+	private TopicVo activeAction(Long id, boolean active) {
+		try {
+			Optional<Topic> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				Topic filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return TopicVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Tematica");
+			return null;
+		}
+	}
+	
 	@Override
 	public TopicVo store(TopicVo filterVo) {
 		try {
@@ -70,8 +84,13 @@ public class TopicDao implements I_FilterDao<TopicVo>{
 
 	@Override
 	public TopicVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Topic> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? TopicVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Tematica");
+			return null;
+		}
 	}
 
 	@Override

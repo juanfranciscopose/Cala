@@ -72,9 +72,18 @@ public class FilterController {
 
 	@DeleteMapping("/{type}/delete/{id}")
 	public ResponseEntity<?> remove(@PathVariable("type") String type, @PathVariable("id") Long id) {
-		logger.info("Servicio: /filter/"+type+"/delete -> id: " + id);
-		FilterDto filterDto = getFilterService().delete(type, id);
-		return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.OK);
+		try {
+			logger.info("Servicio: /filter/"+type+"/delete -> id: " + id);
+			FilterDto filterDto = getFilterService().delete(type, id);
+			return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.OK);
+		} catch (AppDataTypeValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch (AppBussinessValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(ResponseDto.error(MessageError.msgErrorDeleteGenericFilter(type)), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping("/{type}/find/{id}")

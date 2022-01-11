@@ -28,16 +28,30 @@ public class IdeologyDao implements I_FilterDao<IdeologyVo>{
 	
 	@Override
 	public IdeologyVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public IdeologyVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
 
+	private IdeologyVo activeAction(Long id, boolean active) {
+		try {
+			Optional<Ideology> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				Ideology filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return IdeologyVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Ideologia");
+			return null;
+		}
+	}
+	
 	@Override
 	public IdeologyVo store(IdeologyVo filterVo) {
 		try {
@@ -70,8 +84,13 @@ public class IdeologyDao implements I_FilterDao<IdeologyVo>{
 
 	@Override
 	public IdeologyVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Ideology> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? IdeologyVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Ideologia");
+			return null;
+		}
 	}
 
 	@Override

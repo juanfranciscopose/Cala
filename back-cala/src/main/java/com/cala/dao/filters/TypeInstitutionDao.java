@@ -28,16 +28,30 @@ public class TypeInstitutionDao implements I_FilterDao<TypeInstitutionVo>{
 	
 	@Override
 	public TypeInstitutionVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public TypeInstitutionVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
 
+	private TypeInstitutionVo activeAction(Long id, boolean active) {
+		try {
+			Optional<TypeInstitution> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				TypeInstitution filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return TypeInstitutionVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Tipo Institucion");
+			return null;
+		}
+	}
+	
 	@Override
 	public TypeInstitutionVo store(TypeInstitutionVo filterVo) {
 		try {
@@ -70,8 +84,13 @@ public class TypeInstitutionDao implements I_FilterDao<TypeInstitutionVo>{
 
 	@Override
 	public TypeInstitutionVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<TypeInstitution> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? TypeInstitutionVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Tipo Institucion");
+			return null;
+		}
 	}
 
 	@Override

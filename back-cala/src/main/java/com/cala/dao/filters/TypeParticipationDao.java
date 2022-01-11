@@ -28,16 +28,30 @@ public class TypeParticipationDao implements I_FilterDao<TypeParticipationVo>{
 	
 	@Override
 	public TypeParticipationVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public TypeParticipationVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
 
+	private TypeParticipationVo activeAction(Long id, boolean active) {
+		try {
+			Optional<TypeParticipation> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				TypeParticipation filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return TypeParticipationVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Tipo Participacion");
+			return null;
+		}
+	}
+	
 	@Override
 	public TypeParticipationVo store(TypeParticipationVo filterVo) {
 		try {
@@ -70,8 +84,13 @@ public class TypeParticipationDao implements I_FilterDao<TypeParticipationVo>{
 
 	@Override
 	public TypeParticipationVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<TypeParticipation> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? TypeParticipationVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Tipo Participacion");
+			return null;
+		}
 	}
 
 	@Override

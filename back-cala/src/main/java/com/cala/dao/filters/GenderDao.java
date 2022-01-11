@@ -29,16 +29,30 @@ public class GenderDao implements I_FilterDao<GenderVo>{
 	
 	@Override
 	public GenderVo enable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, true);
 	}
 
 	@Override
 	public GenderVo disable(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return activeAction(id, false);
 	}
-
+	
+	private GenderVo activeAction(Long id, boolean active) {
+		try {
+			Optional<Gender> findFilter = getRepository().findById(id);
+			if (findFilter.isPresent()) {
+				Gender filter = findFilter.get(); 
+				filter.setActive(active);
+				logger.info(filter.generateLog("activeAction"));
+				return GenderVo.createVo(getRepository().save(filter));			
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo activeAction del filtro: Genero");
+			return null;
+		}
+	}
+	
 	@Override
 	public GenderVo store(GenderVo filterVo) {
 		try {
@@ -71,8 +85,13 @@ public class GenderDao implements I_FilterDao<GenderVo>{
 
 	@Override
 	public GenderVo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Optional<Gender> findFilter = getRepository().findById(id);
+			return (findFilter.isPresent() ? GenderVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findById del filtro: Genero");
+			return null;
+		}
 	}
 
 	@Override
