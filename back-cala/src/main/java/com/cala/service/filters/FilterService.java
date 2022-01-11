@@ -54,9 +54,15 @@ public class FilterService implements I_FilterService {
 	}
 
 	@Override
-	public Optional<FilterDto> findById(String type, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<FilterDto> findById(String type, Long id)  throws AppBussinessValidationException, AppDataTypeValidationException  {
+		// data types validations
+		getHelperFilterService().validateDataTypeForFindById(id);
+				
+		// identify type, business validations and generate filter on DB
+		GenericFilterVo filter = getHelperFilterService().findByIdFilter(type, id);
+						
+		// create dto for response
+		return Optional.of(new FilterDto(filter.getId(), filter.getName(), filter.isActive()));
 	}
 
 	public HelperFilterService getHelperFilterService() {

@@ -88,12 +88,18 @@ public class FilterController {
 	
 	@GetMapping("/{type}/find/{id}")
 	public ResponseEntity<?> findById(@PathVariable("type") String type, @PathVariable("id") Long id) {
-		logger.info("Servicio: /filter/"+type+"/find -> id: " + id);
-		Optional<FilterDto> filterDto = getFilterService().findById(type, id);
-		if (filterDto.isPresent()) {
-			return new ResponseEntity<>(ResponseDto.ok(filterDto.get()), HttpStatus.OK);
+		try {
+			logger.info("Servicio: /filter/"+type+"/find -> id: " + id);
+			Optional<FilterDto> filterDto = getFilterService().findById(type, id);
+			if (filterDto.isPresent()) {
+				return new ResponseEntity<>(ResponseDto.ok(filterDto.get()), HttpStatus.OK);
+			}
+			return new ResponseEntity<>(ResponseDto.ok(), HttpStatus.NO_CONTENT);
+		}catch (AppDataTypeValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch (AppBussinessValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(ResponseDto.ok(), HttpStatus.NO_CONTENT);
 	}
 
 	public I_FilterService getFilterService() {
