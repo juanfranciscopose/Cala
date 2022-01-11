@@ -1,5 +1,7 @@
 package com.cala.service.filters;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import com.cala.model.vo.filters.TypeInstitutionVo;
 import com.cala.model.vo.filters.TypeJobVo;
 import com.cala.model.vo.filters.TypeParticipationVo;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
+import com.cala.model.vo.pagination.PaginationVo;
 import com.cala.service.global.DataTypeValidationService;
 import com.cala.util.messages.MessageError;
 
@@ -54,9 +57,61 @@ public class HelperFilterService implements I_HelperFilterService{
 	
 	@Autowired
 	private I_FilterDao<TypeParticipationVo> typeParticipationDao;
+
+	private PaginationVo pagination;
+	
+	public void validateDataTypeForFindAll(int size, int page) throws AppDataTypeValidationException {
+		DataTypeValidationService.checkInteger(size, MessageError.ERR_PAGINATION);	
+		DataTypeValidationService.checkInteger(page, MessageError.ERR_PAGINATION);	
+	}
+
+	public List<GenericFilterVo> findAllFilters(String type, int size, int page) throws AppBussinessValidationException {
+		if (this.pagination == null) {
+			this.pagination = new PaginationVo(page, size);
+		}else {
+			this.pagination.setPage(page);
+			this.pagination.setSize(size);
+		}		
+		switch (type) {
+		
+		// -- 1 --
+		case GENDER :
+			return getGenderDao().getAll(this.pagination);
+		
+		// -- 2 --
+		case IDEOLOGY :
+			return getIdeologyDao().getAll(this.pagination);
+		
+		// -- 3 --
+		case INTEREST :
+			return getInterestDao().getAll(this.pagination);
+		
+		// -- 4 --
+		case NEXUS_MANAGEMENT :
+			return getNexusManagementDao().getAll(this.pagination);
+		
+		// -- 5 --
+		case TOPIC :
+			return getTopicDao().getAll(this.pagination);
+		
+		// -- 6 --
+		case TYPE_INSTITUTION :
+			return getTypeInstitutionDao().getAll(this.pagination);	
+		
+		// -- 7 --
+		case TYPE_JOB :
+			return getTypeJobDao().getAll(this.pagination);
+			
+		// -- 8 --
+		case TYPE_PARTICIPATION :
+			return getTypeParticipationDao().getAll(this.pagination);
+				
+		}// end switch
+		throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
+	}
 	
 	public void validateDataTypeForFindById(Long id) throws AppDataTypeValidationException {
-		DataTypeValidationService.checkId(id, MessageError.ERR_ID);		
+		DataTypeValidationService.checkLong(id, MessageError.ERR_ID);		
 	}
 	
 	public GenericFilterVo findByIdFilter(String type, Long id) throws AppBussinessValidationException {
@@ -135,11 +190,11 @@ public class HelperFilterService implements I_HelperFilterService{
 				return typeParticipationVo;
 					
 		}// end switch
-		return null;
+		throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
 	}
 	
 	public void validateDataTypeForRemove(Long id) throws AppDataTypeValidationException {
-		DataTypeValidationService.checkId(id, MessageError.ERR_ID);		
+		DataTypeValidationService.checkLong(id, MessageError.ERR_ID);		
 	}
 
 	public GenericFilterVo deleteFilter(String type, Long id) throws AppBussinessValidationException {
@@ -225,8 +280,8 @@ public class HelperFilterService implements I_HelperFilterService{
 			// delete
 			return getTypeParticipationDao().disable(id);
 				
-	}// end switch
-	return null;
+		}// end switch
+		throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
 	}
 
 	public void validateDataTypeForCreation(FilterDto filter) throws AppDataTypeValidationException {
@@ -329,7 +384,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				return getTypeParticipationDao().store(typeParticipationVo);
 					
 		}// end switch
-		return null;
+		throw new AppBussinessValidationException(MessageError.ERR_FILTER_NOT_EXIST);
 	}
 
 	public I_FilterDao<GenderVo> getGenderDao() {

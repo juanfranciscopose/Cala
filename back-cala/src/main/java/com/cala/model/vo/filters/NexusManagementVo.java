@@ -3,6 +3,7 @@ package com.cala.model.vo.filters;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.cala.model.entities.filters.NexusManagement;
 import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 
@@ -28,7 +29,7 @@ public class NexusManagementVo extends GenericFilterVo{
 		return null;
 	}
 	
-	public static List<NexusManagementVo> createListVo(List<Filterable> list){
+	public static List<GenericFilterVo> createListVo(List<NexusManagement> list){
 		if (list!= null) {
 			return list.stream().map(filter -> new NexusManagementVo(filter)).collect(Collectors.toList());
 		}

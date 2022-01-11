@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import com.cala.dao.filters.generics.I_FilterDao;
 import com.cala.model.entities.filters.TypeParticipation;
 import com.cala.model.vo.filters.TypeParticipationVo;
+import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.pagination.PaginationVo;
 import com.cala.repository.filters.TypeParticipationFilterRepository;
 
@@ -94,9 +97,15 @@ public class TypeParticipationDao implements I_FilterDao<TypeParticipationVo>{
 	}
 
 	@Override
-	public List<TypeParticipationVo> getAll(PaginationVo pagination) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GenericFilterVo> getAll(PaginationVo pagination) {
+		try {
+			PageRequest pageRequest = PageRequest.of(pagination.getPage(), pagination.getSize());	
+			Page<TypeParticipation> filters = getRepository().findAll(pageRequest);
+			return TypeParticipationVo.createListVo(filters.getContent());
+		} catch (Exception e) {
+			logger.error("Error en metodo getAll del filtro: Tipo Participacion");
+			return null;
+		}
 	}
 	
 	

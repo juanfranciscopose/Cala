@@ -31,8 +31,15 @@ public class DataTypeValidationService {
 		if (exp) throw new AppDataTypeValidationException(message);
 	}
 
-	public static Boolean checkId(Long id, String message) throws AppDataTypeValidationException {
-		if(id == null || id <= 0){
+	public static Boolean checkLong(Long l, String message) throws AppDataTypeValidationException {
+		if(l == null || l <= 0){
+			throw new AppDataTypeValidationException(message);
+		}
+		return true;
+	}
+	
+	public static Boolean checkInteger(Integer i, String message) throws AppDataTypeValidationException {
+		if(i == null || i < 0){
 			throw new AppDataTypeValidationException(message);
 		}
 		return true;

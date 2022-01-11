@@ -13,7 +13,7 @@ public interface I_FilterService {
 
 	public FilterDto edit(String type, FilterDto filter);
 
-	public Optional<List<FilterDto>> findAll(String type, int size, int page);
+	public List<FilterDto> findAll(String type, int size, int page) throws AppDataTypeValidationException, AppBussinessValidationException;
 
 	public FilterDto delete(String type, Long id) throws AppDataTypeValidationException, AppBussinessValidationException;
 

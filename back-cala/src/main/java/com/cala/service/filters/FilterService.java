@@ -1,5 +1,6 @@
 package com.cala.service.filters;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,9 +37,19 @@ public class FilterService implements I_FilterService {
 	}
 
 	@Override
-	public Optional<List<FilterDto>> findAll(String type, int size, int page) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FilterDto> findAll(String type, int size, int page) throws AppDataTypeValidationException, AppBussinessValidationException {
+		// data types validations
+		getHelperFilterService().validateDataTypeForFindAll(size, page);
+				
+		// identify type and get all filters from DB
+		List<GenericFilterVo> filter = getHelperFilterService().findAllFilters(type, size, page);
+						
+		// create dto for response
+		List<FilterDto> listDto = new ArrayList<>();
+		for (GenericFilterVo f : filter) {
+			listDto.add(new FilterDto(f.getId(), f.getName(), f.isActive()));
+		}
+		return listDto;
 	}
 
 	@Override
@@ -46,7 +57,7 @@ public class FilterService implements I_FilterService {
 		// data types validations
 		getHelperFilterService().validateDataTypeForRemove(id);
 		
-		// identify type, business validations and generate filter on DB
+		// identify type, business validations and delete filter on DB
 		GenericFilterVo filter = getHelperFilterService().deleteFilter(type, id);
 				
 		// create dto for response
@@ -58,7 +69,7 @@ public class FilterService implements I_FilterService {
 		// data types validations
 		getHelperFilterService().validateDataTypeForFindById(id);
 				
-		// identify type, business validations and generate filter on DB
+		// identify type, business validations and find filter on DB
 		GenericFilterVo filter = getHelperFilterService().findByIdFilter(type, id);
 						
 		// create dto for response

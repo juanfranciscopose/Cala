@@ -16,7 +16,7 @@ public class PaginationVo {
 		return size;
 	}
 
-	public void setSize(Integer size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 

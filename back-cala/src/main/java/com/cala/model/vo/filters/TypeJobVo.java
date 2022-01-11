@@ -3,6 +3,7 @@ package com.cala.model.vo.filters;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.cala.model.entities.filters.TypeJob;
 import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 
@@ -28,7 +29,7 @@ public class TypeJobVo extends GenericFilterVo {
 		return null;
 	}
 	
-	public static List<TypeJobVo> createListVo(List<Filterable> types){
+	public static List<GenericFilterVo> createListVo(List<TypeJob> types){
 		return types.stream().map(TypeJobVo::new).collect(Collectors.toList());
 	}
 

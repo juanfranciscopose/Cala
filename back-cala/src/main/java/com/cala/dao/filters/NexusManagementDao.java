@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import com.cala.dao.filters.generics.I_FilterDao;
 import com.cala.model.entities.filters.NexusManagement;
 import com.cala.model.vo.filters.NexusManagementVo;
+import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.pagination.PaginationVo;
 import com.cala.repository.filters.NexusManagementFilterRepository;
 
@@ -94,9 +97,15 @@ public class NexusManagementDao implements I_FilterDao<NexusManagementVo>{
 	}
 
 	@Override
-	public List<NexusManagementVo> getAll(PaginationVo pagination) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GenericFilterVo> getAll(PaginationVo pagination) {
+		try {
+			PageRequest pageRequest = PageRequest.of(pagination.getPage(), pagination.getSize());	
+			Page<NexusManagement> filters = getRepository().findAll(pageRequest);
+			return NexusManagementVo.createListVo(filters.getContent());
+		} catch (Exception e) {
+			logger.error("Error en metodo getAll del filtro: Nexo de Gestion");
+			return null;
+		}
 	}
 	
 }

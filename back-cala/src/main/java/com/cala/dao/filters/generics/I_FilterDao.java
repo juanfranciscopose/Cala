@@ -15,5 +15,5 @@ public interface I_FilterDao<T extends GenericFilterVo> {
 	public T rename(T filterVo);
 	public T findByName(String name);
 	public T findById(Long id);
-	public List<T> getAll(PaginationVo pagination);
+	public List<GenericFilterVo> getAll(PaginationVo pagination);
 }

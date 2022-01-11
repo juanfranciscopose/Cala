@@ -62,12 +62,18 @@ public class FilterController {
 
 	@GetMapping("/{type}/list") 
 	public ResponseEntity<?> list(@PathVariable("type") String type, @RequestParam int size, @RequestParam int page) {
-		logger.info("Servicio: /filter/"+type+"/list");
-		Optional<List<FilterDto>> list = getFilterService().findAll(type, size, page);
-		if (!list.isEmpty()) {
-			return new ResponseEntity<>(ResponseDto.ok(list.get()), HttpStatus.OK);
+		try {
+			logger.info("Servicio: /filter/"+type+"/list");
+			List<FilterDto> list = getFilterService().findAll(type, size, page);
+			if (!list.isEmpty()) {
+				return new ResponseEntity<>(ResponseDto.ok(list), HttpStatus.OK);
+			}
+			return new ResponseEntity<>(ResponseDto.ok(), HttpStatus.NO_CONTENT);
+		} catch (AppDataTypeValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (AppBussinessValidationException e) {
+		 	return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(ResponseDto.ok(), HttpStatus.NO_CONTENT);
 	}
 
 	@DeleteMapping("/{type}/delete/{id}")
@@ -78,8 +84,8 @@ public class FilterController {
 			return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.OK);
 		} catch (AppDataTypeValidationException e) {
 			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-		}catch (AppBussinessValidationException e) {
-			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (AppBussinessValidationException e) {
+		 	return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(ResponseDto.error(MessageError.msgErrorDeleteGenericFilter(type)), HttpStatus.INTERNAL_SERVER_ERROR);

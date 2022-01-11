@@ -3,6 +3,7 @@ package com.cala.model.vo.filters;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.cala.model.entities.filters.Topic;
 import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 
@@ -28,7 +29,7 @@ public class TopicVo  extends GenericFilterVo{
 		return null;
 	}
 	
-	public static List<TopicVo> createListVo(List<Filterable> topics){
+	public static List<GenericFilterVo> createListVo(List<Topic> topics){
 		if (topics!= null) {
 			return topics.stream().map(TopicVo::new).collect(Collectors.toList());	
 		}

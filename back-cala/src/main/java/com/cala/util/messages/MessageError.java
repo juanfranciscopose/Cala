@@ -18,6 +18,7 @@ public class MessageError {
 	public static final String ERR_NAME_NOT_UNIQUE = "El campo nombre está siendo utilizado en otro filtro";//-> usado en generico de filtro
 	public static final String ERR_ID = "El id es incorrecto";//-> usado en generico de filtro
 	public static final String ERR_FILTER_NOT_EXIST = "El filtro no existe";//-> usado en generico de filtro
+	public static final String ERR_PAGINATION = "La paginacion es incorrecta";//-> usado en generico de filtro
 	
 	/**
 	 * ABM
