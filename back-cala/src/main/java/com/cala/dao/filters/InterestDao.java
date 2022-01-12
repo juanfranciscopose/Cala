@@ -80,7 +80,7 @@ public class InterestDao implements I_FilterDao<InterestVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Interes");
+			logger.error("Error en metodo rename del filtro: Interes");
 			return null;
 		}
 	}

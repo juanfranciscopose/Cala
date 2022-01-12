@@ -79,7 +79,7 @@ public class TypeJobDao implements I_FilterDao<TypeJobVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Tipo Trabajo");
+			logger.error("Error en metodo rename del filtro: Tipo Trabajo");
 			return null;
 		}
 	}

@@ -80,7 +80,7 @@ public class NexusManagementDao implements I_FilterDao<NexusManagementVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Nexo de Gestion");
+			logger.error("Error en metodo rename del filtro: Nexo de Gestion");
 			return null;
 		}
 	}

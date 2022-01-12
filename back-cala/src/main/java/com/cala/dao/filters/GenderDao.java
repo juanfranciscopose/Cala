@@ -81,7 +81,7 @@ public class GenderDao implements I_FilterDao<GenderVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Genero");
+			logger.error("Error en metodo rename del filtro: Genero");
 			return null;
 		}
 	}

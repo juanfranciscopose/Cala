@@ -80,7 +80,7 @@ public class IdeologyDao implements I_FilterDao<IdeologyVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Ideologia");
+			logger.error("Error en metodo rename del filtro: Ideologia");
 			return null;
 		}
 	}

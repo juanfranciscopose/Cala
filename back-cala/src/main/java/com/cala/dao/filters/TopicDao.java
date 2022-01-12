@@ -80,7 +80,7 @@ public class TopicDao implements I_FilterDao<TopicVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Tematica");
+			logger.error("Error en metodo rename del filtro: Tematica");
 			return null;
 		}
 	}

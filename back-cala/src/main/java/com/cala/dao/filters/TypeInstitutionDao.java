@@ -80,7 +80,7 @@ public class TypeInstitutionDao implements I_FilterDao<TypeInstitutionVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Tipo Institucion");
+			logger.error("Error en metodo rename del filtro: Tipo Institucion");
 			return null;
 		}
 	}

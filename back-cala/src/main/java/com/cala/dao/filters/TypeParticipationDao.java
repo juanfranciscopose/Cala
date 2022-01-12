@@ -80,7 +80,7 @@ public class TypeParticipationDao implements I_FilterDao<TypeParticipationVo>{
 			}
 			return null;
 		} catch (Exception e) {
-			logger.error("Error en metodo findByName del filtro: Tipo Participacion");
+			logger.error("Error en metodo rename del filtro: Tipo Participacion");
 			return null;
 		}
 	}

@@ -85,7 +85,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
 			}
 			// update
-			genderVo = GenderVo.createVo(filter.getName(), filter.isActive());
+			genderVo = GenderVo.createVo(filter);
 			return getGenderDao().rename(genderVo);
 		
 		// -- 2 --
@@ -100,7 +100,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
 			}
 			// update
-			ideologyVo = IdeologyVo.createVo(filter.getName(), filter.isActive());
+			ideologyVo = IdeologyVo.createVo(filter);
 			return getIdeologyDao().rename(ideologyVo);
 		
 		// -- 3 --
@@ -115,7 +115,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
 			}
 			// update
-			interestVo = InterestVo.createVo(filter.getName(), filter.isActive());
+			interestVo = InterestVo.createVo(filter);
 			return getInterestDao().rename(interestVo);
 		
 		// -- 4 --
@@ -130,7 +130,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
 			}
 			// update
-			nmVo = NexusManagementVo.createVo(filter.getName(), filter.isActive());
+			nmVo = NexusManagementVo.createVo(filter);
 			return getNexusManagementDao().rename(nmVo);
 		
 		// -- 5 --
@@ -160,7 +160,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
 			}
 			// update
-			typeInstitutionVo = TypeInstitutionVo.createVo(filter.getName(), filter.isActive());
+			typeInstitutionVo = TypeInstitutionVo.createVo(filter);
 			return getTypeInstitutionDao().rename(typeInstitutionVo);
 		
 		// -- 7 --
@@ -175,7 +175,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
 			}
 			// update
-			typeJobVo = TypeJobVo.createVo(filter.getName(), filter.isActive());
+			typeJobVo = TypeJobVo.createVo(filter);
 			return getTypeJobDao().rename(typeJobVo);
 		
 		// -- 8 --
@@ -190,7 +190,7 @@ public class HelperFilterService implements I_HelperFilterService{
 				throw new AppBussinessValidationException(MessageError.ERR_NAME_NOT_UNIQUE);
 			}
 			// update
-			typeParticipationVo = TypeParticipationVo.createVo(filter.getName(), filter.isActive());
+			typeParticipationVo = TypeParticipationVo.createVo(filter);
 			return getTypeParticipationDao().rename(typeParticipationVo);
 		
 		}// end switch

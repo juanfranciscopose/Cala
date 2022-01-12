@@ -35,7 +35,7 @@ public class FilterService implements I_FilterService {
 		// data types validations
 		getHelperFilterService().validateDataTypeForEdition(filter);
 				
-		// identify type, business validations and generate filter on DB
+		// identify type, business validations and edit filter on DB
 		GenericFilterVo filterVo = getHelperFilterService().updateFilter(type, filter);
 				
 		// create dto for response

@@ -1,6 +1,8 @@
 package com.cala.model.dto.filters;
 
-public class FilterDto {
+import com.cala.model.entities.filters.filterable.Filterable;
+
+public class FilterDto implements Filterable{
 
 	private Long id;
 	
