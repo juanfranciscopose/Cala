@@ -12,37 +12,29 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.cala.model.entities.filters.generics.GenericFilter;
+import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.pagination.PaginationVo;
-import com.cala.repository.filters.GenericFilterRepository;
 
 @SpringBootTest
-public abstract class FilterDaoTest<T extends FilterDao<K, E>,
-								K extends GenericFilter, 
+public abstract class FilterDaoTest<T extends I_FilterDao<E>,
 								E extends GenericFilterVo> {
 
 	@Autowired
 	private T dao;
-	
-	@Autowired
-	private GenericFilterRepository<K> repository;
-	
-	public abstract K create(String name, boolean active);
-	
-	public abstract E createVo(K filter);
+	public abstract void delete(Filterable filter);
+	public abstract Filterable create(String name, boolean active);
+	public abstract List<GenericFilterVo> getAll(PaginationVo pagination);
+	public abstract E createVo(Filterable filter);
+	public abstract Filterable findByName(String name);
 	
 	public T getDao() {
 		return dao;
 	}
 	
-	public GenericFilterRepository<K> getRepository() {
-		return repository;
-	}
-	
 	@Test
 	void testGetById() {
-		K filter = create("test", true);
+		Filterable filter = create("test", true);
 		E filterVo = createVo(filter);
 		getDao().store(filterVo);
 		filterVo = getDao().findByName("test");
@@ -50,13 +42,13 @@ public abstract class FilterDaoTest<T extends FilterDao<K, E>,
 		E filterVo1 = getDao().findById(filterVo.getId());
 		assertEquals(filterVo.getName(), filterVo1.getName());
 		
-		filter = getRepository().findByName("test").get();
-		getRepository().delete(filter);		
+		filter = findByName("test");
+		delete(filter);		
 	}
 	
 	@Test
 	void testActive() {
-		K filter = create("test", true);
+		Filterable filter = create("test", true);
 		E filterVo = createVo(filter);
 		getDao().store(filterVo);
 		
@@ -69,14 +61,14 @@ public abstract class FilterDaoTest<T extends FilterDao<K, E>,
 		filterVo = getDao().findByName("test");
 		assertTrue(filterVo.isActive());
 		
-		filter = getRepository().findByName("test").get();
-		getRepository().delete(filter);
+		filter = findByName("test");
+		delete(filter);
 	}
 	
 	@Test
 	void testGetAll() {
 		
-		K test = create("test", true);
+		Filterable test = create("test", true);
 		E testVo = createVo(test);	
 		getDao().store(testVo);
 		test = create("test1", true);
@@ -113,52 +105,52 @@ public abstract class FilterDaoTest<T extends FilterDao<K, E>,
 		
 		//first case
 		PaginationVo pagination = new PaginationVo(0, 10);
-		List<E> filters = getDao().getAll(pagination);
+		List<GenericFilterVo> filters = getAll(pagination);
 		assertEquals(10, filters.size());
 		pagination.setPage(1);
-		filters = getDao().getAll(pagination);
+		filters = getAll(pagination);
 		assertEquals(1, filters.size());
 		
 		//second case
 		pagination.setPage(0);
 		pagination.setSize(5);
-		filters = getDao().getAll(pagination);
+		filters = getAll(pagination);
 		assertEquals(5, filters.size());
 		pagination.setPage(1);
-		filters = getDao().getAll(pagination);
+		filters = getAll(pagination);
 		assertEquals(5, filters.size());
 		pagination.setPage(2);
-		filters = getDao().getAll(pagination);
+		filters = getAll(pagination);
 		assertEquals(1, filters.size());
 		
 		//remove all
-		test = getRepository().findByName("test").get();
-		getRepository().delete(test);	
-		test = getRepository().findByName("test1").get();
-		getRepository().delete(test);		
-		test = getRepository().findByName("test2").get();
-		getRepository().delete(test);		
-		test = getRepository().findByName("test3").get();
-		getRepository().delete(test);
-		test = getRepository().findByName("test4").get();
-		getRepository().delete(test);
-		test = getRepository().findByName("test5").get();
-		getRepository().delete(test);
-		test = getRepository().findByName("test6").get();
-		getRepository().delete(test);
-		test = getRepository().findByName("test7").get();
-		getRepository().delete(test);
-		test = getRepository().findByName("test8").get();
-		getRepository().delete(test);
-		test = getRepository().findByName("test9").get();
-		getRepository().delete(test);
-		test = getRepository().findByName("test10").get();
-		getRepository().delete(test);
+		test = findByName("test");
+		delete(test);	
+		test = findByName("test1");
+		delete(test);		
+		test = findByName("test2");
+		delete(test);		
+		test = findByName("test3");
+		delete(test);
+		test = findByName("test4");
+		delete(test);
+		test = findByName("test5");
+		delete(test);
+		test = findByName("test6");
+		delete(test);
+		test = findByName("test7");
+		delete(test);
+		test = findByName("test8");
+		delete(test);
+		test = findByName("test9");
+		delete(test);
+		test = findByName("test10");
+		delete(test);
 	}
 	
 	@Test
 	void testStoreUpdate() {
-		K test = create("test", true);
+		Filterable test = create("test", true);
 		E testVo = createVo(test);	
 		getDao().store(testVo);
 		
@@ -177,20 +169,20 @@ public abstract class FilterDaoTest<T extends FilterDao<K, E>,
 		assertNotNull(filter);
 		filter = getDao().findByName("test1");
 		assertNull(filter);	
-		
+
 		//store
 		test = create("test1", true);
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		List<E> filters = getDao().getAll(new PaginationVo(0, 10));
+		List<GenericFilterVo> filters = getAll(new PaginationVo(0, 10));
 		assertEquals(2, filters.size());
-		test = repository.findByName("test1").get();
+		test = findByName("test1");
 		//remove
-		repository.delete(test);
+		delete(test);
 		filters = getDao().getAll(new PaginationVo(0, 10));
 		assertEquals(1, filters.size());		
-		test = getRepository().findByName("test").get();
-		getRepository().delete(test);	
+		test = findByName("test");
+		delete(test);	
 		filters = getDao().getAll(new PaginationVo(0, 10));
 		assertEquals(0, filters.size());	
 	}
