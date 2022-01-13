@@ -61,7 +61,7 @@ public class FilterService implements I_FilterService {
 	@Override
 	public FilterDto delete(String type, Long id) throws AppBussinessValidationException, AppDataTypeValidationException {
 		// data types validations
-		getHelperFilterService().validateDataTypeForRemove(id);
+		getHelperFilterService().validateDataTypeId(id);
 		
 		// identify type, business validations and delete filter on DB
 		GenericFilterVo filter = getHelperFilterService().deleteFilter(type, id);
@@ -73,7 +73,7 @@ public class FilterService implements I_FilterService {
 	@Override
 	public Optional<FilterDto> findById(String type, Long id)  throws AppBussinessValidationException, AppDataTypeValidationException  {
 		// data types validations
-		getHelperFilterService().validateDataTypeForFindById(id);
+		getHelperFilterService().validateDataTypeId(id);
 				
 		// identify type, business validations and find filter on DB
 		GenericFilterVo filter = getHelperFilterService().findByIdFilter(type, id);
@@ -84,6 +84,18 @@ public class FilterService implements I_FilterService {
 
 	public HelperFilterService getHelperFilterService() {
 		return helperFilterService;
+	}
+
+	@Override
+	public FilterDto activate(String type, Long id) throws AppDataTypeValidationException, AppBussinessValidationException {
+		// data types validations
+		getHelperFilterService().validateDataTypeId(id);
+						
+		// identify type, business validations and find filter on DB
+		GenericFilterVo filter = getHelperFilterService().activateFilter(type, id);
+		
+		// create dto for response
+		return new FilterDto(filter.getId(), filter.getName(), filter.isActive());
 	}
 
 }

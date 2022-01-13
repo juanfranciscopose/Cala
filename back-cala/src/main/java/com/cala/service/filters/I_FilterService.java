@@ -19,4 +19,6 @@ public interface I_FilterService {
 
 	public Optional<FilterDto> findById(String type, Long id) throws AppBussinessValidationException, AppDataTypeValidationException;
 
+	public FilterDto activate(String type, Long id) throws AppDataTypeValidationException, AppBussinessValidationException;
+
 }

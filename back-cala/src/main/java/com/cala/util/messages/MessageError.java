@@ -124,4 +124,8 @@ public class MessageError {
 		return String.format("El filtro %s no se pudo actualizar en el sistema.", key);
 	}
 	
+	public static String msgErrorActivateGenericFilter(String key){
+		return String.format("El filtro %s no se pudo activar en el sistema.", key);
+	}
+	
 }

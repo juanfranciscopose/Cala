@@ -50,7 +50,6 @@ public class FilterController {
 			e.printStackTrace();
 			return new ResponseEntity<>(ResponseDto.error(MessageError.msgErrorCreateGenericFilter(type)), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
 	}
 
 	@PutMapping("/{type}/update")
@@ -114,6 +113,22 @@ public class FilterController {
 			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch (AppBussinessValidationException e) {
 			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PutMapping("/{type}/activate/{id}")
+	public ResponseEntity<?> activate(@PathVariable("type") String type, @PathVariable("id") Long id) {
+		try {
+			logger.info("Servicio: /filter/"+type+"/activate -> id: " + id);
+			FilterDto filterDto = getFilterService().activate(type, id);
+			return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.OK);
+		} catch (AppDataTypeValidationException e) {
+			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (AppBussinessValidationException e) {
+		 	return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(ResponseDto.error(MessageError.msgErrorActivateGenericFilter(type)), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
