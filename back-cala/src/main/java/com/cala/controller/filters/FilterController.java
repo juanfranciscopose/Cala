@@ -89,7 +89,7 @@ public class FilterController {
 		try {
 			logger.info("Servicio: /filter/"+type+"/delete -> id: " + id);
 			FilterDto filterDto = getFilterService().delete(type, id);
-			return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.OK);
+			return new ResponseEntity<>(ResponseDto.ok(filterDto), HttpStatus.ACCEPTED);
 		} catch (AppDataTypeValidationException e) {
 			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (AppBussinessValidationException e) {
