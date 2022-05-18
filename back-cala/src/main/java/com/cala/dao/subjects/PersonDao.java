@@ -75,187 +75,268 @@ public class PersonDao extends GenericSubjectDao<PersonVo, Person> implements I_
 	Logger logger = LoggerFactory.getLogger(PersonDao.class);
 	
 	@Override
-	public PersonVo setDescription(Long id, List<DescriptionVo> descriptions) {
-		if (descriptions != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			List<Description> desc = new ArrayList<>();
-			descriptions.stream().forEach(descriptionVo -> {
-				Description d = new Description(descriptionVo.getDescription(), descriptionVo.isStatus(), descriptionVo.getStamp());
-				desc.add(d);
-			});
-			if (person.isPresent() && !desc.isEmpty()) {
-				person.get().setDescriptions(desc);
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+	public List<PersonVo> findAllOrderByHighlightNameSurname(PaginationVo pagination) {
+		try {
+			PageRequest pageRequest = PageRequest.of(pagination.getPage(), pagination.getSize());
+			Page<Person> subjects = getPersonRepository().findAllOrderByHighlightDescSurnameAscNameAsc(pageRequest);
+			return PersonVo.createListVo(subjects.getContent());
+		} catch (Exception e) {
+			logger.error("Error en metodo findAllOrderByHighlightNameSurname de PersonDao");
+			return null;
 		}
-		return null;
 	}
 	
 	@Override
-	public List<PersonVo> findAll(SearchPersonFilterVo filter, PaginationVo pagination){
-		PageRequest pageRequest = PageRequest.of(pagination.getPage(), pagination.getSize());
-		Page<Person> subjects;
-		if (filter != null) {
-			subjects = getPersonRepository().findAll(PersonSpecification.filter(filter), pageRequest);
-		}else {
-			subjects = getPersonRepository().findAll(pageRequest);
+	public PersonVo setDescription(Long id, List<DescriptionVo> descriptions) {
+		try {
+			if (descriptions != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				List<Description> desc = new ArrayList<>();
+				descriptions.stream().forEach(descriptionVo -> {
+					Description d = new Description(descriptionVo.getDescription(), descriptionVo.isStatus(), descriptionVo.getStamp());
+					desc.add(d);
+				});
+				if (person.isPresent() && !desc.isEmpty()) {
+					person.get().setDescriptions(desc);
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setDescription de PersonDao");
+			return null;
 		}
-		return PersonVo.createListVo(subjects.getContent());
+	}
+	
+	@Override
+	public List<PersonVo> findAllWithFilters(SearchPersonFilterVo filter, PaginationVo pagination){
+		try {
+			PageRequest pageRequest = PageRequest.of(pagination.getPage(), pagination.getSize());
+			Page<Person> subjects;
+			if (filter != null) {
+				subjects = getPersonRepository().findAll(PersonSpecification.filter(filter), pageRequest);
+			}else {
+				subjects = getPersonRepository().findAll(pageRequest);
+			}
+			return PersonVo.createListVo(subjects.getContent());
+		} catch (Exception e) {
+			logger.error("Error en metodo findAllWithFilters de PersonDao");
+			return null;
+		}
 	}	
 
 	@Override
 	public PersonVo setTopics(Long id, List<TopicVo> filters) {
-		if (filters != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			List<Topic> topics = new ArrayList<>();
-			filters.stream().forEach(topicVo -> {
-				Optional<Topic> f = getTopicRepository().findByName(topicVo.getName());
-				if (f.isPresent()) {
-					topics.add(f.get());
-				}
-			});
-			if (person.isPresent() && !topics.isEmpty()) {
-				person.get().setTopics(topics);
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (filters != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				List<Topic> topics = new ArrayList<>();
+				filters.stream().forEach(topicVo -> {
+					Optional<Topic> f = getTopicRepository().findByName(topicVo.getName());
+					if (f.isPresent()) {
+						topics.add(f.get());
+					}
+				});
+				if (person.isPresent() && !topics.isEmpty()) {
+					person.get().setTopics(topics);
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setTopics de PersonDao");
+			return null;
 		}
-		return null;
 	}
 
 	@Override
 	public PersonVo setTypeParticipations(Long id, List<TypeParticipationVo> filters) {
-		if (filters != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			List<TypeParticipation> types = new ArrayList<>();
-			filters.stream().forEach(typeParticipationVo -> {
-				Optional<TypeParticipation> f = getTypeParticipationRepository().findByName(typeParticipationVo.getName());
-				if (f.isPresent()) {
-					types.add(f.get());
-				}
-			});
-			if (person.isPresent() && !types.isEmpty()) {
-				person.get().setTypeParticipation(types);
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (filters != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				List<TypeParticipation> types = new ArrayList<>();
+				filters.stream().forEach(typeParticipationVo -> {
+					Optional<TypeParticipation> f = getTypeParticipationRepository().findByName(typeParticipationVo.getName());
+					if (f.isPresent()) {
+						types.add(f.get());
+					}
+				});
+				if (person.isPresent() && !types.isEmpty()) {
+					person.get().setTypeParticipation(types);
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;	
+		} catch (Exception e) {
+			logger.error("Error en metodo setTypeParticipations de PersonDao");
+			return null;
 		}
-		return null;
 	}
 
 	@Override
 	public PersonVo setInterests(Long id, List<InterestVo> filters) {
-		if (filters != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			List<Interest> interests = new ArrayList<>();
-			filters.stream().forEach(interestVo -> {
-				Optional<Interest> f = getInterestRepository().findByName(interestVo.getName());
-				if (f.isPresent()) {
-					interests.add(f.get());
-				}
-			});
-			if (person.isPresent() && !interests.isEmpty()) {
-				person.get().setInterests(interests);
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (filters != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				List<Interest> interests = new ArrayList<>();
+				filters.stream().forEach(interestVo -> {
+					Optional<Interest> f = getInterestRepository().findByName(interestVo.getName());
+					if (f.isPresent()) {
+						interests.add(f.get());
+					}
+				});
+				if (person.isPresent() && !interests.isEmpty()) {
+					person.get().setInterests(interests);
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setInterests de PersonDao");
+			return null;
 		}
-		return null;
 	}
 
 	@Override
 	public PersonVo setNexusManagement(Long id, List<NexusManagementVo> filters) {
-		if (filters != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			List<NexusManagement> nexus = new ArrayList<>();
-			filters.stream().forEach(nexusVo -> {
-				Optional<NexusManagement> f = getNexusManagementRepository().findByName(nexusVo.getName());
-				if (f.isPresent()) {
-					nexus.add(f.get());
-				}
-			});
-			if (person.isPresent() && !nexus.isEmpty()) {
-				person.get().setNexusManagement(nexus);
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (filters != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				List<NexusManagement> nexus = new ArrayList<>();
+				filters.stream().forEach(nexusVo -> {
+					Optional<NexusManagement> f = getNexusManagementRepository().findByName(nexusVo.getName());
+					if (f.isPresent()) {
+						nexus.add(f.get());
+					}
+				});
+				if (person.isPresent() && !nexus.isEmpty()) {
+					person.get().setNexusManagement(nexus);
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setNexusManagement de PersonDao");
+			return null;
 		}
-		return null;
 	}
 	
 	@Override
 	public PersonVo setAgeGroup(Long id, AgeGroupVo config) {
-		if (config != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			Optional<AgeGroup> group = getAgeGroupRepository().findByName(config.getName());
-			if (person.isPresent() && group.isPresent()) {
-				person.get().setAgeGroup(group.get());
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (config != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				Optional<AgeGroup> group = getAgeGroupRepository().findByName(config.getName());
+				if (person.isPresent() && group.isPresent()) {
+					person.get().setAgeGroup(group.get());
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setAgeGroup de PersonDao");
+			return null;
 		}
-		return null;
 	}
 	
 	@Override
 	public PersonVo setIdeologies(Long id, List<IdeologyVo> filters) {
-		if (filters != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			List<Ideology> ideologies = new ArrayList<>();
-			filters.stream().forEach(ideologyVo -> {
-				Optional<Ideology> f = getIdeologyRepository().findByName(ideologyVo.getName());
-				if (f.isPresent()) {
-					ideologies.add(f.get());
-				}
-			});
-			if (person.isPresent() && !ideologies.isEmpty()) {
-				person.get().setIdeologies(ideologies);
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (filters != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				List<Ideology> ideologies = new ArrayList<>();
+				filters.stream().forEach(ideologyVo -> {
+					Optional<Ideology> f = getIdeologyRepository().findByName(ideologyVo.getName());
+					if (f.isPresent()) {
+						ideologies.add(f.get());
+					}
+				});
+				if (person.isPresent() && !ideologies.isEmpty()) {
+					person.get().setIdeologies(ideologies);
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setIdeologies de PersonDao");
+			return null;
 		}
-		return null;
 	}
 	
 	@Override
 	public PersonVo setTypeJob(Long id, TypeJobVo type) {
-		if (type != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			Optional<TypeJob> typeJob = getTypeJobRepository().findByName(type.getName());
-			if (person.isPresent() && typeJob.isPresent()) {
-				person.get().setTypeJob(typeJob.get());
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (type != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				Optional<TypeJob> typeJob = getTypeJobRepository().findByName(type.getName());
+				if (person.isPresent() && typeJob.isPresent()) {
+					person.get().setTypeJob(typeJob.get());
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setTypeJob de PersonDao");
+			return null;
 		}
-		return null;
 	}
 	
 	@Override
 	public PersonVo setGender(Long id, GenderVo gender) {
-		if (gender != null && id != null) {
-			Optional<Person> person = getRepository().findById(id);
-			Optional<Gender> gen = getGenderRepository().findByName(gender.getName());
-			if (person.isPresent() && gen.isPresent()) {
-				person.get().setGender(gen.get());
-				Person p = getRepository().save(person.get());
-				return PersonVo.createVo(p);
-			}	
+		try {
+			if (gender != null && id != null) {
+				Optional<Person> person = getRepository().findById(id);
+				Optional<Gender> gen = getGenderRepository().findByName(gender.getName());
+				if (person.isPresent() && gen.isPresent()) {
+					person.get().setGender(gen.get());
+					Person p = getRepository().save(person.get());
+					return PersonVo.createVo(p);
+				}	
+			}
+			return null;
+		} catch (Exception e) {
+			logger.error("Error en metodo setGender de PersonDao");
+			return null;
 		}
-		return null;
 	}
 
 	@Override
 	public PersonVo update(PersonVo personVo) {
-		Optional<Person> person = getRepository().findById(personVo.getId());
-		if(person.isPresent()) {
-			Person p = person.get();
-			p.update(personVo);
-			p = getPersonRepository().save(p);
-			return PersonVo.createVo(p);
+		try {
+			Optional<Person> person = getRepository().findById(personVo.getId());
+			if(person.isPresent()) {
+				Person p = person.get();
+				p.update(personVo);
+				p = getPersonRepository().save(p);
+				return PersonVo.createVo(p);
+			}
+			return null;		
+		} catch (Exception e) {
+			logger.error("Error en metodo update de PersonDao");
+			return null;
 		}
-		return null;		
+	}
+	
+	@Override
+	public PersonVo findById(Long id) {
+		try {
+			Optional<Person> person = getRepository().findById(id);
+			if(person.isPresent()) {
+				return PersonVo.createVo(person.get());
+			}
+			return null;		
+		} catch (Exception e) {
+			logger.error("Error en metodo findById de PersonDao");
+			return null;
+		}
 	}
 
 	@Override

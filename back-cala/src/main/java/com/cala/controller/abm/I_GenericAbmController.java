@@ -7,6 +7,6 @@ public interface I_GenericAbmController <T>{
 	public ResponseEntity<?> update(T t);
 	public ResponseEntity<?> list(int size, int page);
 	public ResponseEntity<?> remove(Long id);
-	public ResponseEntity<T> findById(Long id);
+	public ResponseEntity<?> findById(Long id);
 	
 }

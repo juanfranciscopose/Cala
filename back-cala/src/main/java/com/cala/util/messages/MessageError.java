@@ -7,6 +7,13 @@ public class MessageError {
 	public static final String ERR_GENERICO = "Ocurrió un error en la aplicación. Por favor, contáctese con el administrador.";
 	public static final String ERR_VALIDACION_GENERICA = "Datos insuficientes";
 	public static final String ERR_PAGINACION_REQUERIDA = "Es necesario paginar los resultados";
+	/**
+	 * PERSON
+	 */
+	public static final String ERR_CREATE_PERSON_ERROR = "No se pudo almacenar la persona al sistema";//-> usado en personController
+	public static final String ERR_UPDATE_PERSON_ERROR = "No se pudo actualizar la persona al sistema";//-> usado en personController
+	public static final String ERR_DELETE_PERSON_ERROR = "No se pudo eliminar la persona al sistema";//-> usado en personController
+	public static final String ERR_PERSON_NOT_EXIST = "La persona no existe";//-> usado en PersonController
 	
 	/**
 	 * generic filter
@@ -108,6 +115,7 @@ public class MessageError {
 	public static String msgErrorNoExisteDato(String key){
 		return String.format("El campo %s no se pudo encontrar en el sistema.", key);
 	}
+
 	
 	/*
 	 *       GENERIC FILTER

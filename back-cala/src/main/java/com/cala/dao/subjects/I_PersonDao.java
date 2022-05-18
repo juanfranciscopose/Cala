@@ -16,15 +16,32 @@ import com.cala.model.vo.subjects.DescriptionVo;
 import com.cala.model.vo.subjects.PersonVo;
 
 public interface I_PersonDao{
-	public List<PersonVo> findAll(SearchPersonFilterVo filter, PaginationVo pagination);
+	
+	public List<PersonVo> findAllWithFilters(SearchPersonFilterVo filter, PaginationVo pagination);
+	
+	public List<PersonVo> findAllOrderByHighlightNameSurname(PaginationVo pagination);
+	
 	public PersonVo setTypeJob(Long id, TypeJobVo type);
+
 	public PersonVo setAgeGroup(Long id, AgeGroupVo config);
+	
 	public PersonVo setGender(Long id, GenderVo gender);
+	
 	public PersonVo setIdeologies(Long id, List<IdeologyVo> filters);
+	
 	public PersonVo setTopics(Long id, List<TopicVo> filters);
+	
 	public PersonVo setTypeParticipations(Long id, List<TypeParticipationVo> filters);
+	
 	public PersonVo setInterests(Long id, List<InterestVo> filters);
+	
 	public PersonVo setNexusManagement(Long id, List<NexusManagementVo> filters);
+	
 	public PersonVo setDescription (Long id, List<DescriptionVo> descriptions);
+	
 	public PersonVo update(PersonVo person);
+	
+	public PersonVo store(PersonVo personVo);
+	
+	public PersonVo findById(Long id);
 }

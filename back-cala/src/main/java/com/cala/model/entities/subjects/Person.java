@@ -5,9 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -25,10 +22,6 @@ import com.cala.model.vo.subjects.PersonVo;
 @Entity
 @DiscriminatorValue(value = "PERSON")
 public class Person extends Subject implements Auditable{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private Long id;
 	
 	@Column(name="surname")
 	private String surname;

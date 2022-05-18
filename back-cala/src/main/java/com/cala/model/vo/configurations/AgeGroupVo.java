@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.cala.model.entities.configurations.AgeGroup;
+import com.cala.model.entities.filters.filterable.Filterable;
 import com.cala.model.vo.global.AbstractVo;
 
-public class AgeGroupVo extends AbstractVo{
+public class AgeGroupVo extends AbstractVo implements Filterable{
 	
 	private String name;
 	

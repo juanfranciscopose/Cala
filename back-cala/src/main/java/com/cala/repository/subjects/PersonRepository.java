@@ -9,5 +9,5 @@ import com.cala.model.entities.subjects.Person;
 
 @Repository
 public interface PersonRepository extends SubjectRepository<Person>, JpaSpecificationExecutor<Person> {
-	public Page<Person> findAll(Pageable pageable);
+	public Page<Person> findAllOrderByHighlightDescSurnameAscNameAsc(Pageable pageable);
 }
