@@ -1,5 +1,5 @@
 import React from "react";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { TextField } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 
@@ -18,11 +18,13 @@ const MyTextField = ({
 
 }) => {
     const classes = useStyles();
-    const [field] = useField(props);  
-
+    const [field] = useField(name);  
+    const { setFieldValue } = useFormikContext();
+    
     const onChangeValue = (event) => {
         if (!disabled){
-            field.onChange(event.target.value)
+            //field.onChange(event.target.value)
+            setFieldValue(name, event.target.value);
             if (customChange) customChange(event);
         }
     }
@@ -31,6 +33,7 @@ const MyTextField = ({
         <TextField
             {...field}
             {...props}
+            name={name}
             onChange={event => onChangeValue(event)}
             disabled={disabled}
             label={label ? label : ''}

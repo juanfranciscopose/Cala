@@ -1,6 +1,7 @@
 import React from "react"
 import TYPE_FIELDS from './../../../constants/typeFields'
 import MyTextField from "./../fields/MyTextField";
+import MySelect from "./../fields/MySelect";
 import {ErrorMessage} from 'formik'
 import { Grid } from '@mui/material';
 
@@ -14,6 +15,15 @@ const InputFactory = ({field, xs}) => {
             <MyTextField
               label={field.label}
               name={field.name}
+            />
+          );
+        case 'Select':
+          return(
+            <MySelect
+              label={field.label}
+              name={field.name}
+              options ={field.options}
+              allowEmpty={true}
             />
           );
         case 'Numeric':
