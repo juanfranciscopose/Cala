@@ -36,7 +36,13 @@ const useStyle = makeStyles( (theme) => ({
 
 const TITLE = 'Formulario Nueva Persona';
 
-let builtValidationSchema = () => {
+let buildInitialValues = () => {
+  let initialValues = {}
+
+  return initialValues;
+}
+
+let buildValidationSchema = () => {
   let validationSchema = {};
   DatosPersonales.arrayDatosPersonales.forEach(campo => validationSchema[campo.name] = campo.validation)
   console.log('validationSchema', validationSchema);
@@ -64,13 +70,14 @@ const FormularioNuevaPersona = ({open, close, view=false, edit=false}) => {
         </DialogTitle>
         <DialogContent>
           <Formik
-            //initialValues={fields}
             enableReinitialize
             onSubmit={(values) => {
-              console.log(values);
+              console.log("values formulario", values);
               console.log("submit!");
+              close()
             }}
-            validationSchema={builtValidationSchema()}
+            validationSchema={buildValidationSchema()}
+            initialValues={buildInitialValues()}
           >
             {({ values, errors}) => (
               <Form >
