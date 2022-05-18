@@ -31,6 +31,15 @@ const arrayDatosPersonales = [
         type: 'Text',
         validation: Yup.string().required('El campo es requerido'),
         initialValue: ''
+    },
+    {
+        id: 'genero',
+        name: 'genero',
+        label: 'Genero',
+        type: 'Select',
+        options: [{value: 'M', label: 'Masculino'},{value: 'F', label: 'Femenino'}],
+        validation: '',
+        initialValue: ''
     }
 ];
 
