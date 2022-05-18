@@ -1,10 +1,11 @@
 import React from "react"
 import { Grid, Typography, Collapse, Paper } from '@mui/material'
-import KeyboardControlKeyIcon from '@mui/icons-material/KeyboardControlKey';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardControlKeyIcon from '@mui/icons-material/KeyboardControlKey'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import SeccionBuilder from './../../../../../shared/components/build/SeccionBuilder'
-import { makeStyles } from '@mui/styles';
-import * as Yup from 'yup';
+import { makeStyles } from '@mui/styles'
+import * as Yup from 'yup'
+import getGeneroOptions from './../../../../../shared/services/filters/GeneroService'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -37,8 +38,8 @@ const arrayDatosPersonales = [
         name: 'genero',
         label: 'Genero',
         type: 'Select',
-        options: [{value: 'M', label: 'Masculino'},{value: 'F', label: 'Femenino'}],
-        validation: '',
+        options: getGeneroOptions,
+        validation: Yup.string().required('El campo es requerido'),
         initialValue: ''
     }
 ];
