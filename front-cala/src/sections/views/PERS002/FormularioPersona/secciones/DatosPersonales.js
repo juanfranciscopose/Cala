@@ -41,6 +41,14 @@ const arrayDatosPersonales = [
         options: getGeneroOptions,
         validation: Yup.string().required('El campo es requerido'),
         initialValue: ''
+    },
+    {
+        id: 'tieneHijo',
+        name: 'tieneHijo',
+        label: '¿Tiene Hijos?',
+        type: 'Checkbox',
+        validation: '',
+        initialValue: false
     }
 ];
 

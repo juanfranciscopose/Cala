@@ -4,6 +4,7 @@ import MyTextField from "./../fields/MyTextField";
 import MySelect from "./../fields/MySelect";
 import {ErrorMessage} from 'formik'
 import { Grid } from '@mui/material';
+import MyCheckbox from "./../fields/MyCheckbox";
 
 const InputFactory = ({field, xs}) => {
   
@@ -26,15 +27,16 @@ const InputFactory = ({field, xs}) => {
               allowEmpty={true}
             />
           );
-        case 'Numeric':
-          console.log('NUMERIC');
-          break;
         case 'Date':
           console.log('DATE');
           break;
-        case 'Boolean':
-          console.log('BOOLEAN');
-          break;
+        case 'Checkbox':
+          return(
+            <MyCheckbox
+              label={field.label}
+              name={field.name}
+            />
+          );
         default:
           console.log('Error en type field',field.type);
           break;

@@ -1,9 +1,8 @@
 const TYPE_FIELDS = [
     'Text',
     'Select',
-    'Numeric',
     'Date',
-    'Boolean'
+    'Checkbox'
 ];
 
 export default TYPE_FIELDS
