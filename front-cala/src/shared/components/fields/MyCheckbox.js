@@ -32,7 +32,6 @@ export default function MyCheckbox({
                     {...props}
                     name={name}
                     checked={Boolean(field.value)} 
-                    defaultChecked={false}
                     value={checklistValue ? checklistValue : Boolean(field.value)}              
                     onChange={event => onChangeValue(event)}
                 />}
