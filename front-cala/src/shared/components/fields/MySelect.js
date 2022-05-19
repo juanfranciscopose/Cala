@@ -26,7 +26,7 @@ const MySelect = ({
     }
     
     const getDescription = (item) => {
-        return hideId || item.value == -1
+        return hideId || item.value === -1
             ? item.label
             : `${item.value} - ${item.label}`
     }
