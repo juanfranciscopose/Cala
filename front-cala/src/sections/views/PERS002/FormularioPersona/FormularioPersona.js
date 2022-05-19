@@ -38,7 +38,8 @@ const TITLE = 'Formulario Nueva Persona';
 
 let buildInitialValues = () => {
   let initialValues = {}
-
+  DatosPersonales.arrayDatosPersonales.forEach(campo => initialValues[campo.name] = campo.initialValue)
+  console.log('initialValues', initialValues);
   return initialValues;
 }
 
@@ -51,7 +52,13 @@ let buildValidationSchema = () => {
 
 const FormularioNuevaPersona = ({open, close, view=false, edit=false}) => {
   const classes = useStyle();
- 
+  
+  const onSubmitForm = (values) => {
+    console.log("values formulario", values);
+    console.log("submit!");
+    close()
+  }
+
   return (
     <React.Fragment>
       <Dialog
@@ -72,9 +79,7 @@ const FormularioNuevaPersona = ({open, close, view=false, edit=false}) => {
           <Formik
             enableReinitialize
             onSubmit={(values) => {
-              console.log("values formulario", values);
-              console.log("submit!");
-              close()
+              onSubmitForm(values)
             }}
             validationSchema={buildValidationSchema()}
             initialValues={buildInitialValues()}
