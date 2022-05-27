@@ -47,8 +47,8 @@ const arrayDatosPersonales = [
         name: 'tieneHijo',
         label: '¿Tiene Hijos?',
         type: 'Checkbox',
-        validation: '',
-        initialValue: false
+        validation: Yup.boolean().oneOf([true, false],"El campo es requerido"),
+        initialValue: false,
     }
 ];
 

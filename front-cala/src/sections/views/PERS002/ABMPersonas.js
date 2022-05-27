@@ -1,15 +1,29 @@
-import { Add } from '@mui/icons-material';
+import { Add, Edit } from '@mui/icons-material';
 import { Fab, Tooltip } from '@mui/material';
 import React , {useState} from 'react';
-import FormularioNuevaPersona from './FormularioPersona/FormularioPersona';
+import FormularioPersona from './FormularioPersona/FormularioPersona';
 
 const TITLE = 'ABMPersonas';
 
 const ABMPersonas = () => {
-  const [open, setOpen] = useState(false);
+  //modals states
+  const [openNew, setOpenNew] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
-  const cerrar = () => {
-    setOpen(false);
+  //test edit
+  const initPersona = {
+    nombre: 'vitto',
+    apellido: 'pose',
+    genero: 'M',
+    tieneHijos: false
+  }
+
+  const cerrarNew = () => {
+    setOpenNew(false);
+  }
+
+  const cerrarEdit = () => {
+    setOpenEdit(false);
   }
 
   return (
@@ -21,21 +35,37 @@ const ABMPersonas = () => {
       {/* 6-paginacion */}
       <div>
           {TITLE}
+
           <Tooltip title="Nueva Persona">
             <Fab
              ariant="extended"
              size="medium"
              color="secondary"
              onClick={() => {
-               console.log("click!");
-               setOpen(true);
+               console.log("click - nueva persona");
+               setOpenNew(true);
              }} 
             >
               <Add/>
             </Fab>
           </Tooltip>
+
+          <Tooltip title="Editar Persona">
+            <Fab
+             ariant="extended"
+             size="medium"
+             color="secondary"
+             onClick={() => {
+               console.log("click - editar persona");
+               setOpenEdit(true);
+             }} 
+            >
+              <Edit/>
+            </Fab>
+          </Tooltip>
       </div>
-      <FormularioNuevaPersona open={open} close={cerrar}/>
+      <FormularioPersona open={openNew} close={cerrarNew}/>
+      <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={initPersona}/>
     </React.Fragment>
   )
 };
