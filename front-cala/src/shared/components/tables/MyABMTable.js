@@ -4,10 +4,11 @@ import { DataGrid} from '@mui/x-data-grid';
 const MyABMTable = ({
     columns, // headers de la tabla (dejo hardcode de ejemplo)
     rows, // valores de la tabla (dejo hardcode de ejemplo)
-    pageSize, // integer
-    rowsPerPageOptions // array => ej [5]
+    pageSize, // integer => cantidad por defecto de items por pagina
+    height, // max(600) o min(400) => ajustar
+    customSelectionChange // evento seleccion de checkbox fila
   }) => {
-    const columnsHardcode = [
+    /*const columnsHardcode = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'firstName', headerName: 'First name', width: 130 },
         { field: 'lastName', headerName: 'Last name', width: 130 },
@@ -38,16 +39,23 @@ const MyABMTable = ({
         { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
         { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
         { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-      ];
+      ];*/
+
+      const handleSelectionChange = (newSelection) => {
+        if (customSelectionChange){
+            customSelectionChange(newSelection)
+        }
+      }
 
       return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: height == 'max' ? 600 : 400 , width: '100%' }}>
           <DataGrid
-            rows={rowsHardcode}
-            columns={columnsHardcode}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            rows={rows}
+            columns={columns}
+            pageSize={pageSize}
+            rowsPerPageOptions={[]}
             checkboxSelection
+            onSelectionModelChange={(newSelection) => { handleSelectionChange(newSelection) }}
           />
         </div>
       );
