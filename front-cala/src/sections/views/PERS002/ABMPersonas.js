@@ -1,6 +1,7 @@
 import { Add, Edit } from '@mui/icons-material';
 import { Fab, Tooltip } from '@mui/material';
 import React , {useState} from 'react';
+import MyABMTable from '../../../shared/components/tables/MyABMTable';
 import FormularioPersona from './FormularioPersona/FormularioPersona';
 
 const TITLE = 'ABMPersonas';
@@ -36,6 +37,20 @@ const ABMPersonas = () => {
       <div>
           {TITLE}
 
+          <Tooltip title="Editar Persona">
+            <Fab
+             ariant="extended"
+             size="medium"
+             color="secondary"
+             onClick={() => {
+               console.log("click - editar persona");
+               setOpenEdit(true);
+             }} 
+            >
+              <Edit/>
+            </Fab>
+          </Tooltip>
+          <MyABMTable/>
           <Tooltip title="Nueva Persona">
             <Fab
              ariant="extended"
@@ -50,19 +65,6 @@ const ABMPersonas = () => {
             </Fab>
           </Tooltip>
 
-          <Tooltip title="Editar Persona">
-            <Fab
-             ariant="extended"
-             size="medium"
-             color="secondary"
-             onClick={() => {
-               console.log("click - editar persona");
-               setOpenEdit(true);
-             }} 
-            >
-              <Edit/>
-            </Fab>
-          </Tooltip>
       </div>
       <FormularioPersona open={openNew} close={cerrarNew}/>
       <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={initPersona}/>
