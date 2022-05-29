@@ -1,4 +1,4 @@
-import { Add, Edit } from '@mui/icons-material';
+import { Add, Edit, Album } from '@mui/icons-material';
 import { Fab, Tooltip } from '@mui/material';
 import React , {useState} from 'react';
 import MyABMTable from '../../../shared/components/tables/MyABMTable';
@@ -38,6 +38,8 @@ const ABMPersonas = () => {
   //modals states
   const [openNew, setOpenNew] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openView, setOpenView] = useState(false);
+  const [showBtnView, setShowBtnView] = useState(false);
 
   //test edit
   const initPersona = {
@@ -55,9 +57,19 @@ const ABMPersonas = () => {
     setOpenEdit(false);
   }
 
-  const verPersona = (newSelection) => {
+  const cerrarView = () => {
+    setOpenView(false);
+  }
+
+  const onSelectedRows = (newSelection) => {
     console.log(newSelection)
-    // abrir modal con itialvalues setiadas en newSelection y inputs grisados 
+    if (newSelection.length === 1){
+      setShowBtnView(true)
+      //setPersona a ver
+      //grisar inputs modal
+    }else{
+      setShowBtnView(false)
+    }
   }
 
   return (
@@ -83,13 +95,27 @@ const ABMPersonas = () => {
               <Edit/>
             </Fab>
           </Tooltip>
+          {!showBtnView ? '' :(
+          <Tooltip title="Ver Persona">
+            <Fab
+             ariant="extended"
+             size="medium"
+             color="secondary"
+             onClick={() => {
+               console.log("click - ver persona");
+               setOpenView(true);
+             }} 
+            >
+              <Album/>
+            </Fab>
+          </Tooltip>)}
 
           <MyABMTable 
             columns={HEADERS_TABLA} 
             rows={HARDCODE_TABLA_VALUES} 
             pageSize={25} 
             height={'max'}
-            customSelectionChange={verPersona}
+            customSelectionChange={onSelectedRows}
           />
           
           <Tooltip title="Nueva Persona">
@@ -108,6 +134,7 @@ const ABMPersonas = () => {
       </div>
       <FormularioPersona open={openNew} close={cerrarNew}/>
       <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={initPersona}/>
+      {!showBtnView ? '' : <FormularioPersona open={openView} close={cerrarView} edit={true} initialValues={initPersona}/>}
     </React.Fragment>
   )
 };
