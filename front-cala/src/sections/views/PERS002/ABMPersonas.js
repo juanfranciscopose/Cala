@@ -95,7 +95,7 @@ const ABMPersonas = () => {
               <Edit/>
             </Fab>
           </Tooltip>
-          {!showBtnView ? '' :(
+          {!showBtnView ? '' : (
           <Tooltip title="Ver Persona">
             <Fab
              ariant="extended"
@@ -134,7 +134,9 @@ const ABMPersonas = () => {
       </div>
       <FormularioPersona open={openNew} close={cerrarNew}/>
       <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={initPersona}/>
-      {!showBtnView ? '' : <FormularioPersona open={openView} close={cerrarView} edit={true} initialValues={initPersona}/>}
+      {!showBtnView ? '' : (
+        <FormularioPersona open={openView} close={cerrarView} view={false} initialValues={initPersona}/>
+      )}
     </React.Fragment>
   )
 };

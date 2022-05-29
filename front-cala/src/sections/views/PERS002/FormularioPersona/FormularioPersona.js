@@ -10,7 +10,7 @@ let buildValidationSchema = () => {
   return Yup.object().shape(validationSchema)
 } 
 
-const FormularioPersona = ({ open, close, edit=false, initialValues={} }) => {
+const FormularioPersona = ({ view, open, close, edit=false, initialValues={} }) => {
 
   const TITLE = !edit ? 'Formulario Nueva Persona' : 'Formulario Modificar Persona'
 
@@ -23,6 +23,7 @@ const FormularioPersona = ({ open, close, edit=false, initialValues={} }) => {
         open={open}
         close={close}
         edit={edit}
+        view={view}
         >
           <DatosPersonales.componentDatosPersonales/><br/>
           {/*Datos Laborales*/}

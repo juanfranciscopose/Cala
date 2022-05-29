@@ -87,7 +87,7 @@ const ModalABM = ({
                   >
                     Cancelar
                   </Button>
-                  {view && (
+                  {view ? (
                     <Button
                       type="submit"
                       variant="contained"
@@ -106,7 +106,7 @@ const ModalABM = ({
                         </React.Fragment>
                       )}
                     </Button>
-                  )}
+                  ): '' }
                 </DialogActions>
               </Form>
             }
