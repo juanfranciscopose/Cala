@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { DataGrid} from '@mui/x-data-grid';
 
 const MyABMTable = ({
@@ -41,14 +41,23 @@ const MyABMTable = ({
         { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
       ];*/
 
-      const handleSelectionChange = (newSelection) => {
+      //guardo objeto de selected rows
+      const [selectedRows, setSelectedRows] = React.useState([]);
+
+      const handleSelectionChange = (ids) => {
+        const selectedIDs = new Set(ids);
+        const selectedRows = rows.filter((row) =>
+          selectedIDs.has(row.id),
+        );
+        setSelectedRows(selectedRows);
+
         if (customSelectionChange){
-            customSelectionChange(newSelection)
+            customSelectionChange(selectedRows)
         }
       }
 
       return (
-        <div style={{ height: height == 'max' ? 600 : 400 , width: '100%' }}>
+        <div style={{ height: height === 'max' ? 600 : 400 , width: '100%' }}>
           <DataGrid
             rows={rows}
             columns={columns}
