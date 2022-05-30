@@ -1,10 +1,20 @@
-import { Add, Edit, Album } from '@mui/icons-material';
-import { Fab, Tooltip } from '@mui/material';
-import React , {useState} from 'react';
-import MyABMTable from '../../../shared/components/tables/MyABMTable';
-import FormularioPersona from './FormularioPersona/FormularioPersona';
+import { Add, Edit, Album, NotInterested } from '@mui/icons-material'
+import { Fab, Tooltip } from '@mui/material'
+import React , {useState} from 'react'
+import MyABMTable from '../../../shared/components/tables/MyABMTable'
+import FormularioPersona from './FormularioPersona/FormularioPersona'
+import HeaderABMPersona from './HeaderABMPersona/HeaderABMPersona'
+import { Button, Grid, Typography, Stack  } from '@mui/material'
+import { Formik, Form } from 'formik';
 
-const TITLE = 'ABMPersonas';
+const TITLE = 'ABM Personas'
+
+const buildInitialValues = () => {
+  let initialValues = {}
+  HeaderABMPersona.arrayFiltros.forEach(campo => initialValues[campo.name] = campo.initialValue)
+  console.log('initialValues', initialValues)
+  return initialValues
+}
 
 const HEADERS_TABLA = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -34,41 +44,43 @@ const HARDCODE_TABLA_VALUES = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
+//test edit view
+const initPersona = {
+  nombre: 'vitto',
+  apellido: 'pose',
+  genero: 'M',
+  tieneHijos: false
+}
+
 const ABMPersonas = () => {
   //modals states
-  const [openNew, setOpenNew] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openView, setOpenView] = useState(false);
-  const [showBtnView, setShowBtnView] = useState(false);
-
-  //test edit
-  const initPersona = {
-    nombre: 'vitto',
-    apellido: 'pose',
-    genero: 'M',
-    tieneHijos: false
-  }
+  const [openNew, setOpenNew] = useState(false)
+  const [openEdit, setOpenEdit] = useState(false)
+  const [openView, setOpenView] = useState(false)
+  const [showBtnViewDeleteUpdate, setShowBtnViewDeleteUpdate] = useState(false)
+  const [selectedPerson, setSelectedPerson] = useState(initPersona)
 
   const cerrarNew = () => {
-    setOpenNew(false);
+    setOpenNew(false)
   }
 
   const cerrarEdit = () => {
-    setOpenEdit(false);
+    setOpenEdit(false)
   }
 
   const cerrarView = () => {
-    setOpenView(false);
+    setOpenView(false)
   }
 
   const onSelectedRows = (newSelection) => {
     console.log(newSelection)
     if (newSelection.length === 1){
-      setShowBtnView(true)
-      //setPersona a ver
-      //grisar inputs modal
+      setShowBtnViewDeleteUpdate(true)
+      //setSelectedPerson(newSelection[0])
+      //console.log(selectedPerson)
     }else{
-      setShowBtnView(false)
+      setShowBtnViewDeleteUpdate(false)
+      //setSelectedPerson({})
     }
   }
 
@@ -79,37 +91,85 @@ const ABMPersonas = () => {
       {/* 5-filtros */}
       {/* 2-tabla */}
       {/* 6-paginacion */}
-      <div>
-          {TITLE}
 
-          <Tooltip title="Editar Persona">
-            <Fab
-             ariant="extended"
-             size="medium"
-             color="secondary"
-             onClick={() => {
-               console.log("click - editar persona");
-               setOpenEdit(true);
-             }} 
-            >
-              <Edit/>
-            </Fab>
-          </Tooltip>
-          {!showBtnView ? '' : (
-          <Tooltip title="Ver Persona">
-            <Fab
-             ariant="extended"
-             size="medium"
-             color="secondary"
-             onClick={() => {
-               console.log("click - ver persona");
-               setOpenView(true);
-             }} 
-            >
-              <Album/>
-            </Fab>
-          </Tooltip>)}
+      <Grid container justifyContent="flex-start" alignItems="center">
+        <Grid item xs={3} mt={3} mb={1} p={1}>
+          <Typography variant="h5" >
+            {TITLE}
+          </Typography>
+        </Grid>
+      </Grid>
 
+      <Grid container justifyContent="center" alignItems="center">
+        <Grid item xs={10} m={2} p={1}>
+          <Formik
+            enableReinitialize
+            //validationSchema={validationSchema}
+            initialValues={buildInitialValues()}
+            onSubmit={values => console.log(values)}
+          >
+            {({ values, errors}) => 
+              <Form>
+                <HeaderABMPersona.componentHeaderABMPersona/>
+              </Form>
+            }
+          </Formik>
+        </Grid>
+      </Grid>
+
+      <Grid container p={1} direction="row" spacing={0.5} m={1} justifyContent="flex-end" alignItems="center">
+        {!showBtnViewDeleteUpdate ? '' : (
+          <>
+          <Grid item xs={2} >
+            <Tooltip title="Editar Persona">
+              <Fab
+              ariant="extended"
+              size="medium"
+              color="secondary"
+              onClick={() => {
+                console.log("click - editar persona")
+                setOpenEdit(true)
+              }} 
+              >
+                <Edit/>
+              </Fab>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={2}>
+            <Tooltip title="Ver Persona">
+              <Fab
+              ariant="extended"
+              size="medium"
+              color="secondary"
+              onClick={() => {
+                console.log("click - ver persona")
+                setOpenView(true)
+              }} 
+              >
+                <Album/>
+              </Fab>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={2}>
+            <Tooltip title="Eliminar Persona">
+              <Fab
+              ariant="extended"
+              size="medium"
+              color="secondary"
+              onClick={() => {
+                console.log("click - borrar persona")
+              }} 
+              >
+                <NotInterested/>
+              </Fab>
+            </Tooltip>
+          </Grid>
+          </>
+        )}
+      </Grid>
+
+      <Grid container spacing={2} p={1} alignItems="center" justifyContent="center">
+        <Grid item xs={10} >
           <MyABMTable 
             columns={HEADERS_TABLA} 
             rows={HARDCODE_TABLA_VALUES} 
@@ -117,25 +177,33 @@ const ABMPersonas = () => {
             height={'max'}
             customSelectionChange={onSelectedRows}
           />
-          
+        </Grid>
+      </Grid>
+
+      <Grid container justifyContent="flex-end" alignItems="center">
+        <Grid item xs={2} m={2} p={1}>
           <Tooltip title="Nueva Persona">
             <Fab
              ariant="extended"
              size="medium"
              color="secondary"
              onClick={() => {
-               console.log("click - nueva persona");
-               setOpenNew(true);
-             }} 
+               console.log("click - nueva persona")
+               setOpenNew(true)
+             }}
             >
               <Add/>
             </Fab>
           </Tooltip>
-      </div>
+        </Grid>
+      </Grid>
+
       <FormularioPersona open={openNew} close={cerrarNew}/>
-      <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={initPersona}/>
-      {!showBtnView ? '' : (
-        <FormularioPersona open={openView} close={cerrarView} view={false} initialValues={initPersona}/>
+      {!showBtnViewDeleteUpdate ? '' : (
+        <>
+          <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={selectedPerson}/>
+          <FormularioPersona open={openView} close={cerrarView} view={false} initialValues={selectedPerson}/>
+        </>
       )}
     </React.Fragment>
   )
