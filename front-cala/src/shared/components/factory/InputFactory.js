@@ -5,6 +5,7 @@ import MySelect from "./../fields/MySelect";
 import {ErrorMessage} from 'formik'
 import { Grid } from '@mui/material';
 import MyCheckbox from "./../fields/MyCheckbox";
+import MyDatePicker from "./../fields/MyDatePicker";
 
 const InputFactory = ({field, xs}) => {
   
@@ -28,8 +29,12 @@ const InputFactory = ({field, xs}) => {
             />
           );
         case 'Date':
-          console.log('DATE');
-          break;
+          return(
+            <MyDatePicker
+              label={field.label}
+              name={field.name}
+            />
+          );
         case 'Checkbox':
           return(
             <MyCheckbox
