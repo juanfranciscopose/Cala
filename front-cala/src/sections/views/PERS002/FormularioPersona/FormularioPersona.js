@@ -10,14 +10,14 @@ let buildValidationSchema = () => {
   return Yup.object().shape(validationSchema)
 } 
 
-const FormularioPersona = ({ view, open, close, edit=false, initialValues={} }) => {
+const FormularioPersona = ({ view=true, open, close, edit=false, initialValues={} }) => {
 
-  const TITLE = !edit ? 'Formulario Nueva Persona' : 'Formulario Modificar Persona'
+  const TITLE = !edit ? 'Nueva Persona' : 'Modificar Persona'
 
   return (
     <React.Fragment>
       <ModalABM 
-        titulo={TITLE} 
+        titulo={view ? TITLE : 'Ver Persona'} 
         validationSchema={buildValidationSchema} 
         initialValues={initialValues}
         open={open}
