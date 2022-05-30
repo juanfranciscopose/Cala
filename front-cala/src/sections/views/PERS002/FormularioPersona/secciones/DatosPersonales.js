@@ -43,6 +43,17 @@ const arrayDatosPersonales = [
         initialValue: ''
     },
     {
+        id: 'fechaNacimiento',
+        name: 'fechaNacimiento',
+        label: 'Fecha Nacimiento',
+        type: 'Date',
+        validation: Yup.date()
+                        .nullable()
+                        .max(new Date(), 'La fecha debe ser menor a la actual')//no funciona
+                        .typeError('fecha invalida'),
+        initialValue: ''
+    },
+    {
         id: 'tieneHijo',
         name: 'tieneHijo',
         label: '¿Tiene Hijos?',
