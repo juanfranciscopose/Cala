@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, Typography, Collapse, Paper, Button } from '@mui/material'
+import { Grid, Typography, Collapse, Paper } from '@mui/material'
 import SeccionBuilder from './../../../../shared/components/build/SeccionBuilder'
 import getGeneroOptions from './../../../../shared/services/filters/GeneroService'
 import getFranjaEtariaOptions from './../../../../shared/services/filters/FranjaEtariaService'
@@ -9,8 +9,9 @@ import getNexoGestionOptions from './../../../../shared/services/filters/NexoGes
 import getTematicaOptions from './../../../../shared/services/filters/TematicaService'
 import getTipoParticipacionOptions from './../../../../shared/services/filters/TipoParticipacionService'
 import getTipoTrabajoOptions from './../../../../shared/services/filters/TipoTrabajoService'
+import MyButton from "../../../../shared/components/buttons/MyButton"
 
-const TITLE = 'Filtrar'
+const TITLE = 'Filtro Tabla Personas'
 
 const arrayFiltros = [
     {
@@ -101,9 +102,13 @@ const componentHeaderABMPersona = () => {
                 </Grid>
                 <Grid container alignItems="center" justify="center" spacing={2} p={1}>
                     <SeccionBuilder xs={3} items={arrayFiltros}/>
-                    <Button
-                        type="submit"
-                    > Filtrar </Button>
+                    <Grid item >
+                        <MyButton
+                          type={"submit"}
+                          label={'Filtrar'}
+                          color={'error'}
+                        />
+                    </Grid>
                 </Grid>       
             </Paper>
         </React.Fragment>

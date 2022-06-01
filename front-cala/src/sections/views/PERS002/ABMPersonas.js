@@ -1,11 +1,13 @@
 import { Add, Edit, Album, NotInterested } from '@mui/icons-material'
-import { Fab, Tooltip } from '@mui/material'
+import { ButtonGroup, Fab, Tooltip } from '@mui/material'
 import React , {useState} from 'react'
 import MyABMTable from '../../../shared/components/tables/MyABMTable'
 import FormularioPersona from './FormularioPersona/FormularioPersona'
 import HeaderABMPersona from './HeaderABMPersona/HeaderABMPersona'
 import { Button, Grid, Typography, Stack  } from '@mui/material'
 import { Formik, Form } from 'formik';
+import MyIconButton from '../../../shared/components/buttons/MyIconButton'
+import MyFabButton from '../../../shared/components/buttons/MyFabButton'
 
 const TITLE = 'ABM Personas'
 
@@ -57,7 +59,8 @@ const ABMPersonas = () => {
   const [openNew, setOpenNew] = useState(false)
   const [openEdit, setOpenEdit] = useState(false)
   const [openView, setOpenView] = useState(false)
-  const [showBtnViewDeleteUpdate, setShowBtnViewDeleteUpdate] = useState(false)
+  const [showBtnViewUpdate, setShowBtnViewUpdate] = useState(false)
+  const [showBtnDelete, setShowBtnVDelete] = useState(false)
   const [selectedPerson, setSelectedPerson] = useState(initPersona)
 
   const cerrarNew = () => {
@@ -75,12 +78,17 @@ const ABMPersonas = () => {
   const onSelectedRows = (newSelection) => {
     console.log(newSelection)
     if (newSelection.length === 1){
-      setShowBtnViewDeleteUpdate(true)
+      setShowBtnViewUpdate(true)
       //setSelectedPerson(newSelection[0])
       //console.log(selectedPerson)
     }else{
-      setShowBtnViewDeleteUpdate(false)
+      setShowBtnViewUpdate(false)
       //setSelectedPerson({})
+    }
+    if (newSelection.length > 0 ) {
+      setShowBtnVDelete(true)
+    }else{
+      setShowBtnVDelete(false)
     }
   }
 
@@ -117,59 +125,57 @@ const ABMPersonas = () => {
         </Grid>
       </Grid>
 
-      <Grid container p={1} direction="row" spacing={0.5} m={1} justifyContent="flex-end" alignItems="center">
-        {!showBtnViewDeleteUpdate ? '' : (
-          <>
+      <Grid container p={1} direction="row" m={1} justifyContent="flex-end" alignItems="center">
+        <Grid item xs={2} m={1} p={1}>
+          
+        </Grid>
+          
           <Grid item xs={2} >
-            <Tooltip title="Editar Persona">
-              <Fab
-              ariant="extended"
-              size="medium"
-              color="secondary"
-              onClick={() => {
-                console.log("click - editar persona")
-                setOpenEdit(true)
-              }} 
-              >
-                <Edit/>
-              </Fab>
-            </Tooltip>
-          </Grid>
-          <Grid item xs={2}>
-            <Tooltip title="Ver Persona">
-              <Fab
-              ariant="extended"
-              size="medium"
-              color="secondary"
-              onClick={() => {
-                console.log("click - ver persona")
-                setOpenView(true)
-              }} 
-              >
-                <Album/>
-              </Fab>
-            </Tooltip>
-          </Grid>
-          <Grid item xs={2}>
-            <Tooltip title="Eliminar Persona">
-              <Fab
-              ariant="extended"
-              size="medium"
-              color="secondary"
-              onClick={() => {
-                console.log("click - borrar persona")
-              }} 
-              >
-                <NotInterested/>
-              </Fab>
-            </Tooltip>
-          </Grid>
-          </>
-        )}
+            <ButtonGroup variant="outlined" >
+                {!showBtnViewUpdate ? '' : (
+                <> 
+                  <MyIconButton
+                    customClick={() => {
+                      console.log("click - Ver Persona")
+                      setOpenView(true)
+                    }}
+                    tooltip={"Ver Persona"}
+                    icon={'view'}
+                  />
+                  <MyIconButton
+                    customClick={() => {
+                      console.log("click - editar persona")
+                      setOpenEdit(true)
+                    }}
+                    tooltip={"Editar Persona"}
+                    icon={'edit'}
+                  />
+                </>
+                )}
+                {!showBtnDelete ? '' : (
+                  <MyIconButton
+                    customClick={() => {
+                      console.log("click - Eliminar Persona")
+                    }}
+                    tooltip={"Eliminar Persona"}
+                    icon={'delete'}
+                  />
+                )}
+                <MyFabButton
+                  customClick={() => {
+                    console.log("click - nueva persona")
+                    setOpenNew(true)
+                  }}
+                  color={'error'}
+                  tooltip={"Nueva Persona"}
+                  icon={'add'}
+                />
+              </ButtonGroup>
+          </Grid>  
       </Grid>
 
-      <Grid container spacing={2} p={1} alignItems="center" justifyContent="center">
-        <Grid item xs={10} >
+      <Grid container p={2} m={1} alignItems="center" justifyContent="center">
+        <Grid item xs={12} >
           <MyABMTable 
             columns={HEADERS_TABLA} 
             rows={HARDCODE_TABLA_VALUES} 
@@ -179,27 +185,8 @@ const ABMPersonas = () => {
           />
         </Grid>
       </Grid>
-
-      <Grid container justifyContent="flex-end" alignItems="center">
-        <Grid item xs={2} m={2} p={1}>
-          <Tooltip title="Nueva Persona">
-            <Fab
-             ariant="extended"
-             size="medium"
-             color="secondary"
-             onClick={() => {
-               console.log("click - nueva persona")
-               setOpenNew(true)
-             }}
-            >
-              <Add/>
-            </Fab>
-          </Tooltip>
-        </Grid>
-      </Grid>
-
       <FormularioPersona open={openNew} close={cerrarNew}/>
-      {!showBtnViewDeleteUpdate ? '' : (
+      {!showBtnViewUpdate ? '' : (
         <>
           <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={selectedPerson}/>
           <FormularioPersona open={openView} close={cerrarView} view={false} initialValues={selectedPerson}/>
