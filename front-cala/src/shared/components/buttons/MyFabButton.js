@@ -1,4 +1,5 @@
-import { Add, Delete, Edit } from "@mui/icons-material"
+import React from 'react'
+import { Add, Delete, Edit, ViewListOutlined } from "@mui/icons-material"
 import { Fab, Tooltip } from "@mui/material"
 
 const MyFabButton = ({
@@ -26,9 +27,10 @@ const MyFabButton = ({
                     color={color}
                     onClick={(event) => {handleClick(event)}} 
                 >
-                        {icon == 'delete' ? <Delete/> : ''}
-                        {icon == 'add' ? <Add/> : ''}
-                        {icon == 'edit' ? <Edit/> : ''}
+                        {icon === 'view' ? <ViewListOutlined/> : ''}
+                        {icon === 'delete' ? <Delete/> : ''}
+                        {icon === 'add' ? <Add/> : ''}
+                        {icon === 'edit' ? <Edit/> : ''}
                 </Fab>
             </Tooltip>
         </>

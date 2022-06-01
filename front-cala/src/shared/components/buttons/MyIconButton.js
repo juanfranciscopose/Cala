@@ -1,4 +1,5 @@
-import { Add, Delete } from "@mui/icons-material"
+import React from 'react'
+import { Add, Delete, Edit, ViewListOutlined } from "@mui/icons-material"
 import { IconButton, Tooltip } from "@mui/material"
 
 const MyIconButton = ({
@@ -25,8 +26,10 @@ const MyIconButton = ({
                     size={size}
                     onClick={(event) => handleClick(event)}
                 >
-                    {icon == 'delete' ? <Delete/> : ''}
-                    {icon == 'add' ? <Add/> : ''}
+                    {icon === 'view' ? <ViewListOutlined/> : ''}
+                    {icon === 'delete' ? <Delete/> : ''}
+                    {icon === 'edit' ? <Edit/> : ''}
+                    {icon === 'add' ? <Add/> : ''}
                 </IconButton>
             </Tooltip>
         </>
