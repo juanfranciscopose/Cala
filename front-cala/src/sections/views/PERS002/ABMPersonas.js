@@ -8,7 +8,7 @@ import { Button, Grid, Typography, Stack  } from '@mui/material'
 import { Formik, Form } from 'formik';
 import MyIconButton from '../../../shared/components/buttons/MyIconButton'
 import MyFabButton from '../../../shared/components/buttons/MyFabButton'
-
+import TableService from './services/TablaABMPersonasService'
 const TITLE = 'ABM Personas'
 
 const buildInitialValues = () => {
@@ -20,9 +20,16 @@ const buildInitialValues = () => {
 
 const HEADERS_TABLA = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  { field: 'age', headerName: 'Age', type: 'number', width: 90 },
+  { field: 'name', headerName: 'Nombre', width: 150 },
+  { field: 'surname', headerName: 'Apellido', width: 150 },
+  { field: 'nickname', headerName: 'Apodo', width: 130 },
+  { field: 'phone', headerName: 'Teléfono', width: 130 },
+  { field: 'email', headerName: 'Email', width: 200 },
+  { field: 'instagram', headerName: 'Instagram', width: 180 },
+  { field: 'facebook', headerName: 'Facebook', width: 180 },
+  { field: 'twitter', headerName: 'Twitter', width: 180 },
+  { field: 'discord', headerName: 'Discord', width: 180 },
+  /*{ field: 'age', headerName: 'Age', type: 'number', width: 90 },
   {
     field: 'fullName',
     headerName: 'Full name',
@@ -31,19 +38,19 @@ const HEADERS_TABLA = [
     width: 160,
     valueGetter: (params) =>
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+  },*/
 ];
 
 const HARDCODE_TABLA_VALUES = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, name: 'Snow', surname: 'Jon'},
+  { id: 2, name: 'Lannister', surname: 'Cersei'},
+  { id: 3, name: 'Lannister', surname: 'Jaime'},
+  { id: 4, name: 'Stark', surname: 'Arya'},
+  { id: 5, name: 'Targaryen', surname: 'Daenerys'},
+  { id: 6, name: 'Melisandre', surname: null },
+  { id: 7, name: 'Clifford', surname: 'Ferrara'},
+  { id: 8, name: 'Frances', surname: 'Rossini'},
+  { id: 9, name: 'Roxie', surname: 'Harvey'},
 ];
 
 //test edit view
@@ -61,7 +68,20 @@ const ABMPersonas = () => {
   const [openView, setOpenView] = useState(false)
   const [showBtnViewUpdate, setShowBtnViewUpdate] = useState(false)
   const [showBtnDelete, setShowBtnVDelete] = useState(false)
-  const [selectedPerson, setSelectedPerson] = useState(initPersona)
+  const [selectedPerson, setSelectedPerson] = useState({})
+  const [listaPersonasTabla, setListaPersonasTabla] = useState([])
+
+  React.useEffect(() => {
+    console.log('useEffect')
+    try {
+      TableService.getTable().then(response => {
+        console.log(response.data.json)
+        setListaPersonasTabla(response.data.json)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }, []);
 
   const cerrarNew = () => {
     setOpenNew(false)
@@ -77,10 +97,11 @@ const ABMPersonas = () => {
 
   const onSelectedRows = (newSelection) => {
     console.log(newSelection)
+    debugger
     if (newSelection.length === 1){
       setShowBtnViewUpdate(true)
-      //setSelectedPerson(newSelection[0])
-      //console.log(selectedPerson)
+      setSelectedPerson(newSelection[0])
+      console.log(selectedPerson)
     }else{
       setShowBtnViewUpdate(false)
       //setSelectedPerson({})
@@ -178,9 +199,10 @@ const ABMPersonas = () => {
         <Grid item xs={12} >
           <MyABMTable 
             columns={HEADERS_TABLA} 
-            rows={HARDCODE_TABLA_VALUES} 
+            rows={listaPersonasTabla} 
             pageSize={25} 
             height={'max'}
+            rowsPerPageOptions={[25, 50]}
             customSelectionChange={onSelectedRows}
           />
         </Grid>
