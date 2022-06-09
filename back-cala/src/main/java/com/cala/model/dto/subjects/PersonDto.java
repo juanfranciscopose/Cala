@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.cala.model.vo.configurations.AgeGroupVo;
 import com.cala.model.vo.filters.GenderVo;
-import com.cala.model.vo.filters.IdeologyVo;
 import com.cala.model.vo.filters.InterestVo;
 import com.cala.model.vo.filters.NexusManagementVo;
 import com.cala.model.vo.filters.TopicVo;
 import com.cala.model.vo.filters.TypeJobVo;
 import com.cala.model.vo.filters.TypeParticipationVo;
+import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.subjects.DescriptionVo;
+import com.cala.model.vo.subjects.PersonVo;
 public class PersonDto {
 
 	private Long id;
@@ -58,7 +59,7 @@ public class PersonDto {
 	
 	private AgeGroupVo ageGroup;
 	
-	private List<IdeologyVo> ideologies;
+	private List<GenericFilterVo> ideologies;
 	
 	private List<TopicVo> topics;
 	
@@ -86,7 +87,7 @@ public class PersonDto {
 	public PersonDto(Long id, boolean highlight, String surname, String document, String typeDocument, String nickname, String job,
 			String profession, boolean kids, String kidsNames, boolean disability, String disabilityName, String name,
 			String email, Date birthday, String discord, String facebook, String instagram, String twitter,
-			String phone, GenderVo gender, AgeGroupVo ageGroup, List<IdeologyVo> ideologies, List<TopicVo> topics,
+			String phone, GenderVo gender, AgeGroupVo ageGroup, List<GenericFilterVo> ideologies, List<TopicVo> topics,
 			List<TypeParticipationVo> typeParticipation, List<InterestVo> interests, TypeJobVo typeJob,
 			List<NexusManagementVo> nexusManagement, List<DescriptionVo> descriptions) {
 		this.id = id;
@@ -288,11 +289,11 @@ public class PersonDto {
 		this.ageGroup = ageGroup;
 	}
 
-	public List<IdeologyVo> getIdeologies() {
+	public List<GenericFilterVo> getIdeologies() {
 		return ideologies;
 	}
 
-	public void setIdeologies(List<IdeologyVo> ideologies) {
+	public void setIdeologies(List<GenericFilterVo> ideologies) {
 		this.ideologies = ideologies;
 	}
 
@@ -361,6 +362,40 @@ public class PersonDto {
 
 	public void setHighlight(boolean highlight) {
 		this.highlight = highlight;
+	}
+
+	public PersonVo toVo() {
+		PersonVo personVo = new PersonVo();
+		personVo.setId(getId());
+		personVo.setHighlight(isHighlight());
+		personVo.setSurname(getSurname());
+		personVo.setDocument(getDocument());
+		personVo.setTypeDocument(getTypeDocument());
+		personVo.setNickname(getNickname());
+		personVo.setJob(getJob());
+		personVo.setProfession(getProfession());
+		personVo.setKids(isKids());
+		personVo.setKidsNames(getKidsNames());
+		personVo.setDisability(isDisability());
+		personVo.setDisabilityName(getDisabilityName());
+		personVo.setName(getName());
+		personVo.setEmail(getEmail());
+		personVo.setBirthday(getBirthday());
+		personVo.setDiscord(getDiscord());
+		personVo.setFacebook(getFacebook());
+		personVo.setInstagram(getInstagram());
+		personVo.setTwitter(getTwitter());
+		personVo.setPhone(getPhone());
+		personVo.setGender(getGender());
+		personVo.setAgeGroup(getAgeGroup());
+		personVo.setIdeologies(getIdeologies());
+		personVo.setTopics(getTopics());
+		personVo.setTypeParticipation(getTypeParticipation());
+		personVo.setInterests(getInterests());
+		personVo.setTypeJob(getTypeJob());
+		personVo.setNexusManagement(getNexusManagement());
+		personVo.setDescriptions(getDescriptions());
+		return personVo;
 	}
 	
 }

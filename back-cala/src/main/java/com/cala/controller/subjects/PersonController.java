@@ -28,8 +28,8 @@ import com.cala.service.subjects.I_PersonService;
 import com.cala.util.messages.MessageError;
 
 @RestController
-@RequestMapping(path="/people") 
 @CrossOrigin
+@RequestMapping(path="/people") 
 public class PersonController implements I_GenericAbmController<PersonDto>{
 	
 	private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
@@ -76,7 +76,7 @@ public class PersonController implements I_GenericAbmController<PersonDto>{
 	@GetMapping("/listAll") 
 	public ResponseEntity<?> list(@RequestParam int size, @RequestParam int page){	
 		try {
-			logger.info("Servicio: /people/list");
+			logger.info("Servicio: /people/listAll");
 			List<PersonDto> list = getPersonService().findAll(null, size, page);
 			if (!list.isEmpty()) {
 				return new ResponseEntity<>(ResponseDto.ok(list), HttpStatus.OK);
@@ -122,7 +122,8 @@ public class PersonController implements I_GenericAbmController<PersonDto>{
 		}
 	}
 	
-	//retorna en responseDto lista de filtros sin actualizar para informar
+
+	@GetMapping("/findById")
 	@Override
 	public ResponseEntity<?> findById(@PathVariable("id") Long id) {
 		try {
@@ -137,6 +138,13 @@ public class PersonController implements I_GenericAbmController<PersonDto>{
 		}catch (AppBussinessValidationException e) {
 			return new ResponseEntity<>(ResponseDto.error(e.getErrorMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@PostMapping("/addPersonsTest")
+	public ResponseEntity<?> addPersonsTest() {
+		logger.info("Servicio: /people/addPersonsTest");
+		getPersonService().addPersonsTest();
+		return new ResponseEntity<>(ResponseDto.ok(), HttpStatus.OK);
 	}
 	
 	public I_PersonService getPersonService() {

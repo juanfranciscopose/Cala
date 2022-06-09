@@ -74,16 +74,21 @@ public class PersonDao extends GenericSubjectDao<PersonVo, Person> implements I_
 	
 	Logger logger = LoggerFactory.getLogger(PersonDao.class);
 	
+	public List<PersonVo> getAll() {
+		List<Person> subjects = getRepository().findAll();
+		return (!subjects.isEmpty() ? createListVo(subjects) : null);
+	}
+	
 	@Override
 	public List<PersonVo> findAllOrderByHighlightNameSurname(PaginationVo pagination) {
-		try {
+		/*try {
 			PageRequest pageRequest = PageRequest.of(pagination.getPage(), pagination.getSize());
 			Page<Person> subjects = getPersonRepository().findAllOrderByHighlightDescSurnameAscNameAsc(pageRequest);
 			return PersonVo.createListVo(subjects.getContent());
 		} catch (Exception e) {
-			logger.error("Error en metodo findAllOrderByHighlightNameSurname de PersonDao");
+			logger.error("Error en metodo findAllOrderByHighlightNameSurname de PersonDao");*/
 			return null;
-		}
+		//}
 	}
 	
 	@Override

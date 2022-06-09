@@ -21,4 +21,6 @@ public interface I_PersonService {
 	
 	public Optional<PersonDto> updateFilters(PersonDto person) throws AppDataTypeValidationException, AppBussinessValidationException;
 
+	public void addPersonsTest();
+
 }

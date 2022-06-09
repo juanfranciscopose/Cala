@@ -9,5 +9,5 @@ import com.cala.model.vo.subjects.SubjectVo;
 public interface I_GenericSubjectDao<T extends SubjectVo> {
 	public List<T> getAllHighlight(PaginationVo pagination);
 	public T store(T subject);
-	public PersonVo findById(Long id);	
+	public PersonVo findById(Long id);
 }

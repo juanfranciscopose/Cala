@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.cala.model.dto.subjects.PersonDto;
 import com.cala.model.entities.subjects.Person;
 import com.cala.model.vo.configurations.AgeGroupVo;
 import com.cala.model.vo.filters.GenderVo;
@@ -43,6 +44,12 @@ public class PersonVo extends SubjectVo {
 	
 	public static List<PersonVo> createListVo(List<Person> list) {
 		return list.stream().map(person -> new PersonVo(person)).collect(Collectors.toList());
+	}
+	
+	public static List<PersonDto> createListDto(List<PersonVo> listVo) {
+		return listVo.stream().map(person -> {
+			return person.toDTO();
+		}).collect(Collectors.toList());
 	}
 
 	public static PersonVo createVo(Person person) {
@@ -224,6 +231,40 @@ public class PersonVo extends SubjectVo {
 
 	public void setIdeologies(List<GenericFilterVo> ideologies) {
 		this.ideologies = ideologies;
+	}
+	
+	public PersonDto toDTO() {
+		PersonDto personDto = new PersonDto();
+		personDto.setId(getId());
+		personDto.setHighlight(isHighlight());
+		personDto.setSurname(getSurname());
+		personDto.setDocument(getDocument());
+		personDto.setTypeDocument(getTypeDocument());
+		personDto.setNickname(getNickname());
+		personDto.setJob(getJob());
+		personDto.setProfession(getProfession());
+		personDto.setKids(isKids());
+		personDto.setKidsNames(getKidsNames());
+		personDto.setDisability(isDisability());
+		personDto.setDisabilityName(getDisabilityName());
+		personDto.setName(getName());
+		personDto.setEmail(getEmail());
+		personDto.setBirthday(getBirthday());
+		personDto.setDiscord(getDiscord());
+		personDto.setFacebook(getFacebook());
+		personDto.setInstagram(getInstagram());
+		personDto.setTwitter(getTwitter());
+		personDto.setPhone(getPhone());
+		personDto.setGender(getGender());
+		personDto.setAgeGroup(getAgeGroup());
+		personDto.setIdeologies(getIdeologies());
+		personDto.setTopics(getTopics());
+		personDto.setTypeParticipation(getTypeParticipation());
+		personDto.setInterests(getInterests());
+		personDto.setTypeJob(getTypeJob());
+		personDto.setNexusManagement(getNexusManagement());
+		personDto.setDescriptions(getDescriptions());
+		return personDto;				
 	}
 	
 }

@@ -44,4 +44,6 @@ public interface I_PersonDao{
 	public PersonVo store(PersonVo personVo);
 	
 	public PersonVo findById(Long id);
+
+	public List<PersonVo> getAll();
 }
