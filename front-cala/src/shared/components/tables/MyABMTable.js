@@ -6,6 +6,7 @@ const MyABMTable = ({
     rows, // valores de la tabla (dejo hardcode de ejemplo)
     pageSize, // integer => cantidad por defecto de items por pagina
     height, // max(600) o min(400) => ajustar
+    rowsPerPageOptions,
     customSelectionChange // evento seleccion de checkbox fila
   }) => {
     /*const columnsHardcode = [
@@ -40,7 +41,8 @@ const MyABMTable = ({
         { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
         { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
       ];*/
-      
+      const [pagSize, setPagSize] = React.useState(pageSize);
+
       const handleSelectionChange = (ids) => {
         const selectedIDs = new Set(ids);
         const selectedRows = rows.filter((row) =>
@@ -56,8 +58,9 @@ const MyABMTable = ({
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={pageSize}
-            rowsPerPageOptions={[]}
+            pageSize={pagSize}
+            onPageSizeChange={(newPageSize) => setPagSize(newPageSize)}
+            rowsPerPageOptions={rowsPerPageOptions}
             checkboxSelection
             onSelectionModelChange={(newSelection) => { handleSelectionChange(newSelection) }}
           />
