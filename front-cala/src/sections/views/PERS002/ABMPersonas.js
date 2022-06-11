@@ -61,10 +61,9 @@ const initPersona = {
 }
 
 const ABMPersonas = () => {
-  //modals states
-  const [openNew, setOpenNew] = useState(false)
-  const [openEdit, setOpenEdit] = useState(false)
-  const [openView, setOpenView] = useState(false)
+  const [openNew, setOpenNew] = useState(false)//modal formulario nueva persona
+  const [openEdit, setOpenEdit] = useState(false)//modal formulario editar persona
+  const [openView, setOpenView] = useState(false)//modal formulario ver persona
   const [showBtnViewUpdate, setShowBtnViewUpdate] = useState(false)
   const [showBtnDelete, setShowBtnVDelete] = useState(false)
   const [selectedPerson, setSelectedPerson] = useState({})
