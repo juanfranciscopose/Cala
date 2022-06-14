@@ -24,6 +24,9 @@ public class PersonService implements I_PersonService{
 	Logger logger = LoggerFactory.getLogger(PersonService.class);
 	
 	@Autowired
+	private HelperPersonService helper;
+	
+	@Autowired
 	private I_PersonDao personDao;
 
 	@Override
@@ -62,8 +65,8 @@ public class PersonService implements I_PersonService{
 		// data types validations
 		
 		// business validations
-		
-		PersonVo personVo = (PersonVo) getPersonDao().store(person.toVo());
+		PersonVo pV = helper.personDtoToPersonVo(person);
+		PersonVo personVo = getPersonDao().store(pV);
 		// create dto for response
 		return personVo.toDTO();
 	}
@@ -74,7 +77,8 @@ public class PersonService implements I_PersonService{
 		
 		// business validations
 		if (findById(person.getId()).isPresent()) {
-			PersonVo personVo = (PersonVo) getPersonDao().update(person.toVo());
+			PersonVo pV = helper.personDtoToPersonVo(person);
+			PersonVo personVo = getPersonDao().update(pV);
 			// create dto for response
 			return personVo.toDTO();
 		}

@@ -255,15 +255,6 @@ public class PersonVo extends SubjectVo {
 		personDto.setInstagram(getInstagram());
 		personDto.setTwitter(getTwitter());
 		personDto.setPhone(getPhone());
-		personDto.setGender(getGender());
-		personDto.setAgeGroup(getAgeGroup());
-		personDto.setIdeologies(getIdeologies());
-		personDto.setTopics(getTopics());
-		personDto.setTypeParticipation(getTypeParticipation());
-		personDto.setInterests(getInterests());
-		personDto.setTypeJob(getTypeJob());
-		personDto.setNexusManagement(getNexusManagement());
-		personDto.setDescriptions(getDescriptions());
 		return personDto;				
 	}
 	

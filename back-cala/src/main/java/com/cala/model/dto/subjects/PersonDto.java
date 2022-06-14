@@ -1,18 +1,7 @@
 package com.cala.model.dto.subjects;
 
 import java.util.Date;
-import java.util.List;
 
-import com.cala.model.vo.configurations.AgeGroupVo;
-import com.cala.model.vo.filters.GenderVo;
-import com.cala.model.vo.filters.InterestVo;
-import com.cala.model.vo.filters.NexusManagementVo;
-import com.cala.model.vo.filters.TopicVo;
-import com.cala.model.vo.filters.TypeJobVo;
-import com.cala.model.vo.filters.TypeParticipationVo;
-import com.cala.model.vo.filters.generics.GenericFilterVo;
-import com.cala.model.vo.subjects.DescriptionVo;
-import com.cala.model.vo.subjects.PersonVo;
 public class PersonDto {
 
 	private Long id;
@@ -55,23 +44,23 @@ public class PersonDto {
 	
 	private String phone;
 	
-	private GenderVo gender;
+	private String gender;
 	
-	private AgeGroupVo ageGroup;
+	private String ageGroup;
 	
-	private List<GenericFilterVo> ideologies;
+	private String[] ideologies;
 	
-	private List<TopicVo> topics;
+	private String[] topics;
 	
-	private List<TypeParticipationVo> typeParticipation;
+	private String[] typeParticipation;
 
-	private List<InterestVo> interests;
+	private String[] interests;
 	
-	private TypeJobVo typeJob;
+	private String typeJob;
 
-	private List<NexusManagementVo> nexusManagement;
+	private String[] nexusManagement;
 	
-	private List<DescriptionVo> descriptions;
+	private String[] descriptions;
 	
 	public PersonDto() {}
 
@@ -87,9 +76,9 @@ public class PersonDto {
 	public PersonDto(Long id, boolean highlight, String surname, String document, String typeDocument, String nickname, String job,
 			String profession, boolean kids, String kidsNames, boolean disability, String disabilityName, String name,
 			String email, Date birthday, String discord, String facebook, String instagram, String twitter,
-			String phone, GenderVo gender, AgeGroupVo ageGroup, List<GenericFilterVo> ideologies, List<TopicVo> topics,
-			List<TypeParticipationVo> typeParticipation, List<InterestVo> interests, TypeJobVo typeJob,
-			List<NexusManagementVo> nexusManagement, List<DescriptionVo> descriptions) {
+			String phone, String gender, String ageGroup, String[] ideologies, String[] topics,
+			String[] typeParticipation, String[] interests, String typeJob,
+			String[] nexusManagement, String[] descriptions) {
 		this.id = id;
 		this.highlight = highlight;
 		this.surname = surname;
@@ -273,78 +262,79 @@ public class PersonDto {
 		this.phone = phone;
 	}
 
-	public GenderVo getGender() {
+	
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(GenderVo gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public AgeGroupVo getAgeGroup() {
+	public String getAgeGroup() {
 		return ageGroup;
 	}
 
-	public void setAgeGroup(AgeGroupVo ageGroup) {
+	public void setAgeGroup(String ageGroup) {
 		this.ageGroup = ageGroup;
 	}
 
-	public List<GenericFilterVo> getIdeologies() {
+	public String[] getIdeologies() {
 		return ideologies;
 	}
 
-	public void setIdeologies(List<GenericFilterVo> ideologies) {
+	public void setIdeologies(String[] ideologies) {
 		this.ideologies = ideologies;
 	}
 
-	public List<TopicVo> getTopics() {
+	public String[] getTopics() {
 		return topics;
 	}
 
-	public void setTopics(List<TopicVo> topics) {
+	public void setTopics(String[] topics) {
 		this.topics = topics;
 	}
 
-	public List<TypeParticipationVo> getTypeParticipation() {
+	public String[] getTypeParticipation() {
 		return typeParticipation;
 	}
 
-	public void setTypeParticipation(List<TypeParticipationVo> typeParticipation) {
+	public void setTypeParticipation(String[] typeParticipation) {
 		this.typeParticipation = typeParticipation;
 	}
 
-	public List<InterestVo> getInterests() {
+	public String[] getInterests() {
 		return interests;
 	}
 
-	public void setInterests(List<InterestVo> interests) {
+	public void setInterests(String[] interests) {
 		this.interests = interests;
 	}
 
-	public TypeJobVo getTypeJob() {
+	public String getTypeJob() {
 		return typeJob;
 	}
 
-	public void setTypeJob(TypeJobVo typeJob) {
+	public void setTypeJob(String typeJob) {
 		this.typeJob = typeJob;
 	}
 
-	public List<NexusManagementVo> getNexusManagement() {
+	public String[] getNexusManagement() {
 		return nexusManagement;
 	}
 
-	public void setNexusManagement(List<NexusManagementVo> nexusManagement) {
+	public void setNexusManagement(String[] nexusManagement) {
 		this.nexusManagement = nexusManagement;
 	}
 
-	public List<DescriptionVo> getDescriptions() {
+	public String[] getDescriptions() {
 		return descriptions;
 	}
 
-	public void setDescriptions(List<DescriptionVo> descriptions) {
+	public void setDescriptions(String[] descriptions) {
 		this.descriptions = descriptions;
 	}
-	
+
 	public String generateLog() {
 		return "{id=" + id + ", surname=" + surname + ", document=" + document + ", typeDocument="
 				+ typeDocument + ", nickname=" + nickname + ", job=" + job + ", profession=" + profession + ", kids="
@@ -362,40 +352,6 @@ public class PersonDto {
 
 	public void setHighlight(boolean highlight) {
 		this.highlight = highlight;
-	}
-
-	public PersonVo toVo() {
-		PersonVo personVo = new PersonVo();
-		personVo.setId(getId());
-		personVo.setHighlight(isHighlight());
-		personVo.setSurname(getSurname());
-		personVo.setDocument(getDocument());
-		personVo.setTypeDocument(getTypeDocument());
-		personVo.setNickname(getNickname());
-		personVo.setJob(getJob());
-		personVo.setProfession(getProfession());
-		personVo.setKids(isKids());
-		personVo.setKidsNames(getKidsNames());
-		personVo.setDisability(isDisability());
-		personVo.setDisabilityName(getDisabilityName());
-		personVo.setName(getName());
-		personVo.setEmail(getEmail());
-		personVo.setBirthday(getBirthday());
-		personVo.setDiscord(getDiscord());
-		personVo.setFacebook(getFacebook());
-		personVo.setInstagram(getInstagram());
-		personVo.setTwitter(getTwitter());
-		personVo.setPhone(getPhone());
-		personVo.setGender(getGender());
-		personVo.setAgeGroup(getAgeGroup());
-		personVo.setIdeologies(getIdeologies());
-		personVo.setTopics(getTopics());
-		personVo.setTypeParticipation(getTypeParticipation());
-		personVo.setInterests(getInterests());
-		personVo.setTypeJob(getTypeJob());
-		personVo.setNexusManagement(getNexusManagement());
-		personVo.setDescriptions(getDescriptions());
-		return personVo;
 	}
 	
 }
