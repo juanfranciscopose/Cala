@@ -7,7 +7,7 @@ import { Grid } from '@mui/material';
 import MyCheckbox from "./../fields/MyCheckbox";
 import MyDatePicker from "./../fields/MyDatePicker";
 
-const InputFactory = ({field, xs}) => {
+const InputFactory = ({field, xs, disableInput=false}) => {
   
   const getInput = () => {
     if (TYPE_FIELDS.some(type => type === field.type)){
@@ -17,6 +17,7 @@ const InputFactory = ({field, xs}) => {
             <MyTextField
               label={field.label}
               name={field.name}
+              disabled={disableInput}
             />
           );
         case 'Select':
@@ -26,6 +27,7 @@ const InputFactory = ({field, xs}) => {
               name={field.name}
               options ={field.options}
               allowEmpty={true}
+              disabled={disableInput}
             />
           );
         case 'Date':
@@ -33,6 +35,7 @@ const InputFactory = ({field, xs}) => {
             <MyDatePicker
               label={field.label}
               name={field.name}
+              disabled={disableInput}
             />
           );
         case 'Checkbox':
@@ -40,6 +43,7 @@ const InputFactory = ({field, xs}) => {
             <MyCheckbox
               label={field.label}
               name={field.name}
+              disabled={disableInput}
             />
           );
         default:

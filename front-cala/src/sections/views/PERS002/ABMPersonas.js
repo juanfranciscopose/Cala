@@ -114,7 +114,6 @@ const ABMPersonas = () => {
     try {
       const resp = await ABMService.editarPersona(values);
       setSelectedPerson({})
-      
       reloadTabla()
     } catch (error) {
       console.log(error)
@@ -249,8 +248,9 @@ const ABMPersonas = () => {
           />
           <FormularioPersona 
             open={openView}
-            close={cerrarView} 
-            view={false} 
+            close={cerrarView}
+            view={true}
+            viewBtn={false}
             initialValues={selectedPerson}
           />
         </>

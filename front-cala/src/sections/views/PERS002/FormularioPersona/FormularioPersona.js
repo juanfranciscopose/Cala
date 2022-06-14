@@ -10,7 +10,7 @@ let buildValidationSchema = () => {
   return Yup.object().shape(validationSchema)
 } 
 
-const FormularioPersona = ({ view=true, open, close, edit=false, initialValues={}, onSubmitForm }) => {
+const FormularioPersona = ({ view=false, open, close, edit=false, initialValues={}, onSubmitForm, viewBtn=true}) => {
 
   const TITLE = !edit ? 'Nueva Persona' : 'Modificar Persona'
 
@@ -23,10 +23,10 @@ const FormularioPersona = ({ view=true, open, close, edit=false, initialValues={
         open={open}
         close={close}
         edit={edit}
-        view={view}
+        view={viewBtn}
         onSubmitForm={onSubmitForm}
         >
-          <DatosPersonales.componentDatosPersonales/><br/>
+          <DatosPersonales.componentDatosPersonales disableSeccion={view}/><br/>
           {/*Datos Laborales*/}
           {/*<DatosLabores/>
           <RedesSociales/>

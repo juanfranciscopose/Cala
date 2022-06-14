@@ -63,7 +63,7 @@ const arrayDatosPersonales = [
     }
 ];
 
-const componentDatosPersonales = () => {
+const componentDatosPersonales = ({disableSeccion=false}) => {
     //const classes = useStyles();
     //const [seccionCollapse, setSeccionCollapse] = React.useState(true);
 
@@ -77,7 +77,7 @@ const componentDatosPersonales = () => {
                 </Grid>
                 {/*<Collapse orientation="horizontal" in={seccionCollapse}>*/}
                     <Grid container alignItems="center" justify="center" spacing={2} p={1}>
-                        <SeccionBuilder xs={4} items={arrayDatosPersonales}/>
+                        <SeccionBuilder xs={4} items={arrayDatosPersonales} disableInputs={disableSeccion}/>
                     </Grid>            
                {/*</Collapse>*/}
             </Paper>
