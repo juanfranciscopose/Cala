@@ -8,12 +8,13 @@ import { Formik, Form } from 'formik';
 import MyIconButton from '../../../shared/components/buttons/MyIconButton'
 import MyFabButton from '../../../shared/components/buttons/MyFabButton'
 import TableService from './services/TablaABMPersonasService'
+import ABMService from './services/ABMPersonaService'
 const TITLE = 'ABM Personas'
 
 const buildInitialValues = () => {
   let initialValues = {}
   HeaderABMPersona.arrayFiltros.forEach(campo => initialValues[campo.name] = campo.initialValue)
-  console.log('initialValues', initialValues)
+  //console.log('initialValues', initialValues)
   return initialValues
 }
 
@@ -68,14 +69,18 @@ const ABMPersonas = () => {
   const [showBtnDelete, setShowBtnVDelete] = useState(false)
   const [selectedPerson, setSelectedPerson] = useState({})
   const [listaPersonasTabla, setListaPersonasTabla] = useState([])
+  
+  const reloadTabla = () => {
+    TableService.getTable().then(response => {
+      //console.log(response.data.json)
+      setListaPersonasTabla(response.data.json)
+    })
+  } 
 
   React.useEffect(() => {
-    console.log('useEffect')
+    //console.log('useEffect')
     try {
-      TableService.getTable().then(response => {
-        console.log(response.data.json)
-        setListaPersonasTabla(response.data.json)
-      })
+      reloadTabla()
     } catch (error) {
       console.log(error)
     }
@@ -93,16 +98,37 @@ const ABMPersonas = () => {
     setOpenView(false)
   }
 
+  const onSubmitNewPersona = async (values) => {
+    //console.log('values ABMPersonas: ', values)
+    try {
+      const resp = await ABMService.altaPersona(values);
+      reloadTabla()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onSubmitEditPersona = async (values) => {
+    //console.log('values ABMPersonas: ', values)
+    try {
+      const resp = await ABMService.editarPersona(values);
+      setSelectedPerson({})
+      reloadTabla()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const onSelectedRows = (newSelection) => {
     console.log(newSelection)
-    debugger
+    //debugger
     if (newSelection.length === 1){
       setShowBtnViewUpdate(true)
       setSelectedPerson(newSelection[0])
-      console.log(selectedPerson)
+      //console.log(selectedPerson)
     }else{
       setShowBtnViewUpdate(false)
-      //setSelectedPerson({})
+      setSelectedPerson({})
     }
     if (newSelection.length > 0 ) {
       setShowBtnVDelete(true)
@@ -205,11 +231,30 @@ const ABMPersonas = () => {
           />
         </Grid>
       </Grid>
-      <FormularioPersona open={openNew} close={cerrarNew}/>
+      {/* MODAL NEW */}
+      <FormularioPersona 
+        open={openNew}
+        close={cerrarNew}
+        onSubmitForm={(values) => onSubmitNewPersona(values)}
+      />
       {!showBtnViewUpdate ? '' : (
         <>
-          <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={selectedPerson}/>
-          <FormularioPersona open={openView} close={cerrarView} view={false} initialValues={selectedPerson}/>
+          {/* MODAL UPDATE */}
+          <FormularioPersona 
+            open={openEdit} 
+            close={cerrarEdit} 
+            edit={true} 
+            initialValues={selectedPerson}
+            onSubmitForm={(values) => onSubmitEditPersona(values)}
+          />
+          {/* MODAL VIEW */}
+          <FormularioPersona 
+            open={openView}
+            close={cerrarView}
+            view={true}
+            viewBtn={false}
+            initialValues={selectedPerson}
+          />
         </>
       )}
     </React.Fragment>

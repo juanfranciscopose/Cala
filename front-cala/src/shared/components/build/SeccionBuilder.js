@@ -2,7 +2,7 @@ import React from "react"
 import TYPE_FIELDS from './../../../constants/typeFields'
 import InputFactory from "../factory/InputFactory"
 
-const SeccionBuilder = ({items, xs}) => {
+const SeccionBuilder = ({items, xs, disableInputs=false}) => {
 
     return (
         <React.Fragment>
@@ -12,6 +12,7 @@ const SeccionBuilder = ({items, xs}) => {
                   key={index}
                   field={item}
                   xs={xs}
+                  disableInput={disableInputs}
                 />
               ))}
         </React.Fragment>

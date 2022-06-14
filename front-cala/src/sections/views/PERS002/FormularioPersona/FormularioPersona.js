@@ -2,6 +2,7 @@ import React from 'react'
 import * as Yup from 'yup'
 import DatosPersonales from './secciones/DatosPersonales'
 import ModalABM from '../../../../shared/components/dialogs/MyFormModal'
+import Filtros from './secciones/Filtros'
 
 let buildValidationSchema = () => {
   let validationSchema = {}
@@ -10,7 +11,7 @@ let buildValidationSchema = () => {
   return Yup.object().shape(validationSchema)
 } 
 
-const FormularioPersona = ({ view=true, open, close, edit=false, initialValues={} }) => {
+const FormularioPersona = ({ view=false, open, close, edit=false, initialValues={}, onSubmitForm, viewBtn=true}) => {
 
   const TITLE = !edit ? 'Nueva Persona' : 'Modificar Persona'
 
@@ -23,14 +24,15 @@ const FormularioPersona = ({ view=true, open, close, edit=false, initialValues={
         open={open}
         close={close}
         edit={edit}
-        view={view}
+        view={viewBtn}
+        onSubmitForm={onSubmitForm}
         >
-          <DatosPersonales.componentDatosPersonales/><br/>
+          <DatosPersonales.componentDatosPersonales disableSeccion={view}/><br/>
           {/*Datos Laborales*/}
           {/*<DatosLabores/>
-          <RedesSociales/>
-          <Filtro/>
-          <Observaciones/>*/}
+          <RedesSociales/>*/}
+          <Filtros.componentFiltros disableSeccion={view}/>
+          {/*<Observaciones/>*/}
       </ModalABM>
     </React.Fragment>
   )

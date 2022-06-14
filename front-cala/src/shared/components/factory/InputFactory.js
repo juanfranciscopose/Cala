@@ -1,13 +1,14 @@
 import React from "react"
 import TYPE_FIELDS from './../../../constants/typeFields'
-import MyTextField from "./../fields/MyTextField";
-import MySelect from "./../fields/MySelect";
+import MyTextField from "./../fields/MyTextField"
+import MySelect from "./../fields/MySelect"
 import {ErrorMessage} from 'formik'
-import { Grid } from '@mui/material';
-import MyCheckbox from "./../fields/MyCheckbox";
-import MyDatePicker from "./../fields/MyDatePicker";
+import { Grid } from '@mui/material'
+import MyCheckbox from "./../fields/MyCheckbox"
+import MyDatePicker from "./../fields/MyDatePicker"
+import MyMultiSelect from "./../fields/MyMultiSelect"
 
-const InputFactory = ({field, xs}) => {
+const InputFactory = ({field, xs, disableInput=false}) => {
   
   const getInput = () => {
     if (TYPE_FIELDS.some(type => type === field.type)){
@@ -17,6 +18,7 @@ const InputFactory = ({field, xs}) => {
             <MyTextField
               label={field.label}
               name={field.name}
+              disabled={disableInput}
             />
           );
         case 'Select':
@@ -26,6 +28,7 @@ const InputFactory = ({field, xs}) => {
               name={field.name}
               options ={field.options}
               allowEmpty={true}
+              disabled={disableInput}
             />
           );
         case 'Date':
@@ -33,6 +36,7 @@ const InputFactory = ({field, xs}) => {
             <MyDatePicker
               label={field.label}
               name={field.name}
+              disabled={disableInput}
             />
           );
         case 'Checkbox':
@@ -40,6 +44,16 @@ const InputFactory = ({field, xs}) => {
             <MyCheckbox
               label={field.label}
               name={field.name}
+              disabled={disableInput}
+            />
+          );
+        case 'MultiSelect':
+          return(
+            <MyMultiSelect
+              label={field.label}
+              name={field.name}
+              options ={field.options}
+              disabled={disableInput}
             />
           );
         default:

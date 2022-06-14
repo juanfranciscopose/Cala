@@ -13,11 +13,11 @@ import com.cala.dao.subjects.I_PersonDao;
 import com.cala.exceptions.AppBussinessValidationException;
 import com.cala.exceptions.AppDataTypeValidationException;
 import com.cala.model.dto.subjects.PersonDto;
-import com.cala.model.vo.pagination.PaginationVo;
 import com.cala.model.vo.subjects.PersonVo;
 import com.cala.service.global.DataTypeValidationService;
 import com.cala.util.messages.MessageError;
 import com.cala.util.persons.RandomDataUtils;
+
 @Service
 public class PersonService implements I_PersonService{
 	

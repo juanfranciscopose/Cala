@@ -2,7 +2,8 @@ const TYPE_FIELDS = [
     'Text',
     'Select',
     'Date',
-    'Checkbox'
+    'Checkbox',
+    'MultiSelect'
 ];
 
 export default TYPE_FIELDS
