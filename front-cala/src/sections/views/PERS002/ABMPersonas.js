@@ -99,7 +99,7 @@ const ABMPersonas = () => {
   }
 
   const onSubmitNewPersona = async (values) => {
-    //console.log('values ABMPersonas: ', values)
+    console.log('values ABMPersonas - create: ', values)
     try {
       const resp = await ABMService.altaPersona(values);
       reloadTabla()

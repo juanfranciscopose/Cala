@@ -8,6 +8,11 @@ import * as Yup from 'yup'
 import getGeneroOptions from './../../../../../shared/services/filters/GeneroService'
 import getInteresOptions from './../../../../../shared/services/filters/InteresService'
 import getIdeologiaOptions from './../../../../../shared/services/filters/IdeologiaService'
+import getTipoTrabajoOptions from './../../../../../shared/services/filters/TipoTrabajoService'
+import getFranjaEtariaOptions from './../../../../../shared/services/filters/FranjaEtariaService'
+import getTipoParticipacionOptions from './../../../../../shared/services/filters/TipoParticipacionService'
+import getTematicaOptions from './../../../../../shared/services/filters/TematicaService'
+import getNexoGestionOptions from './../../../../../shared/services/filters/NexoGestionService'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -20,6 +25,14 @@ const TITLE = 'Filtros'
 
 const arrayFiltros = [
     {
+        id: 'franjaEtaria',
+        name: 'franjaEtaria',
+        label: 'Franja Etaria',
+        type: 'Select',
+        options: getFranjaEtariaOptions,
+        validation: Yup.string().required('El campo es requerido'),
+        initialValue: ''
+    },{
         id: 'genero',
         name: 'gender',
         label: 'Genero',
@@ -43,6 +56,42 @@ const arrayFiltros = [
         label: 'Ideologías',
         type: 'MultiSelect',
         options: getIdeologiaOptions,
+        validation: Yup.string().required('El campo es requerido'),
+        initialValue: ''
+    },
+    {
+        id: 'tipoTrabajo',
+        name: 'tipoTrabajo',
+        label: 'Tipo Trabajo',
+        type: 'Select',
+        options: getTipoTrabajoOptions,
+        validation: Yup.string().required('El campo es requerido'),
+        initialValue: ''
+    },
+    {
+        id: 'tipoParticipacion',
+        name: 'tipoParticipacion',
+        label: 'Tipo Participación',
+        type: 'MultiSelect',
+        options: getTipoParticipacionOptions,
+        validation: Yup.string().required('El campo es requerido'),
+        initialValue: ''
+    },
+    {
+        id: 'tematica',
+        name: 'tematica',
+        label: 'Temática',
+        type: 'MultiSelect',
+        options: getTematicaOptions,
+        validation: Yup.string().required('El campo es requerido'),
+        initialValue: ''
+    },
+    {
+        id: 'nexoGestion',
+        name: 'nexoGestion',
+        label: 'Nexo de Gestión',
+        type: 'MultiSelect',
+        options: getNexoGestionOptions,
         validation: Yup.string().required('El campo es requerido'),
         initialValue: ''
     }
