@@ -19,7 +19,7 @@ const TITLE = 'Datos Personales'
 const arrayDatosPersonales = [
     {
         id: 'nombre',   
-        name: 'nombre', //formik
+        name: 'name', //formik
         label: 'Nombre',//input label
         type: 'Text',   // seccionBuilder y inputFactory
         validation: Yup.string().required('El campo es requerido'), // yup formik
@@ -27,13 +27,13 @@ const arrayDatosPersonales = [
     },
     {
         id: 'apellido',
-        name: 'apellido',
+        name: 'surname',
         label: 'Apellido',
         type: 'Text',
         validation: Yup.string().required('El campo es requerido'),
         initialValue: ''
     },
-    {
+    /*{
         id: 'genero',
         name: 'genero',
         label: 'Genero',
@@ -41,10 +41,10 @@ const arrayDatosPersonales = [
         options: getGeneroOptions,
         validation: Yup.string().required('El campo es requerido'),
         initialValue: ''
-    },
+    },*/
     {
         id: 'fechaNacimiento',
-        name: 'fechaNacimiento',
+        name: 'birthday',
         label: 'Fecha Nacimiento',
         type: 'Date',
         validation: Yup.date()
@@ -55,7 +55,7 @@ const arrayDatosPersonales = [
     },
     {
         id: 'tieneHijo',
-        name: 'tieneHijo',
+        name: 'kids',
         label: '¿Tiene Hijos?',
         type: 'Checkbox',
         validation: Yup.boolean().oneOf([true, false],"El campo es requerido"),

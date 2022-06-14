@@ -8,6 +8,7 @@ import { Formik, Form } from 'formik';
 import MyIconButton from '../../../shared/components/buttons/MyIconButton'
 import MyFabButton from '../../../shared/components/buttons/MyFabButton'
 import TableService from './services/TablaABMPersonasService'
+import ABMService from './services/ABMPersonaService'
 const TITLE = 'ABM Personas'
 
 const buildInitialValues = () => {
@@ -71,10 +72,10 @@ const ABMPersonas = () => {
   const [listaPersonasTabla, setListaPersonasTabla] = useState([])
 
   React.useEffect(() => {
-    console.log('useEffect')
+    //console.log('useEffect')
     try {
       TableService.getTable().then(response => {
-        console.log(response.data.json)
+        //console.log(response.data.json)
         setListaPersonasTabla(response.data.json)
       })
     } catch (error) {
@@ -92,6 +93,19 @@ const ABMPersonas = () => {
 
   const cerrarView = () => {
     setOpenView(false)
+  }
+
+  const onSubmitNewPersona = async (values) => {
+    //console.log('values on ABMPersonas: ', values)
+    try {
+      const resp = await ABMService.altaPersona(values);
+      TableService.getTable().then(response => {
+        //console.log(response.data.json)
+        setListaPersonasTabla(response.data.json)
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const onSelectedRows = (newSelection) => {
@@ -206,7 +220,7 @@ const ABMPersonas = () => {
           />
         </Grid>
       </Grid>
-      <FormularioPersona open={openNew} close={cerrarNew}/>
+      <FormularioPersona open={openNew} close={cerrarNew} onSubmitForm={(values) => onSubmitNewPersona(values)}/>
       {!showBtnViewUpdate ? '' : (
         <>
           <FormularioPersona open={openEdit} close={cerrarEdit} edit={true} initialValues={selectedPerson}/>
