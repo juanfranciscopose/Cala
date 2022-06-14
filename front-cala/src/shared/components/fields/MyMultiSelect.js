@@ -81,7 +81,7 @@ const MyMultiSelect = ({
   return (
     <div>
       <FormControl fullWidth>
-        <InputLabel id="multiple-chip-label">Chip</InputLabel>
+        <InputLabel id="multiple-chip-label">{label}</InputLabel>
         <Select
           {...field}
           {...props}

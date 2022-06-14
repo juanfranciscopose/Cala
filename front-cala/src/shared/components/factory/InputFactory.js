@@ -1,11 +1,12 @@
 import React from "react"
 import TYPE_FIELDS from './../../../constants/typeFields'
-import MyTextField from "./../fields/MyTextField";
-import MySelect from "./../fields/MySelect";
+import MyTextField from "./../fields/MyTextField"
+import MySelect from "./../fields/MySelect"
 import {ErrorMessage} from 'formik'
-import { Grid } from '@mui/material';
-import MyCheckbox from "./../fields/MyCheckbox";
-import MyDatePicker from "./../fields/MyDatePicker";
+import { Grid } from '@mui/material'
+import MyCheckbox from "./../fields/MyCheckbox"
+import MyDatePicker from "./../fields/MyDatePicker"
+import MyMultiSelect from "./../fields/MyMultiSelect"
 
 const InputFactory = ({field, xs, disableInput=false}) => {
   
@@ -43,6 +44,15 @@ const InputFactory = ({field, xs, disableInput=false}) => {
             <MyCheckbox
               label={field.label}
               name={field.name}
+              disabled={disableInput}
+            />
+          );
+        case 'MultiSelect':
+          return(
+            <MyMultiSelect
+              label={field.label}
+              name={field.name}
+              options ={field.options}
               disabled={disableInput}
             />
           );
