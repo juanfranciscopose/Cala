@@ -19,8 +19,24 @@ const persistirPersona = async (persona) => {
   }
 };
 
+const updatePersona = async (persona) => {
+    try {
+      const response = axios.put(
+        `${apiConstant.ABMPersonas}/updatePerson`,
+        persona,
+        config
+      );
+      return response
+    } catch (error) {
+      throw error;
+    }
+  };
+
 const altaPersona = (persona) => {
     return persistirPersona(persona)
 } 
 
-export default { altaPersona };
+const editarPersona = (persona) => {
+    return updatePersona(persona)
+} 
+export default { altaPersona, editarPersona };
