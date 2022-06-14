@@ -2,6 +2,7 @@ import React from 'react'
 import * as Yup from 'yup'
 import DatosPersonales from './secciones/DatosPersonales'
 import ModalABM from '../../../../shared/components/dialogs/MyFormModal'
+import Filtros from './secciones/Filtros'
 
 let buildValidationSchema = () => {
   let validationSchema = {}
@@ -29,9 +30,9 @@ const FormularioPersona = ({ view=false, open, close, edit=false, initialValues=
           <DatosPersonales.componentDatosPersonales disableSeccion={view}/><br/>
           {/*Datos Laborales*/}
           {/*<DatosLabores/>
-          <RedesSociales/>
-          <Filtro/>
-          <Observaciones/>*/}
+          <RedesSociales/>*/}
+          <Filtros.componentFiltros disableSeccion={view}/>
+          {/*<Observaciones/>*/}
       </ModalABM>
     </React.Fragment>
   )

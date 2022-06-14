@@ -232,6 +232,7 @@ const ABMPersonas = () => {
           />
         </Grid>
       </Grid>
+      {/* MODAL NEW */}
       <FormularioPersona 
         open={openNew}
         close={cerrarNew}
@@ -239,6 +240,7 @@ const ABMPersonas = () => {
       />
       {!showBtnViewUpdate ? '' : (
         <>
+          {/* MODAL UPDATE */}
           <FormularioPersona 
             open={openEdit} 
             close={cerrarEdit} 
@@ -246,6 +248,7 @@ const ABMPersonas = () => {
             initialValues={selectedPerson}
             onSubmitForm={(values) => onSubmitEditPersona(values)}
           />
+          {/* MODAL VIEW */}
           <FormularioPersona 
             open={openView}
             close={cerrarView}
