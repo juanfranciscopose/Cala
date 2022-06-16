@@ -21,8 +21,8 @@ class IdeologyDaoTest extends FilterDaoTest<IdeologyDao, IdeologyVo>{
 	private I_FilterDao<IdeologyVo> ideologyDao;
 	
 	@Override
-	public Ideology create(String name, boolean active) {
-		return new Ideology(name, active);
+	public Ideology create(String name, boolean active, String code) {
+		return new Ideology(name, active, code);
 	}
 
 	@Override

@@ -21,8 +21,8 @@ class TypeJobDaoTest extends FilterDaoTest<TypeJobDao, TypeJobVo>{
 	private I_FilterDao<TypeJobVo> dao;
 	
 	@Override
-	public TypeJob create(String name, boolean active) {
-		return new TypeJob(name, active);
+	public TypeJob create(String name, boolean active, String code) {
+		return new TypeJob(name, active, code);
 	}
 
 	@Override

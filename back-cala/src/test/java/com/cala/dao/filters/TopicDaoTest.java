@@ -21,8 +21,8 @@ class TopicDaoTest extends FilterDaoTest<TopicDao, TopicVo>{
 	private TopicFilterRepository repository;
 	
 	@Override
-	public Topic create(String name, boolean active) {
-		return new Topic(name, active);
+	public Topic create(String name, boolean active, String code) {
+		return new Topic(name, active, code);
 	}
 
 	@Override

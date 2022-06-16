@@ -15,11 +15,13 @@ public class InterestVo extends GenericFilterVo{
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
+		setCode(filter.getCode());
 	}
 	
-	public InterestVo(String name, boolean active) {
+	public InterestVo(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public static InterestVo createVo(Filterable filter) {
@@ -36,9 +38,9 @@ public class InterestVo extends GenericFilterVo{
 		return null;
 	}
 
-	public static InterestVo createVo(String name, boolean active) {
+	public static InterestVo createVo(String name, boolean active, String code) {
 		if (name != null) {
-			return new InterestVo(name, active);
+			return new InterestVo(name, active, code);
 		}
 		return null;
 	}

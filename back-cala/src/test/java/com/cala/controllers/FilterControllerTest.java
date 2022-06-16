@@ -27,7 +27,7 @@ class FilterControllerTest {
 	@Test
 	void testCreateFilter() throws Exception {
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/filter/gender/create")
-				.content(asJsonString(new FilterDto(null, "fem", true)));
+				.content(asJsonString(new FilterDto(null, "fem", true, "F")));
 		mvc.perform(request).andExpect(status().isCreated());
 	}
 	

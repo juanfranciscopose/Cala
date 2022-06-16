@@ -3,6 +3,7 @@ package com.cala.service.subjects;
 import org.springframework.stereotype.Service;
 
 import com.cala.model.dto.subjects.PersonDto;
+import com.cala.model.vo.filters.GenderVo;
 import com.cala.model.vo.subjects.PersonVo;
 
 @Service
@@ -30,8 +31,15 @@ public class HelperPersonService {
 		respPerson.setInstagram(person.getInstagram());
 		respPerson.setTwitter(person.getTwitter());
 		respPerson.setPhone(person.getPhone());
+		respPerson.setGender(getGenderDto(person.getGender()));
 		return respPerson;
 	}
+
+	private GenderVo getGenderDto(String gender) {
+		
+		return null;
+	}
+
 
 	
 }

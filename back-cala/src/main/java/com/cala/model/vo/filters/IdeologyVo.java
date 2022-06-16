@@ -15,11 +15,13 @@ public class IdeologyVo extends GenericFilterVo {
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
+		setCode(filter.getCode());
 	}
 	
-	public IdeologyVo(String name, boolean active) {
+	public IdeologyVo(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public static IdeologyVo createVo(Filterable filter) {
@@ -36,9 +38,9 @@ public class IdeologyVo extends GenericFilterVo {
 		return null;
 	}
 
-	public static IdeologyVo createVo(String name, boolean active) {
+	public static IdeologyVo createVo(String name, boolean active, String code) {
 		if (name != null) {
-			return new IdeologyVo(name, active);
+			return new IdeologyVo(name, active, code);
 		}
 		return null;
 	}

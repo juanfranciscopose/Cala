@@ -6,6 +6,8 @@ public abstract class GenericFilterVo extends AbstractVo {
 	
 	private String name;
 	
+	private String code;
+	
 	private boolean active;
 	
 	public String getName() {
@@ -22,6 +24,14 @@ public abstract class GenericFilterVo extends AbstractVo {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

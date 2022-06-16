@@ -15,11 +15,13 @@ public class GenderVo extends GenericFilterVo{
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
+		setCode(filter.getCode());
 	}
 
-	public GenderVo(String gender, boolean active) {
+	public GenderVo(String gender, boolean active, String code) {
 		setName(gender);
 		setActive(active);
+		setCode(code);
 	}
 	
 	public static List<GenericFilterVo> createListVo(List<Gender> list) {
@@ -36,9 +38,9 @@ public class GenderVo extends GenericFilterVo{
 		return null;
 	}
 	
-	public static GenderVo createVo(String name, boolean active) {
+	public static GenderVo createVo(String name, boolean active, String code) {
 		if (name != null) {
-			return new GenderVo(name, active);
+			return new GenderVo(name, active, code);
 		}
 		return null;
 	}

@@ -28,6 +28,9 @@ public class NexusManagement implements Auditable, Filterable{
 	@Column(name="name", nullable = false, unique = true)
 	private String name;
 
+	@Column(name="code", nullable = false, unique = true)
+	private String code;
+	
 	public String getName() {
 		return name;
 	}
@@ -38,14 +41,16 @@ public class NexusManagement implements Auditable, Filterable{
 	
 	public NexusManagement() {}
 	
-	public NexusManagement(String name, boolean active) {
+	public NexusManagement(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 	
 	public NexusManagement(NexusManagementVo filterVo) {
 		setName(filterVo.getName());
 		setActive(filterVo.isActive());
+		setCode(filterVo.getCode());
 	}
 	
 	@Override
@@ -79,4 +84,13 @@ public class NexusManagement implements Auditable, Filterable{
 	protected String activeToString() {
 		return isActive() ? "Si" : "No";
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 }

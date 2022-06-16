@@ -31,7 +31,7 @@ class AgeGroupDaoTest {
 	
 	@Test
 	void testSetAgeGroup() {
-		getDao().store(new AgeGroupVo("test", 16, 24,  true));
+		getDao().store(new AgeGroupVo("test", 16, 24,  true, "T"));
 		AgeGroupVo config = getDao().findByName("test");
 		config.setAgeMax(2);
 		config.setAgeMin(1);
@@ -56,7 +56,7 @@ class AgeGroupDaoTest {
 	
 	@Test
 	void testActive() {
-		getDao().store(new AgeGroupVo("test", 16, 24,  true));
+		getDao().store(new AgeGroupVo("test", 16, 24,  true, "T"));
 		
 		AgeGroupVo config = getDao().findByName("test");
 		getDao().disable(config.getId());
@@ -73,17 +73,17 @@ class AgeGroupDaoTest {
 	
 	@Test
 	void testGetAll() {
-		getDao().store(new AgeGroupVo("test", 16, 24,  true));
-		getDao().store(new AgeGroupVo("test1", 25, 28,  true));
-		getDao().store(new AgeGroupVo("test2", 29, 35,  true));
-		getDao().store(new AgeGroupVo("test3", 36, 40,  true));
-		getDao().store(new AgeGroupVo("test4", 41, 50,  true));
-		getDao().store(new AgeGroupVo("test5", 51, 52,  true));
-		getDao().store(new AgeGroupVo("test6", 53, 60,  true));
-		getDao().store(new AgeGroupVo("test7", 61, 65,  true));
-		getDao().store(new AgeGroupVo("test8", 66, 70,  true));
-		getDao().store(new AgeGroupVo("test9", 71, 75,  true));
-		getDao().store(new AgeGroupVo("test10", 76, 100,  true));
+		getDao().store(new AgeGroupVo("test", 16, 24,  true, "T"));
+		getDao().store(new AgeGroupVo("test1", 25, 28,  true, "T1"));
+		getDao().store(new AgeGroupVo("test2", 29, 35,  true, "T2"));
+		getDao().store(new AgeGroupVo("test3", 36, 40,  true, "T3"));
+		getDao().store(new AgeGroupVo("test4", 41, 50,  true, "T4"));
+		getDao().store(new AgeGroupVo("test5", 51, 52,  true, "T5"));
+		getDao().store(new AgeGroupVo("test6", 53, 60,  true, "T6"));
+		getDao().store(new AgeGroupVo("test7", 61, 65,  true, "T7"));
+		getDao().store(new AgeGroupVo("test8", 66, 70,  true, "T8"));
+		getDao().store(new AgeGroupVo("test9", 71, 75,  true, "T9"));
+		getDao().store(new AgeGroupVo("test10", 76, 100,  true, "T10"));
 		
 		//first case
 		PaginationVo pagination = new PaginationVo(0, 10);
@@ -133,7 +133,7 @@ class AgeGroupDaoTest {
 	
 	@Test
 	void testGetById() {
-		getRepository().save(new AgeGroup("jovenes", 16, 24,  true));
+		getRepository().save(new AgeGroup("jovenes", 16, 24,  true, "T"));
 		AgeGroupVo configVo =  getDao().findByName("jovenes");
 		assertNotNull(configVo);	
 		AgeGroupVo configVo1 =  getDao().getAgeGroup(configVo.getId());

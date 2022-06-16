@@ -27,7 +27,7 @@ public class FilterService implements I_FilterService {
 		GenericFilterVo filter = getHelperFilterService().generateFilter(type, filterDto);
 		
 		// create dto for response
-		return new FilterDto(filter.getId(), filter.getName(), filter.isActive());
+		return new FilterDto(filter.getId(), filter.getName(), filter.isActive(), filter.getCode());
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class FilterService implements I_FilterService {
 		GenericFilterVo filterVo = getHelperFilterService().updateFilter(type, filter);
 				
 		// create dto for response
-		return new FilterDto(filterVo.getId(), filterVo.getName(), filterVo.isActive());
+		return new FilterDto(filterVo.getId(), filterVo.getName(), filterVo.isActive(), filterVo.getCode());
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class FilterService implements I_FilterService {
 		// create dto for response
 		List<FilterDto> listDto = new ArrayList<>();
 		for (GenericFilterVo f : filter) {
-			listDto.add(new FilterDto(f.getId(), f.getName(), f.isActive()));
+			listDto.add(new FilterDto(f.getId(), f.getName(), f.isActive(), f.getCode()));
 		}
 		return listDto;
 	}
@@ -67,7 +67,7 @@ public class FilterService implements I_FilterService {
 		GenericFilterVo filter = getHelperFilterService().deleteFilter(type, id);
 				
 		// create dto for response
-		return new FilterDto(filter.getId(), filter.getName(), filter.isActive());
+		return new FilterDto(filter.getId(), filter.getName(), filter.isActive(), filter.getCode());
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class FilterService implements I_FilterService {
 		GenericFilterVo filter = getHelperFilterService().findByIdFilter(type, id);
 						
 		// create dto for response
-		return Optional.of(new FilterDto(filter.getId(), filter.getName(), filter.isActive()));
+		return Optional.of(new FilterDto(filter.getId(), filter.getName(), filter.isActive(), filter.getCode()));
 	}
 
 	public HelperFilterService getHelperFilterService() {
@@ -95,7 +95,7 @@ public class FilterService implements I_FilterService {
 		GenericFilterVo filter = getHelperFilterService().activateFilter(type, id);
 		
 		// create dto for response
-		return new FilterDto(filter.getId(), filter.getName(), filter.isActive());
+		return new FilterDto(filter.getId(), filter.getName(), filter.isActive(), filter.getCode());
 	}
 
 }

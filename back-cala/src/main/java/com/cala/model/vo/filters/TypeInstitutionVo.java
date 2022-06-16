@@ -15,11 +15,13 @@ public class TypeInstitutionVo extends GenericFilterVo {
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
+		setCode(filter.getCode());
 	}
 
-	public TypeInstitutionVo(String name, boolean active) {
+	public TypeInstitutionVo(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public static TypeInstitutionVo createVo(Filterable filter) {
@@ -33,9 +35,9 @@ public class TypeInstitutionVo extends GenericFilterVo {
 		return types.stream().map(filter -> new TypeInstitutionVo(filter)).collect(Collectors.toList());
 	}
 
-	public static TypeInstitutionVo createVo(String name, boolean active) {
+	public static TypeInstitutionVo createVo(String name, boolean active, String code) {
 		if (name != null) {
-			return new TypeInstitutionVo(name, active);
+			return new TypeInstitutionVo(name, active, code);
 		}
 		return null;
 	}

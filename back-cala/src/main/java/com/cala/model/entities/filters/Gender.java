@@ -24,6 +24,9 @@ public class Gender implements Auditable, Filterable{
 	
 	@Column(name="name", nullable = false, unique = true)
 	private String name;
+	
+	@Column(name="code", nullable = false, unique = true)
+	private String code;
 		
 	public String getName() {
 		return name;
@@ -38,11 +41,13 @@ public class Gender implements Auditable, Filterable{
 	public Gender(GenderVo genderVo) {
 		setName(genderVo.getName());
 		setActive(genderVo.isActive());
+		setCode(genderVo.getCode());
 	}
 	
-	public Gender(String gender, boolean active) {
+	public Gender(String gender, boolean active, String code) {
 		setName(gender);
 		setActive(active);
+		setCode(code);
 	}
 	
 	public Long getId() {
@@ -75,5 +80,15 @@ public class Gender implements Auditable, Filterable{
 			return new Gender(gender);
 		}
 		return null;
+	}
+
+	@Override
+	public String getCode() {
+		return this.code;
+	}
+
+	@Override
+	public void setCode(String code) {
+		this.code = code;
 	}
 }

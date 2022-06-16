@@ -25,6 +25,9 @@ public class Interest implements Auditable, Filterable{
 	
 	@Column(name="name", nullable = false, unique = true)
 	private String name;
+
+	@Column(name="code", nullable = false, unique = true)
+	private String code;
 		
 	@Column(name = "active", nullable = false)
 	private boolean active;
@@ -39,14 +42,16 @@ public class Interest implements Auditable, Filterable{
 	
 	public Interest() {}
 	
-	public Interest(String name, boolean active) {
+	public Interest(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 	
 	public Interest(InterestVo filterVo) {
 		setName(filterVo.getName());
 		setActive(filterVo.isActive());
+		setCode(filterVo.getCode());
 	}
 	
 	@Override
@@ -80,4 +85,13 @@ public class Interest implements Auditable, Filterable{
 	protected String activeToString() {
 		return isActive() ? "Si" : "No";
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 }

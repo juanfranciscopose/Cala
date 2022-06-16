@@ -21,8 +21,8 @@ class TypeParticipationDaoTest extends FilterDaoTest<TypeParticipationDao, TypeP
 	private I_FilterDao<TypeParticipationVo> dao;
 	
 	@Override
-	public TypeParticipation create(String name, boolean active) {
-		return new TypeParticipation(name, active); 
+	public TypeParticipation create(String name, boolean active, String code) {
+		return new TypeParticipation(name, active, code); 
 	}
 
 	@Override

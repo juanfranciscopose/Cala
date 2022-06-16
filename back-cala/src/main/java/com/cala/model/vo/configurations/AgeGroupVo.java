@@ -16,6 +16,8 @@ public class AgeGroupVo extends AbstractVo implements Filterable{
 	private int ageMin;
 	
 	private boolean active;
+	
+	private String code;
 
 	public AgeGroupVo() {}
 	
@@ -25,13 +27,15 @@ public class AgeGroupVo extends AbstractVo implements Filterable{
 		setAgeMax(ageGroup.getAgeMax());
 		setAgeMin(ageGroup.getAgeMin());
 		setActive(ageGroup.isActive());
+		setCode(ageGroup.getCode());
 	}
 	
-	public AgeGroupVo(String name, int ageMax, int ageMin, boolean active) {
+	public AgeGroupVo(String name, int ageMax, int ageMin, boolean active, String code) {
 		this.name = name;
 		this.ageMax = ageMax;
 		this.ageMin = ageMin;
 		this.active = active;
+		this.code = code;
 	}
 
 	public String getName() {
@@ -75,6 +79,14 @@ public class AgeGroupVo extends AbstractVo implements Filterable{
 			return new AgeGroupVo(config);
 		}
 		return null;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 		
 }

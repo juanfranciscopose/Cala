@@ -21,8 +21,8 @@ class TypeInstitutionDaoTest extends FilterDaoTest<TypeInstitutionDao, TypeInsti
 	private I_FilterDao<TypeInstitutionVo> dao;
 	
 	@Override
-	public TypeInstitution create(String name, boolean active) {
-		return new TypeInstitution(name, active);
+	public TypeInstitution create(String name, boolean active, String code) {
+		return new TypeInstitution(name, active, code);
 	}
 
 	@Override

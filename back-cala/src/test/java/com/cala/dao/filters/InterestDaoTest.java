@@ -21,8 +21,8 @@ class InterestDaoTest extends FilterDaoTest<InterestDao, InterestVo> {
 	private InterestFilterRepository interestRepository;
 	
 	@Override
-	public Interest create(String name, boolean active) {
-		return new Interest(name, active);
+	public Interest create(String name, boolean active, String code) {
+		return new Interest(name, active, code);
 	}
 
 	@Override

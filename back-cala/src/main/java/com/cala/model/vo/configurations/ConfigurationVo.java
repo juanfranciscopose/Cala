@@ -12,6 +12,8 @@ public class ConfigurationVo extends AbstractVo{
 	
 	private String name;
 	
+	private String code;
+	
 	public ConfigurationVo() {}
 	
 	public ConfigurationVo(Configuration config) {
@@ -50,6 +52,14 @@ public class ConfigurationVo extends AbstractVo{
 			return new ConfigurationVo(config);
 		}
 		return null;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 }

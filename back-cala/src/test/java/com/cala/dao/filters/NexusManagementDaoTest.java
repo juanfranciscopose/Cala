@@ -21,8 +21,8 @@ class NexusManagementDaoTest extends FilterDaoTest<NexusManagementDao, NexusMana
 	private I_FilterDao<NexusManagementVo> dao;
 	
 	@Override
-	public NexusManagement create(String name, boolean active) {
-		return new NexusManagement(name, active);
+	public NexusManagement create(String name, boolean active, String code) {
+		return new NexusManagement(name, active, code);
 	}
 
 	@Override

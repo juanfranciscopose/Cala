@@ -9,11 +9,14 @@ public class FilterDto implements Filterable{
 	private String name;
 	
 	private boolean active;
+	
+	private String code;
 
-	public FilterDto(Long id, String name, boolean active) {
+	public FilterDto(Long id, String name, boolean active, String code) {
 		setId(id);
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public Long getId() {
@@ -47,5 +50,13 @@ public class FilterDto implements Filterable{
 	private String activeToString() {
 		return isActive() ? "Si" : "No";
 	}
-	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 }

@@ -28,6 +28,9 @@ public class TypeInstitution implements Auditable, Filterable{
 	@Column(name="name", nullable = false, unique = true)
 	private String name;
 
+	@Column(name="code", nullable = false, unique = true)
+	private String code;
+	
 	public String getName() {
 		return name;
 	}
@@ -38,14 +41,16 @@ public class TypeInstitution implements Auditable, Filterable{
 	
 	public TypeInstitution () {}
 	
-	public TypeInstitution(String name, boolean active) {
+	public TypeInstitution(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public TypeInstitution(TypeInstitutionVo filterVo) {
 		setName(filterVo.getName());
 		setActive(filterVo.isActive());
+		setCode(filterVo.getCode());
 	}
 	
 	@Override
@@ -77,4 +82,12 @@ public class TypeInstitution implements Auditable, Filterable{
 		return isActive() ? "Si" : "No";
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 }

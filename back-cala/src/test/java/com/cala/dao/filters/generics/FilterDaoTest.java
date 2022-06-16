@@ -23,7 +23,7 @@ public abstract class FilterDaoTest<T extends I_FilterDao<E>,
 	@Autowired
 	private T dao;
 	public abstract void delete(Filterable filter);
-	public abstract Filterable create(String name, boolean active);
+	public abstract Filterable create(String name, boolean active, String code);
 	public abstract List<GenericFilterVo> getAll(PaginationVo pagination);
 	public abstract E createVo(Filterable filter);
 	public abstract Filterable findByName(String name);
@@ -34,7 +34,7 @@ public abstract class FilterDaoTest<T extends I_FilterDao<E>,
 	
 	@Test
 	void testGetById() {
-		Filterable filter = create("test", true);
+		Filterable filter = create("test", true, "T");
 		E filterVo = createVo(filter);
 		getDao().store(filterVo);
 		filterVo = getDao().findByName("test");
@@ -48,7 +48,7 @@ public abstract class FilterDaoTest<T extends I_FilterDao<E>,
 	
 	@Test
 	void testActive() {
-		Filterable filter = create("test", true);
+		Filterable filter = create("test", true, "T");
 		E filterVo = createVo(filter);
 		getDao().store(filterVo);
 		
@@ -68,37 +68,37 @@ public abstract class FilterDaoTest<T extends I_FilterDao<E>,
 	@Test
 	void testGetAll() {
 		
-		Filterable test = create("test", true);
+		Filterable test = create("test", true, "T");
 		E testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test1", true);
+		test = create("test1", true, "T1");
 		testVo = createVo(test);	
 		getDao().store(testVo);	
-		test = create("test2", true);
+		test = create("test2", true, "T2");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test3", true);
+		test = create("test3", true, "T3");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test4", true);
+		test = create("test4", true, "T4");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test5", true);
+		test = create("test5", true, "T5");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test6", true);
+		test = create("test6", true, "T6");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test7", true);
+		test = create("test7", true, "T7");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test8", true);
+		test = create("test8", true, "T8");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test9", true);
+		test = create("test9", true, "T9");
 		testVo = createVo(test);	
 		getDao().store(testVo);
-		test = create("test10", true);
+		test = create("test10", true, "T10");
 		testVo = createVo(test);	
 		getDao().store(testVo);
 		
@@ -150,7 +150,7 @@ public abstract class FilterDaoTest<T extends I_FilterDao<E>,
 	
 	@Test
 	void testStoreUpdate() {
-		Filterable test = create("test", true);
+		Filterable test = create("test", true, "T");
 		E testVo = createVo(test);	
 		getDao().store(testVo);
 		
@@ -171,7 +171,7 @@ public abstract class FilterDaoTest<T extends I_FilterDao<E>,
 		assertNull(filter);	
 
 		//store
-		test = create("test1", true);
+		test = create("test1", true, "T1");
 		testVo = createVo(test);	
 		getDao().store(testVo);
 		List<GenericFilterVo> filters = getAll(new PaginationVo(0, 10));

@@ -15,11 +15,13 @@ public class TopicVo  extends GenericFilterVo{
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
+		setCode(filter.getCode());
 	}
 
-	public TopicVo(String name, boolean active) {
+	public TopicVo(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public static TopicVo createVo(Filterable topic) {
@@ -36,9 +38,9 @@ public class TopicVo  extends GenericFilterVo{
 		return null;
 	}
 
-	public static TopicVo createVo(String name, boolean active) {
+	public static TopicVo createVo(String name, boolean active, String code) {
 		if (name != null) {
-			return new TopicVo(name, active);
+			return new TopicVo(name, active, code);
 		}
 		return null;
 	}

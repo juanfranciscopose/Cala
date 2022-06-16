@@ -21,8 +21,8 @@ class GenderDaoTest extends FilterDaoTest<GenderDao, GenderVo> {
 	private I_FilterDao<GenderVo> genderDao;
 	
 	@Override
-	public Gender create(String name, boolean active) {
-		return new Gender(name, active);
+	public Gender create(String name, boolean active, String code) {
+		return new Gender(name, active, code);
 	}
 
 	@Override

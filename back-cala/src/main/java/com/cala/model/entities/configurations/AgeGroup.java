@@ -29,14 +29,18 @@ public class AgeGroup implements Auditable{
 		
 	@Column(name = "active", nullable = false)
 	private boolean active;
-
+	
+	@Column(name="code", nullable = false, unique = true)
+	private String code;
+		
 	public AgeGroup() {}
 	
-	public AgeGroup(String name, int ageMax, int ageMin, boolean active) {
+	public AgeGroup(String name, int ageMax, int ageMin, boolean active, String code) {
 		this.name = name;
 		this.ageMax = ageMax;
 		this.ageMin = ageMin;
 		this.active = active;
+		this.code = code;
 	}
 
 	public AgeGroup(AgeGroupVo config) {
@@ -44,6 +48,7 @@ public class AgeGroup implements Auditable{
 		this.ageMax = config.getAgeMax();
 		this.ageMin = config.getAgeMin();
 		this.active = config.isActive();
+		this.code = config.getCode();
 	}
 
 	public Long getId() {
@@ -103,4 +108,12 @@ public class AgeGroup implements Auditable{
 		return null;
 	}
 
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 }

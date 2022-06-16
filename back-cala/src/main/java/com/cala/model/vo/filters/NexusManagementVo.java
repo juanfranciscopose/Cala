@@ -15,11 +15,13 @@ public class NexusManagementVo extends GenericFilterVo{
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
+		setCode(filter.getCode());
 	}
 
-	public NexusManagementVo(String name, boolean active) {
+	public NexusManagementVo(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public static NexusManagementVo createVo(Filterable filter) {
@@ -36,9 +38,9 @@ public class NexusManagementVo extends GenericFilterVo{
 		return null;
 	}
 
-	public static NexusManagementVo createVo(String name, boolean active) {
+	public static NexusManagementVo createVo(String name, boolean active, String code) {
 		if (name != null) {
-			return new NexusManagementVo(name, active);
+			return new NexusManagementVo(name, active, code);
 		}
 		return null;
 	}

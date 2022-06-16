@@ -15,11 +15,13 @@ public class TypeParticipationVo extends GenericFilterVo{
 		setId(filter.getId());
 		setName(filter.getName());
 		setActive(filter.isActive());
+		setCode(filter.getCode());
 	}
 	
-	public TypeParticipationVo(String name, boolean active) {
+	public TypeParticipationVo(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 
 	public static TypeParticipationVo createVo(Filterable filter) {
@@ -36,9 +38,9 @@ public class TypeParticipationVo extends GenericFilterVo{
 		return null;
 	}
 
-	public static TypeParticipationVo createVo(String name, boolean active) {
+	public static TypeParticipationVo createVo(String name, boolean active, String code) {
 		if (name != null) {
-			return new TypeParticipationVo(name, active);
+			return new TypeParticipationVo(name, active, code);
 		}
 		return null;
 	}

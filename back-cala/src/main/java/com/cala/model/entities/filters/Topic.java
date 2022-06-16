@@ -24,7 +24,10 @@ public class Topic implements Auditable, Filterable{
 	
 	@Column(name="name", nullable = false, unique = true)
 	private String name;
-		
+
+	@Column(name="code", nullable = false, unique = true)
+	private String code;
+	
 	@Column(name = "active", nullable = false)
 	private boolean active;
 
@@ -41,11 +44,13 @@ public class Topic implements Auditable, Filterable{
 	public Topic(TopicVo filterVo) {
 		setName(filterVo.getName());
 		setActive(filterVo.isActive());
+		setCode(filterVo.getCode());
 	}
 	
-	public Topic(String name, boolean active) {
+	public Topic(String name, boolean active, String code) {
 		setName(name);
 		setActive(active);
+		setCode(code);
 	}
 	
 	@Override
@@ -79,6 +84,13 @@ public class Topic implements Auditable, Filterable{
 	protected String activeToString() {
 		return isActive() ? "Si" : "No";
 	}
-	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 	
 }
