@@ -96,17 +96,18 @@ const arrayFiltros = [
         filter: 'topic',
         needFilter: true,
         mapeoProps: {value: 'code', desc: 'name'}
-    }/*,
+    },
     {
         id: 'nexoGestion',
         name: 'nexoGestion',
         label: 'Nexo de Gestión',
         type: 'MultiSelect',
-        options: getNexoGestionOptions,
-        validation: Yup.string().required('El campo es requerido'),
+        validation: '',
         initialValue: '',
-        mapeoProps: {value: 'value', desc: 'label'}
-    }*/
+        filter: 'nexus-management',
+        needFilter: true,
+        mapeoProps: {value: 'code', desc: 'name'}
+    }
 ];
 
 const componentFiltros = ({disableSeccion=false}) => {
