@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { useField, useFormikContext } from 'formik';
-import Service from './../../services/filters/InteresService'
+import Service from './../../services/FilterService'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -70,7 +70,7 @@ const MyMultiSelect = ({
         setListado(options)
         setIsBussy(false)
       }else{
-        Service.getInteresOptions().then(response => {
+        Service.execute(filter).then(response => {
           //console.log(response);
           const list = response.data.json
           setListado(list)
