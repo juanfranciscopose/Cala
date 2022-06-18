@@ -18,7 +18,7 @@ const FormularioPersona = ({ view=false, open, close, edit=false, initialValues=
   return (
     <React.Fragment>
       <ModalABM 
-        titulo={view ? TITLE : 'Ver Persona'} 
+        titulo={view ? 'Ver Persona' : TITLE } 
         validationSchema={buildValidationSchema} 
         initialValues={initialValues}
         open={open}
