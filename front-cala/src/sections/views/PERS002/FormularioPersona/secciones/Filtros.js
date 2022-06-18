@@ -48,9 +48,11 @@ const arrayFiltros = [
         name: 'interest',
         label: 'Interés',
         type: 'MultiSelect',
-        options: getInteresOptions,
+        //options: getInteresOptions,
         validation: '',
         initialValue: '',
+        filter: 'interest',
+        needFilter: true,
         mapeoProps: {value: 'code', desc: 'name'}
     }/*,
     {

@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { useField, useFormikContext } from 'formik';
+import Service from './../../services/filters/InteresService'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -51,6 +52,8 @@ const MyMultiSelect = ({
     customChange,
     needEvento = true,
     mapeoProps,
+    filter,
+    needFilter,
     ...props
 }) => {
   const { setFieldValue } = useFormikContext();
@@ -63,8 +66,17 @@ const MyMultiSelect = ({
   React.useEffect(() => {
     let isMounted = true
     if (isMounted){
-      setListado(options)
-      setIsBussy(false)
+      if (!needFilter){
+        setListado(options)
+        setIsBussy(false)
+      }else{
+        Service.getInteresOptions().then(response => {
+          //console.log(response);
+          const list = response.data.json
+          setListado(list)
+          setIsBussy(false)
+        })
+      }
     }
     return () => {isMounted = false}
   }, [])
