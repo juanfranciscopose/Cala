@@ -23,7 +23,7 @@ const getTipoTrabajoOptions = async () => {
     return listAllTipoTrabajo()
 }
 
-export default {getTipoTrabajoOptions}
+export default {getTipoTrabajoOptions};
 
 /*const getTipoTrabajoOptions = [
     {
