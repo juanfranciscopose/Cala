@@ -12,10 +12,13 @@ const MySelect = ({
     customChange,
     needEvento,
     allowEmpty = false,
+    mapeoProps,
     ...props
 }) => {
     const [field, meta] = useField(name);
     const { setFieldValue } = useFormikContext();
+    const [isBussy, setIsBussy] = React.useState(true)
+    const [listado, setListado] = React.useState([])
 
     const onChangeValue = (event) => {
         if (!disabled) {
@@ -24,11 +27,20 @@ const MySelect = ({
           if (customChange) needEvento ? customChange(event) : customChange();
         }
     }
-    
+
+    React.useEffect(() => {
+    let isMounted = true
+    if (isMounted){
+      setListado(options)
+      setIsBussy(false)
+    }
+    return () => {isMounted = false}
+  }, [])
+
     const getDescription = (item) => {
         return hideId || item.value === -1
-            ? item.label
-            : `${item.value} - ${item.label}`
+            ? item[mapeoProps.desc]
+            : `${item[mapeoProps.value]} - ${item[mapeoProps.desc]}`
     }
 
     return (
@@ -45,9 +57,14 @@ const MySelect = ({
             InputLabelProps={{ shrink: true }}
             fullWidth>
             <MenuItem disabled={!allowEmpty} value=''><em>None</em></MenuItem>
-            {options && options.map((item, key) =>
-                <MenuItem key={key} value={item.value}>{getDescription(item)}</MenuItem>
-            )}
+            {isBussy ? [] : listado && listado.map((item, key) =>
+            <MenuItem 
+              key={key} 
+              value={item[mapeoProps.value]}
+            >
+                {getDescription(item)}
+            </MenuItem>
+          )}
         </TextField>
     );
 }

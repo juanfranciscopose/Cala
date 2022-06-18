@@ -29,6 +29,7 @@ const InputFactory = ({field, xs, disableInput=false}) => {
               options ={field.options}
               allowEmpty={true}
               disabled={disableInput}
+              mapeoProps={field.mapeoProps}
             />
           );
         case 'Date':
