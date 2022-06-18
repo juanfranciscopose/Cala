@@ -85,17 +85,18 @@ const arrayFiltros = [
         filter: 'type-participation',
         needFilter: true,
         mapeoProps: {value: 'code', desc: 'name'}
-    }/*,
+    },
     {
         id: 'tematica',
         name: 'tematica',
         label: 'Temática',
         type: 'MultiSelect',
-        options: getTematicaOptions,
-        validation: Yup.string().required('El campo es requerido'),
+        validation: '',
         initialValue: '',
-        mapeoProps: {value: 'value', desc: 'label'}
-    },
+        filter: 'topic',
+        needFilter: true,
+        mapeoProps: {value: 'code', desc: 'name'}
+    }/*,
     {
         id: 'nexoGestion',
         name: 'nexoGestion',
