@@ -30,26 +30,29 @@ const arrayFiltros = [
         label: 'Franja Etaria',
         type: 'Select',
         options: getFranjaEtariaOptions,
-        validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
-    },{
+        validation: '',
+        initialValue: '',
+        mapeoProps: {value: 'value', desc: 'label'}
+    },/*{
         id: 'genero',
         name: 'gender',
         label: 'Genero',
         type: 'Select',
         options: getGeneroOptions,
         validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
-    },
+        initialValue: '',
+        mapeoProps: {value: 'value', desc: 'label'}
+    },*/
     {
         id: 'interes',
         name: 'interest',
         label: 'Interés',
         type: 'MultiSelect',
         options: getInteresOptions,
-        validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
-    },
+        validation: '',
+        initialValue: '',
+        mapeoProps: {value: 'code', desc: 'name'}
+    }/*,
     {
         id: 'ideologia',
         name: 'ideologia',
@@ -57,7 +60,8 @@ const arrayFiltros = [
         type: 'MultiSelect',
         options: getIdeologiaOptions,
         validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
+        initialValue: '',
+        mapeoProps: {value: 'value', desc: 'label'}
     },
     {
         id: 'tipoTrabajo',
@@ -66,7 +70,8 @@ const arrayFiltros = [
         type: 'Select',
         options: getTipoTrabajoOptions,
         validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
+        initialValue: '',
+        mapeoProps: {value: 'value', desc: 'label'}
     },
     {
         id: 'tipoParticipacion',
@@ -75,7 +80,8 @@ const arrayFiltros = [
         type: 'MultiSelect',
         options: getTipoParticipacionOptions,
         validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
+        initialValue: '',
+        mapeoProps: {value: 'value', desc: 'label'}
     },
     {
         id: 'tematica',
@@ -84,7 +90,8 @@ const arrayFiltros = [
         type: 'MultiSelect',
         options: getTematicaOptions,
         validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
+        initialValue: '',
+        mapeoProps: {value: 'value', desc: 'label'}
     },
     {
         id: 'nexoGestion',
@@ -93,8 +100,9 @@ const arrayFiltros = [
         type: 'MultiSelect',
         options: getNexoGestionOptions,
         validation: Yup.string().required('El campo es requerido'),
-        initialValue: ''
-    }
+        initialValue: '',
+        mapeoProps: {value: 'value', desc: 'label'}
+    }*/
 ];
 
 const componentFiltros = ({disableSeccion=false}) => {
