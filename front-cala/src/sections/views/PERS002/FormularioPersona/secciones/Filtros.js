@@ -48,23 +48,23 @@ const arrayFiltros = [
         name: 'interest',
         label: 'Interés',
         type: 'MultiSelect',
-        //options: getInteresOptions,
         validation: '',
         initialValue: '',
         filter: 'interest',
         needFilter: true,
         mapeoProps: {value: 'code', desc: 'name'}
-    }/*,
+    },
     {
         id: 'ideologia',
         name: 'ideologia',
         label: 'Ideologías',
         type: 'MultiSelect',
-        options: getIdeologiaOptions,
-        validation: Yup.string().required('El campo es requerido'),
+        validation: '',
         initialValue: '',
-        mapeoProps: {value: 'value', desc: 'label'}
-    },
+        filter: 'ideology',
+        needFilter: true,
+        mapeoProps: {value: 'code', desc: 'name'}
+    }/*,
     {
         id: 'tipoTrabajo',
         name: 'tipoTrabajo',
