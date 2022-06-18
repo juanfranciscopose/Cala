@@ -64,8 +64,8 @@ const arrayFiltros = [
         filter: 'ideology',
         needFilter: true,
         mapeoProps: {value: 'code', desc: 'name'}
-    }/*,
-    {
+    },
+    /*{
         id: 'tipoTrabajo',
         name: 'tipoTrabajo',
         label: 'Tipo Trabajo',
@@ -74,17 +74,18 @@ const arrayFiltros = [
         validation: Yup.string().required('El campo es requerido'),
         initialValue: '',
         mapeoProps: {value: 'value', desc: 'label'}
-    },
+    },*/
     {
         id: 'tipoParticipacion',
         name: 'tipoParticipacion',
         label: 'Tipo Participación',
         type: 'MultiSelect',
-        options: getTipoParticipacionOptions,
-        validation: Yup.string().required('El campo es requerido'),
+        validation: '',
         initialValue: '',
-        mapeoProps: {value: 'value', desc: 'label'}
-    },
+        filter: 'type-participation',
+        needFilter: true,
+        mapeoProps: {value: 'code', desc: 'name'}
+    }/*,
     {
         id: 'tematica',
         name: 'tematica',
