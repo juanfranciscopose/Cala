@@ -1,23 +1,23 @@
 const getInteresOptions = [
     {
-        value: 'HEST', 
-        label: 'Hincha Estudiantes'
+        code: 'HEST', 
+        name: 'Hincha Estudiantes'
     },
     {
-        value: 'HGIM', 
-        label: 'Hincha Gimnasia'
+        code: 'HGIM', 
+        name: 'Hincha Gimnasia'
     },
     {
-        value: 'MASC',
-        label: 'Mascotas'
+        code: 'MASC',
+        name: 'Mascotas'
     },
     {
-        value: 'FUTA',
-        label: 'Futbol Amateur'
+        code: 'FUTA',
+        name: 'Futbol Amateur'
     },
     {
-        value: 'FUTL',
-        label: 'Liga Amateur Platense'
+        code: 'FUTL',
+        name: 'Liga Amateur Platense'
     }
 ];
 
