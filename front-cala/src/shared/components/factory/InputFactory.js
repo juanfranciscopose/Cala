@@ -54,6 +54,7 @@ const InputFactory = ({field, xs, disableInput=false}) => {
               name={field.name}
               options ={field.options}
               disabled={disableInput}
+              mapeoProps={field.mapeoProps}
             />
           );
         default:

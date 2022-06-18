@@ -50,12 +50,24 @@ const MyMultiSelect = ({
     hideId = false,
     customChange,
     needEvento = true,
+    mapeoProps,
     ...props
 }) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const [isBussy, setIsBussy] = React.useState(true)
+  const [listado, setListado] = React.useState([])
+
+  React.useEffect(() => {
+    let isMounted = true
+    if (isMounted){
+      setListado(options)
+      setIsBussy(false)
+    }
+    return () => {isMounted = false}
+  }, [])
 
   const onChangeValue = (event) => {
     if (!disabled) {
@@ -74,8 +86,8 @@ const MyMultiSelect = ({
 
   const getDescription = (item) => {
     return hideId || item.value === -1
-        ? item.label
-        : `${item.value} - ${item.label}`
+        ? item[mapeoProps.desc]
+        : `${item[mapeoProps.value]} - ${item[mapeoProps.desc]}`
     }
 
   return (
@@ -102,8 +114,15 @@ const MyMultiSelect = ({
           )}
           MenuProps={MenuProps}
         >
-          {options && options.map((item, key) =>
-            <MenuItem style={getStyles(name, personName, theme)} key={key} value={item.value}>{getDescription(item)}</MenuItem>
+          {isBussy ? [] : listado && listado.map((item, key) =>
+            <MenuItem 
+              style={getStyles(name, personName, theme)} 
+              key={key} 
+              value={item[mapeoProps.value]}
+            >
+                {getDescription(item)}
+                
+            </MenuItem>
           )}
         </Select>
       </FormControl>
