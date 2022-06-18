@@ -30,6 +30,8 @@ const InputFactory = ({field, xs, disableInput=false}) => {
               allowEmpty={true}
               disabled={disableInput}
               mapeoProps={field.mapeoProps}
+              filter={field.filter}
+              needFilter={field.needFilter}
             />
           );
         case 'Date':

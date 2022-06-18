@@ -4,6 +4,8 @@ import IdeologiaService from './filters/IdeologiaService'
 import TipoParticipacionService from './filters/TipoParticipacionService'
 import TematicaService from './filters/TematicaService'
 import NexoGestionService from './filters/NexoGestionService'
+import GeneroService from './filters/GeneroService'
+import TipoTrabajoService from './filters/TipoTrabajoService'
 
 const execute = (filter) => {
       switch (filter) {
@@ -21,7 +23,13 @@ const execute = (filter) => {
 
         case 'nexus-management':
           return NexoGestionService.getNexoGestionOptions()
-                  
+
+        case 'gender':
+          return GeneroService.getGeneroOptions()
+        
+          case 'type-job':
+          return TipoTrabajoService.getTipoTrabajoOptions()
+        
         default:
           console.log('Error en filter');
           break;

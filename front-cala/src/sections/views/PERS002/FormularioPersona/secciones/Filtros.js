@@ -33,16 +33,18 @@ const arrayFiltros = [
         validation: '',
         initialValue: '',
         mapeoProps: {value: 'value', desc: 'label'}
-    },/*{
+    },
+    {
         id: 'genero',
         name: 'gender',
         label: 'Genero',
         type: 'Select',
-        options: getGeneroOptions,
-        validation: Yup.string().required('El campo es requerido'),
+        validation: '',
         initialValue: '',
-        mapeoProps: {value: 'value', desc: 'label'}
-    },*/
+        filter: 'gender',
+        needFilter: true,
+        mapeoProps: {value: 'code', desc: 'name'}
+    },
     {
         id: 'interes',
         name: 'interest',
@@ -65,16 +67,17 @@ const arrayFiltros = [
         needFilter: true,
         mapeoProps: {value: 'code', desc: 'name'}
     },
-    /*{
+    {
         id: 'tipoTrabajo',
         name: 'tipoTrabajo',
         label: 'Tipo Trabajo',
         type: 'Select',
-        options: getTipoTrabajoOptions,
-        validation: Yup.string().required('El campo es requerido'),
+        validation: '',
         initialValue: '',
-        mapeoProps: {value: 'value', desc: 'label'}
-    },*/
+        filter: 'type-job',
+        needFilter: true,
+        mapeoProps: {value: 'code', desc: 'name'}
+    },
     {
         id: 'tipoParticipacion',
         name: 'tipoParticipacion',
