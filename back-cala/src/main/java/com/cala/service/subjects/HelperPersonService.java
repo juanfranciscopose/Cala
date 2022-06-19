@@ -37,7 +37,9 @@ public class HelperPersonService {
 		respPerson.setInstagram(person.getInstagram());
 		respPerson.setTwitter(person.getTwitter());
 		respPerson.setPhone(person.getPhone());
-		respPerson.setGender(getGenderDto(person.getGender()));
+		if (person.getGender() != null) {
+			respPerson.setGender(getGenderDto(person.getGender()));
+		}
 		return respPerson;
 	}
 
