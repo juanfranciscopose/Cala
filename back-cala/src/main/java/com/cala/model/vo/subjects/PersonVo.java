@@ -258,6 +258,9 @@ public class PersonVo extends SubjectVo {
 		if (getGender() != null) {
 			personDto.setGender(getGender().getCode());
 		}
+		if (getTypeJob() != null) {
+			personDto.setTypeJob(getTypeJob().getCode());
+		}
 		
 		return personDto;				
 	}

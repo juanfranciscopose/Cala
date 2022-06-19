@@ -69,7 +69,7 @@ const arrayFiltros = [
     },
     {
         id: 'tipoTrabajo',
-        name: 'tipoTrabajo',
+        name: 'typeJob',
         label: 'Tipo Trabajo',
         type: 'Select',
         validation: '',

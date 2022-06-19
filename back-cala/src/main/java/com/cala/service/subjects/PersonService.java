@@ -65,10 +65,15 @@ public class PersonService implements I_PersonService{
 		// data types validations
 		
 		// business validations
+		
+		//persist
 		PersonVo pV = helper.personDtoToPersonVo(person);
 		PersonVo personVo = getPersonDao().store(pV);
 		if (pV.getGender() != null) {
 			personVo = getPersonDao().setGender(personVo.getId(), pV.getGender());
+		}
+		if (pV.getTypeJob() != null) {
+			personVo = getPersonDao().setTypeJob(personVo.getId(), pV.getTypeJob());
 		}
 		// create dto for response
 		return personVo.toDTO();

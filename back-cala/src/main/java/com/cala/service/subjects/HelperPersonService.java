@@ -4,16 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cala.dao.filters.GenderDao;
+import com.cala.dao.filters.TypeJobDao;
 import com.cala.model.dto.subjects.PersonDto;
 
 import com.cala.model.vo.filters.GenderVo;
+import com.cala.model.vo.filters.TypeJobVo;
 import com.cala.model.vo.subjects.PersonVo;
 
 @Service
 public class HelperPersonService {
 	
 	@Autowired
-	private GenderDao filterDao;
+	private GenderDao genderDao;
+	
+	@Autowired
+	private TypeJobDao typeJobDao;
 	
 	public PersonVo personDtoToPersonVo(PersonDto person) {
 		PersonVo respPerson = new PersonVo();
@@ -40,13 +45,18 @@ public class HelperPersonService {
 		if (person.getGender() != null) {
 			respPerson.setGender(getGenderDto(person.getGender()));
 		}
+		if (person.getTypeJob() != null) {
+			respPerson.setTypeJob(getTypeJobDto(person.getTypeJob()));
+		}
 		return respPerson;
 	}
 
+	private TypeJobVo getTypeJobDto(String typeJob) {
+		return typeJobDao.findByCode(typeJob);
+	}
+
 	private GenderVo getGenderDto(String gender) {
-		GenderVo gVo = filterDao.findByCode(gender);
-		System.out.println(gVo);
-		return gVo;
+		return genderDao.findByCode(gender);
 	}
 
 
