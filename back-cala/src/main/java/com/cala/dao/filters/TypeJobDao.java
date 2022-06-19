@@ -117,6 +117,17 @@ public class TypeJobDao implements I_FilterDao<TypeJobVo>{
 			return null;
 		}
 	}
+
+	@Override
+	public TypeJobVo findByCode(String code) {
+		try {
+			Optional<TypeJob> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? TypeJobVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Tipo Trabajo");
+			return null;
+		}
+	}
 	
 	
 }

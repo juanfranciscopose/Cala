@@ -13,4 +13,5 @@ import com.cala.model.entities.filters.Interest;
 public interface InterestFilterRepository extends JpaRepository<Interest, Long>{
 	public Optional<Interest> findByName(String name);
 	public Page<Interest> findAll(Pageable pageable);
+	public Optional<Interest> findByCode(String code);
 }

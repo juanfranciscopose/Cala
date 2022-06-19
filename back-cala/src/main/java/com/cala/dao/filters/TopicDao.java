@@ -118,5 +118,16 @@ public class TopicDao implements I_FilterDao<TopicVo>{
 			return null;
 		}
 	}
+
+	@Override
+	public TopicVo findByCode(String code) {
+		try {
+			Optional<Topic> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? TopicVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Tematica");
+			return null;
+		}
+	}
 	
 }

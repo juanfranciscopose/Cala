@@ -13,4 +13,5 @@ import com.cala.model.entities.filters.TypeJob;
 public interface TypeJobFilterRepository extends JpaRepository<TypeJob, Long>{
 	public Optional<TypeJob> findByName(String name);
 	public Page<TypeJob> findAll(Pageable pageable);
+	public Optional<TypeJob> findByCode(String code);
 }

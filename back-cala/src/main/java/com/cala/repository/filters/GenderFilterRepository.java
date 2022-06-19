@@ -13,4 +13,5 @@ import com.cala.model.entities.filters.Gender;
 public interface GenderFilterRepository extends JpaRepository<Gender, Long>{
 	public Optional<Gender> findByName(String name);
 	public Page<Gender> findAll(Pageable pageable);
+	public Optional<Gender> findByCode(String code);
 }

@@ -13,5 +13,5 @@ import com.cala.model.entities.filters.Ideology;
 public interface IdeologyFilterRepository extends JpaRepository<Ideology, Long>{
 	public Optional<Ideology> findByName(String name);
 	public Page<Ideology> findAll(Pageable pageable);
-
+	public Optional<Ideology> findByCode(String code);
 }

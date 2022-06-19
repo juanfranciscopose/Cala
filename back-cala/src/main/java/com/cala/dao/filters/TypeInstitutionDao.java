@@ -119,4 +119,15 @@ public class TypeInstitutionDao implements I_FilterDao<TypeInstitutionVo>{
 		}
 	}
 
+	@Override
+	public TypeInstitutionVo findByCode(String code) {
+		try {
+			Optional<TypeInstitution> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? TypeInstitutionVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Tipo Institucion");
+			return null;
+		}
+	}
+
 }

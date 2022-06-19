@@ -13,4 +13,5 @@ import com.cala.model.entities.filters.NexusManagement;
 public interface NexusManagementFilterRepository extends JpaRepository<NexusManagement, Long>{
 	public Optional<NexusManagement> findByName(String name);
 	public Page<NexusManagement> findAll(Pageable pageable);
+	public Optional<NexusManagement> findByCode(String code);
 }

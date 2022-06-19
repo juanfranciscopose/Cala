@@ -118,5 +118,16 @@ public class NexusManagementDao implements I_FilterDao<NexusManagementVo>{
 			return null;
 		}
 	}
+
+	@Override
+	public NexusManagementVo findByCode(String code) {
+		try {
+			Optional<NexusManagement> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? NexusManagementVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Nexo de Gestion");
+			return null;
+		}
+	}
 	
 }

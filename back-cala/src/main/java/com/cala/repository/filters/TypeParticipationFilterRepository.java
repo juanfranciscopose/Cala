@@ -13,4 +13,5 @@ import com.cala.model.entities.filters.TypeParticipation;
 public interface TypeParticipationFilterRepository extends JpaRepository<TypeParticipation, Long>{
 	public Optional<TypeParticipation> findByName(String name);
 	public Page<TypeParticipation> findAll(Pageable pageable);
+	public Optional<TypeParticipation> findByCode(String code);
 }

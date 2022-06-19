@@ -118,5 +118,16 @@ public class IdeologyDao implements I_FilterDao<IdeologyVo>{
 			return null;
 		}
 	}
+
+	@Override
+	public IdeologyVo findByCode(String code) {
+		try {
+			Optional<Ideology> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? IdeologyVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Genero");
+			return null;
+		}
+	}
 	
 }

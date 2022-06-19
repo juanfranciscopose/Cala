@@ -118,5 +118,15 @@ public class InterestDao implements I_FilterDao<InterestVo>{
 			return null;
 		}
 	}
-	
+
+	@Override
+	public InterestVo findByCode(String code) {
+		try {
+			Optional<Interest> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? InterestVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Interes");
+			return null;
+		}
+	}
 }

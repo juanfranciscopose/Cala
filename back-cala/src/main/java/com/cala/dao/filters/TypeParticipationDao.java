@@ -118,6 +118,17 @@ public class TypeParticipationDao implements I_FilterDao<TypeParticipationVo>{
 			return null;
 		}
 	}
+
+	@Override
+	public TypeParticipationVo findByCode(String code) {
+		try {
+			Optional<TypeParticipation> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? TypeParticipationVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Tipo Participacion");
+			return null;
+		}
+	}
 	
 	
 }

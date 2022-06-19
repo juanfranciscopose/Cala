@@ -119,5 +119,16 @@ public class GenderDao implements I_FilterDao<GenderVo>{
 			return null;
 		}
 	}
+
+	@Override
+	public GenderVo findByCode(String code) {
+		try {
+			Optional<Gender> findFilter = getRepository().findByCode(code);
+			return (findFilter.isPresent() ? GenderVo.createVo(findFilter.get()) : null);
+		} catch (Exception e) {
+			logger.error("Error en metodo findByCode del filtro: Genero");
+			return null;
+		}
+	}
 	
 }

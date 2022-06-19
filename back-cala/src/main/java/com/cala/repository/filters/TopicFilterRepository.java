@@ -13,4 +13,5 @@ import com.cala.model.entities.filters.Topic;
 public interface TopicFilterRepository extends JpaRepository<Topic, Long>{
 	public Optional<Topic> findByName(String name);
 	public Page<Topic> findAll(Pageable pageable);
+	public Optional<Topic> findByCode(String code);
 }

@@ -255,6 +255,10 @@ public class PersonVo extends SubjectVo {
 		personDto.setInstagram(getInstagram());
 		personDto.setTwitter(getTwitter());
 		personDto.setPhone(getPhone());
+		if (getGender() != null) {
+			personDto.setGender(getGender().getCode());
+		}
+		
 		return personDto;				
 	}
 	

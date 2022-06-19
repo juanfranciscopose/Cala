@@ -13,4 +13,5 @@ import com.cala.model.entities.filters.TypeInstitution;
 public interface TypeInstitutionFilterRepository extends JpaRepository<TypeInstitution, Long>{
 	public Optional<TypeInstitution> findByName(String name);
 	public Page<TypeInstitution> findAll(Pageable pageable);
+	public Optional<TypeInstitution> findByCode(String code);
 }
