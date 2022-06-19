@@ -8,32 +8,32 @@ import GeneroService from './filters/GeneroService'
 import TipoTrabajoService from './filters/TipoTrabajoService'
 
 const execute = (filter) => {
-      switch (filter) {
-        case 'interest':
-          return InteresService.getInteresOptions()
-        
-        case 'ideology':
-          return IdeologiaService.getIdeologiaOptions()
-        
-        case 'type-participation':
-          return TipoParticipacionService.getTipoParticipacionOptions()
+  switch (filter) {
+    case 'interest':
+      return InteresService.getInteresOptions()
+    
+    case 'ideology':
+      return IdeologiaService.getIdeologiaOptions()
+    
+    case 'type-participation':
+      return TipoParticipacionService.getTipoParticipacionOptions()
 
-        case 'topic':
-          return TematicaService.getTematicaOptions()
+    case 'topic':
+      return TematicaService.getTematicaOptions()
 
-        case 'nexus-management':
-          return NexoGestionService.getNexoGestionOptions()
+    case 'nexus-management':
+      return NexoGestionService.getNexoGestionOptions()
 
-        case 'gender':
-          return GeneroService.getGeneroOptions()
-        
-          case 'type-job':
-          return TipoTrabajoService.getTipoTrabajoOptions()
-        
-        default:
-          console.log('Error en filter');
-          break;
-      }
-    }
+    case 'gender':
+      return GeneroService.getGeneroOptions()
+    
+      case 'type-job':
+      return TipoTrabajoService.getTipoTrabajoOptions()
+    
+    default:
+      console.log('Error en filter');
+      break;
+  }
+}
 
-    export default { execute };
+export default { execute };
