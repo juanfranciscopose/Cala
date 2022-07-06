@@ -8,11 +8,14 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -72,6 +75,9 @@ public abstract class Subject {
 	private List<TypeParticipation> typeParticipation;
 	
 	@ManyToMany
+	@JoinTable(name = "subjects_interests",
+			joinColumns = {@JoinColumn(name="subject_id")},
+			inverseJoinColumns={@JoinColumn(name = "interests_id")})
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Interest> interests;
 	

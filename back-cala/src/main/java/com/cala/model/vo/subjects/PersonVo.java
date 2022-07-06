@@ -1,5 +1,6 @@
 package com.cala.model.vo.subjects;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import com.cala.model.entities.subjects.Person;
 import com.cala.model.vo.configurations.AgeGroupVo;
 import com.cala.model.vo.filters.GenderVo;
 import com.cala.model.vo.filters.IdeologyVo;
+import com.cala.model.vo.filters.InterestVo;
 import com.cala.model.vo.filters.TypeJobVo;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 
@@ -72,6 +74,7 @@ public class PersonVo extends SubjectVo {
 		setTwitter(person.getTwitter());
 		setPhone(person.getPhone());
 		setHighlight(person.isHighlight());		
+		setInterests(InterestVo.createListInterestsVo(person.getInterests()));
 		this.surname = person.getSurname();
 		this.document = person.getDocument();
 		this.typeDocument = person.getTypeDocument();
@@ -261,7 +264,14 @@ public class PersonVo extends SubjectVo {
 		if (getTypeJob() != null) {
 			personDto.setTypeJob(getTypeJob().getCode());
 		}
-		
+		if (getInterests() != null) {
+			ArrayList<String> array = new ArrayList<String>();
+			for (InterestVo intrest: getInterests()) {
+				array.add(intrest.getCode());
+			}
+			String[] stringArray = array.toArray(new String[10]);
+			personDto.setInterests(stringArray);
+		}
 		return personDto;				
 	}
 	

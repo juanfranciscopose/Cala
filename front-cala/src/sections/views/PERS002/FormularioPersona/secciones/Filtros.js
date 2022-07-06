@@ -47,7 +47,7 @@ const arrayFiltros = [
     },
     {
         id: 'interes',
-        name: 'interest',
+        name: 'interests',
         label: 'Interés',
         type: 'MultiSelect',
         validation: '',

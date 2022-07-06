@@ -1,13 +1,18 @@
 package com.cala.service.subjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cala.dao.filters.GenderDao;
+import com.cala.dao.filters.InterestDao;
 import com.cala.dao.filters.TypeJobDao;
 import com.cala.model.dto.subjects.PersonDto;
 
 import com.cala.model.vo.filters.GenderVo;
+import com.cala.model.vo.filters.InterestVo;
 import com.cala.model.vo.filters.TypeJobVo;
 import com.cala.model.vo.subjects.PersonVo;
 
@@ -19,6 +24,9 @@ public class HelperPersonService {
 	
 	@Autowired
 	private TypeJobDao typeJobDao;
+	
+	@Autowired
+	private InterestDao interestDao;
 	
 	public PersonVo personDtoToPersonVo(PersonDto person) {
 		PersonVo respPerson = new PersonVo();
@@ -48,7 +56,19 @@ public class HelperPersonService {
 		if (person.getTypeJob() != null) {
 			respPerson.setTypeJob(getTypeJobDto(person.getTypeJob()));
 		}
+		if(person.getInterests() != null) {
+			respPerson.setInterests(getInterestDto(person.getInterests()));
+		}
 		return respPerson;
+	}
+
+	private List<InterestVo> getInterestDto(String[] interests) {
+		List<InterestVo> listVo = new ArrayList<>();
+		for (String inter : interests) {
+			InterestVo interest = interestDao.findByCode(inter);
+			listVo.add(interest);
+		}
+		return listVo;
 	}
 
 	private TypeJobVo getTypeJobDto(String typeJob) {

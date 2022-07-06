@@ -75,6 +75,9 @@ public class PersonService implements I_PersonService{
 		if (pV.getTypeJob() != null) {
 			personVo = getPersonDao().setTypeJob(personVo.getId(), pV.getTypeJob());
 		}
+		if (pV.getInterests() != null) {
+			personVo = getPersonDao().setInterests(personVo.getId(), pV.getInterests());
+		}
 		// create dto for response
 		return personVo.toDTO();
 	}

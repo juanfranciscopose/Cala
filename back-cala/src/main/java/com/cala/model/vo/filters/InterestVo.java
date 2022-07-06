@@ -37,7 +37,14 @@ public class InterestVo extends GenericFilterVo{
 		}
 		return null;
 	}
-
+	
+	public static List<InterestVo> createListInterestsVo(List<Interest> interests){
+		if (interests!= null) {
+			return interests.stream().map(filter -> new InterestVo(filter)).collect(Collectors.toList());
+		}
+		return null;
+	}
+	
 	public static InterestVo createVo(String name, boolean active, String code) {
 		if (name != null) {
 			return new InterestVo(name, active, code);
