@@ -11,7 +11,10 @@ import com.cala.model.vo.configurations.AgeGroupVo;
 import com.cala.model.vo.filters.GenderVo;
 import com.cala.model.vo.filters.IdeologyVo;
 import com.cala.model.vo.filters.InterestVo;
+import com.cala.model.vo.filters.NexusManagementVo;
+import com.cala.model.vo.filters.TopicVo;
 import com.cala.model.vo.filters.TypeJobVo;
+import com.cala.model.vo.filters.TypeParticipationVo;
 import com.cala.model.vo.filters.generics.GenericFilterVo;
 
 public class PersonVo extends SubjectVo {
@@ -89,6 +92,9 @@ public class PersonVo extends SubjectVo {
 		this.gender = GenderVo.createVo(person.getGender());
 		this.ageGroup = AgeGroupVo.createVo(person.getAgeGroup());
 		this.ideologies = IdeologyVo.createListVo(person.getIdeologies());
+		setTypeParticipation(TypeParticipationVo.createListTypeParticipationVo(person.getTypeParticipation()));
+		setNexusManagement(NexusManagementVo.createListNexusManagementVo(person.getNexusManagement()));
+		setTopics(TopicVo.createListTopicVo(person.getTopics()));
 	}
 	
 	public PersonVo(String name, String email, Date birthday, String discord, String facebook, String instagram,String twitter,
@@ -271,6 +277,39 @@ public class PersonVo extends SubjectVo {
 			}
 			String[] stringArray = array.toArray(new String[10]);
 			personDto.setInterests(stringArray);
+		}
+		// TODO: refactor!! horrible
+		if (getNexusManagement() != null) {
+			ArrayList<String> array = new ArrayList<String>();
+			for (NexusManagementVo nm: getNexusManagement()) {
+				array.add(nm.getCode());
+			}
+			String[] stringArray = array.toArray(new String[10]);
+			personDto.setNexusManagement(stringArray);
+		}
+		if (getTopics() != null) {
+			ArrayList<String> array = new ArrayList<String>();
+			for (TopicVo topic: getTopics()) {
+				array.add(topic.getCode());
+			}
+			String[] stringArray = array.toArray(new String[10]);
+			personDto.setTopics(stringArray);
+		}
+		if (getIdeologies() != null) {
+			ArrayList<String> array = new ArrayList<String>();
+			for (GenericFilterVo ideology: getIdeologies()) {
+				array.add(ideology.getCode());
+			}
+			String[] stringArray = array.toArray(new String[10]);
+			personDto.setIdeologies(stringArray);
+		}
+		if (getTypeParticipation() != null) {
+			ArrayList<String> array = new ArrayList<String>();
+			for (TypeParticipationVo type: getTypeParticipation()) {
+				array.add(type.getCode());
+			}
+			String[] stringArray = array.toArray(new String[10]);
+			personDto.setTypeParticipation(stringArray);
 		}
 		return personDto;				
 	}

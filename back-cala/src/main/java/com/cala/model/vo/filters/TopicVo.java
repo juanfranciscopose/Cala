@@ -44,5 +44,12 @@ public class TopicVo  extends GenericFilterVo{
 		}
 		return null;
 	}
+
+	public static List<TopicVo> createListTopicVo(List<Topic> topics) {
+		if (topics != null) {
+			return topics.stream().map(filter -> new TopicVo(filter)).collect(Collectors.toList());
+		}
+		return null;
+	}
 	
 }

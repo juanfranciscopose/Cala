@@ -78,6 +78,18 @@ public class PersonService implements I_PersonService{
 		if (pV.getInterests() != null) {
 			personVo = getPersonDao().setInterests(personVo.getId(), pV.getInterests());
 		}
+		if(pV.getTypeParticipation() != null) {
+			personVo = getPersonDao().setTypeParticipations(personVo.getId(), pV.getTypeParticipation());
+		}
+		if (pV.getNexusManagement() != null) {
+			personVo = getPersonDao().setNexusManagement(personVo.getId(), pV.getNexusManagement());
+		}
+		if (pV.getIdeologies() != null) {
+			personVo = getPersonDao().setIdeologies(personVo.getId(), pV.getIdeologies());
+		}
+		if (pV.getTopics() != null) {
+			personVo = getPersonDao().setTopics(personVo.getId(), pV.getTopics());
+		}
 		// create dto for response
 		return personVo.toDTO();
 	}
@@ -90,6 +102,27 @@ public class PersonService implements I_PersonService{
 		if (findById(person.getId()).isPresent()) {
 			PersonVo pV = helper.personDtoToPersonVo(person);
 			PersonVo personVo = getPersonDao().update(pV);
+			if (pV.getGender() != null) {
+				personVo = getPersonDao().setGender(personVo.getId(), pV.getGender());
+			}
+			if (pV.getTypeJob() != null) {
+				personVo = getPersonDao().setTypeJob(personVo.getId(), pV.getTypeJob());
+			}
+			if (pV.getInterests() != null) {
+				personVo = getPersonDao().setInterests(personVo.getId(), pV.getInterests());
+			}
+			if(pV.getTypeParticipation() != null) {
+				personVo = getPersonDao().setTypeParticipations(personVo.getId(), pV.getTypeParticipation());
+			}
+			if (pV.getNexusManagement() != null) {
+				personVo = getPersonDao().setNexusManagement(personVo.getId(), pV.getNexusManagement());
+			}
+			if (pV.getIdeologies() != null) {
+				personVo = getPersonDao().setIdeologies(personVo.getId(), pV.getIdeologies());
+			}
+			if (pV.getTopics() != null) {
+				personVo = getPersonDao().setTopics(personVo.getId(), pV.getTopics());
+			}
 			// create dto for response
 			return personVo.toDTO();
 		}

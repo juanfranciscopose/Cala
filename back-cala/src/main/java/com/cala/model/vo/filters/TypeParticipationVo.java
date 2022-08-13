@@ -45,4 +45,11 @@ public class TypeParticipationVo extends GenericFilterVo{
 		return null;
 	}
 
+	public static List<TypeParticipationVo> createListTypeParticipationVo(List<TypeParticipation> typeParticipation) {
+		if (typeParticipation != null) {
+			return typeParticipation.stream().map(filter -> new TypeParticipationVo(filter)).collect(Collectors.toList());
+		}
+		return null;
+	}
+
 }

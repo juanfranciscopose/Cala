@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.cala.model.vo.configurations.AgeGroupVo;
 import com.cala.model.vo.filters.GenderVo;
-import com.cala.model.vo.filters.IdeologyVo;
 import com.cala.model.vo.filters.InterestVo;
 import com.cala.model.vo.filters.NexusManagementVo;
 import com.cala.model.vo.filters.TopicVo;
 import com.cala.model.vo.filters.TypeJobVo;
 import com.cala.model.vo.filters.TypeParticipationVo;
+import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.pagination.PaginationVo;
 import com.cala.model.vo.searches.SearchPersonFilterVo;
 import com.cala.model.vo.subjects.DescriptionVo;
@@ -27,7 +27,7 @@ public interface I_PersonDao{
 	
 	public PersonVo setGender(Long id, GenderVo gender);
 	
-	public PersonVo setIdeologies(Long id, List<IdeologyVo> filters);
+	public PersonVo setIdeologies(Long id, List<GenericFilterVo> filters);
 	
 	public PersonVo setTopics(Long id, List<TopicVo> filters);
 	
@@ -46,4 +46,5 @@ public interface I_PersonDao{
 	public PersonVo findById(Long id);
 
 	public List<PersonVo> getAll();
+
 }

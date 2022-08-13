@@ -23,12 +23,12 @@ import com.cala.model.entities.subjects.Description;
 import com.cala.model.entities.subjects.Person;
 import com.cala.model.vo.configurations.AgeGroupVo;
 import com.cala.model.vo.filters.GenderVo;
-import com.cala.model.vo.filters.IdeologyVo;
 import com.cala.model.vo.filters.InterestVo;
 import com.cala.model.vo.filters.NexusManagementVo;
 import com.cala.model.vo.filters.TopicVo;
 import com.cala.model.vo.filters.TypeJobVo;
 import com.cala.model.vo.filters.TypeParticipationVo;
+import com.cala.model.vo.filters.generics.GenericFilterVo;
 import com.cala.model.vo.pagination.PaginationVo;
 import com.cala.model.vo.searches.SearchPersonFilterVo;
 import com.cala.model.vo.subjects.DescriptionVo;
@@ -251,7 +251,7 @@ public class PersonDao extends GenericSubjectDao<PersonVo, Person> implements I_
 	}
 	
 	@Override
-	public PersonVo setIdeologies(Long id, List<IdeologyVo> filters) {
+	public PersonVo setIdeologies(Long id, List<GenericFilterVo> filters) {
 		try {
 			if (filters != null && id != null) {
 				Optional<Person> person = getRepository().findById(id);

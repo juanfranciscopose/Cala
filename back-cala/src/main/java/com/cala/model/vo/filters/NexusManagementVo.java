@@ -45,4 +45,11 @@ public class NexusManagementVo extends GenericFilterVo{
 		return null;
 	}
 
+	public static List<NexusManagementVo> createListNexusManagementVo(List<NexusManagement> nexusManagement) {
+		if (nexusManagement != null) {
+			return nexusManagement.stream().map(filter -> new NexusManagementVo(filter)).collect(Collectors.toList());
+		}
+		return null;
+	}
+
 }

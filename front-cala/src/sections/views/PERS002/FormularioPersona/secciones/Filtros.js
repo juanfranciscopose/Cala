@@ -5,6 +5,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import SeccionBuilder from './../../../../../shared/components/build/SeccionBuilder'
 import { makeStyles } from '@mui/styles'
 import * as Yup from 'yup'
+// hardcode filtros
 import getGeneroOptions from './../../../../../shared/services/filters/GeneroService'
 import getInteresOptions from './../../../../../shared/services/filters/InteresService'
 import getIdeologiaOptions from './../../../../../shared/services/filters/IdeologiaService'
@@ -58,7 +59,7 @@ const arrayFiltros = [
     },
     {
         id: 'ideologia',
-        name: 'ideologia',
+        name: 'ideologies',
         label: 'Ideologías',
         type: 'MultiSelect',
         validation: '',
@@ -80,7 +81,7 @@ const arrayFiltros = [
     },
     {
         id: 'tipoParticipacion',
-        name: 'tipoParticipacion',
+        name: 'typeParticipation',
         label: 'Tipo Participación',
         type: 'MultiSelect',
         validation: '',
@@ -91,7 +92,7 @@ const arrayFiltros = [
     },
     {
         id: 'tematica',
-        name: 'tematica',
+        name: 'topics',
         label: 'Temática',
         type: 'MultiSelect',
         validation: '',
@@ -102,7 +103,7 @@ const arrayFiltros = [
     },
     {
         id: 'nexoGestion',
-        name: 'nexoGestion',
+        name: 'nexusManagement',
         label: 'Nexo de Gestión',
         type: 'MultiSelect',
         validation: '',
