@@ -20,8 +20,14 @@ const buildInitialValues = () => {
 
 const HEADERS_TABLA = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'Nombre', width: 150 },
-  { field: 'surname', headerName: 'Apellido', width: 150 },
+  {
+    field: 'fullName',
+    headerName: 'Apellido y Nombre',
+    sortable: true,
+    width: 160,
+    valueGetter: (params) =>
+      `${params.row.surname || ''} ${params.row.name || ''}`,
+  },
   { field: 'nickname', headerName: 'Apodo', width: 130 },
   { field: 'phone', headerName: 'Teléfono', width: 130 },
   { field: 'email', headerName: 'Email', width: 200 },
