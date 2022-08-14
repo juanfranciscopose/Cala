@@ -32,6 +32,7 @@ const InputFactory = ({field, xs, disableInput=false}) => {
               mapeoProps={field.mapeoProps}
               filter={field.filter}
               needFilter={field.needFilter}
+              hideDesc={field.hideDesc} 
             />
           );
         case 'Date':

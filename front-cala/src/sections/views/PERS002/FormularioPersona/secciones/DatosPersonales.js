@@ -57,9 +57,12 @@ const arrayDatosPersonales = [
         id: 'tieneHijo',
         name: 'kids',
         label: '¿Tiene Hijos?',
-        type: 'Checkbox',
-        validation: Yup.boolean().oneOf([true, false],"El campo es requerido"),
-        initialValue: false,
+        type: 'Select',
+        validation: Yup.boolean().required('El campo es requerido'),
+        mapeoProps: {value: 'code', desc: 'desc'},
+        options: [{code: true, desc: 'Si'},{code: false, desc: 'No'} ],
+        hideDesc: true,
+        initialValue: '',
     }
 ];
 

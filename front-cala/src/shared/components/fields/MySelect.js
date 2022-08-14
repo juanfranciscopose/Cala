@@ -9,13 +9,13 @@ const MySelect = ({
     label,
     options,
     disabled,
-    hideId,
     customChange,
     needEvento,
     allowEmpty = false,
     mapeoProps,
     filter,
     needFilter=false,
+    hideDesc=false,
     ...props
 }) => {
     const [field, meta] = useField(name);
@@ -50,7 +50,7 @@ const MySelect = ({
     }, [])
 
     const getDescription = (item) => {
-        return hideId || item.value === -1
+        return hideDesc || item.value === -1
             ? item[mapeoProps.desc]
             : `${item[mapeoProps.value]} - ${item[mapeoProps.desc]}`
     }
